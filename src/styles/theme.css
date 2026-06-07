@@ -1,0 +1,158 @@
+:root {
+  color-scheme: light;
+  --fs-background: #eeebd3;
+  --fs-background-soft: #fcf8fb;
+  --fs-surface: #ffffff;
+  --fs-surface-muted: #f0edef;
+  --fs-text: #0a122a;
+  --fs-text-muted: #52545d;
+  --fs-line: rgba(37, 89, 87, 0.12);
+  --fs-nav: #ffffff;
+  --fs-card-shadow: 0 4px 20px rgba(10, 18, 42, 0.06);
+}
+
+:root.dark {
+  color-scheme: dark;
+  --fs-background: #0a122a;
+  --fs-background-soft: #0a122a;
+  --fs-surface: #15213d;
+  --fs-surface-muted: #101a33;
+  --fs-text: #eeebd3;
+  --fs-text-muted: rgba(238, 235, 211, 0.7);
+  --fs-line: rgba(238, 235, 211, 0.12);
+  --fs-nav: #0a122a;
+  --fs-card-shadow: 0 4px 20px rgba(0, 0, 0, 0.24);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root,
+ion-app {
+  min-height: 100%;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #e8e6dd;
+  color: var(--fs-text);
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+ion-content {
+  --background: var(--fs-background-soft);
+  --color: var(--fs-text);
+}
+
+ion-router-outlet {
+  background: var(--fs-background-soft);
+}
+
+.ion-page {
+  background: var(--fs-background-soft);
+}
+
+.screen-frame {
+  width: 100%;
+  min-height: 100%;
+  margin: 0 auto;
+  background: var(--fs-background-soft);
+  color: var(--fs-text);
+}
+
+.screen-content {
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  padding: calc(24px + env(safe-area-inset-top)) 16px
+    calc(104px + env(safe-area-inset-bottom));
+}
+
+.screen-content--focused {
+  padding-bottom: calc(32px + env(safe-area-inset-bottom));
+}
+
+.study-session-screen .screen-content {
+  max-width: 430px;
+}
+
+.academic-card {
+  background: var(--fs-surface);
+  border-radius: 18px;
+  box-shadow: var(--fs-card-shadow);
+}
+
+.muted-text {
+  color: var(--fs-text-muted);
+}
+
+.subtle-divider {
+  border-color: var(--fs-line);
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.line-clamp-1 {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.study-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #e0e0e0 transparent;
+}
+
+.study-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.study-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.study-scrollbar::-webkit-scrollbar-thumb {
+  background: #e0e0e0;
+  border-radius: 9999px;
+}
+
+@media (min-width: 760px) {
+  body {
+    background: #e5e2d8;
+  }
+
+  .screen-frame {
+    max-width: 760px;
+    box-shadow: 0 0 40px rgba(10, 18, 42, 0.08);
+  }
+
+  .screen-content {
+    max-width: 720px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}

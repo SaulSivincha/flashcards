@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Detalle de Curso - Inteligencia Artificial</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#dcd9dc",
+                        "secondary-fixed-dim": "#9cd0cd",
+                        "on-background": "#1b1b1d",
+                        "primary-fixed": "#dbe1ff",
+                        "tertiary-container": "#2d1603",
+                        "on-error": "#ffffff",
+                        "background": "#fcf8fb",
+                        "tertiary-fixed-dim": "#eabe9e",
+                        "inverse-on-surface": "#f3f0f2",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e4e2e4",
+                        "primary-container": "#131a33",
+                        "on-primary-container": "#7b83a0",
+                        "inverse-primary": "#bec5e5",
+                        "secondary-fixed": "#b8ece9",
+                        "surface-container-highest": "#e4e2e4",
+                        "secondary": "#346764",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#000000",
+                        "on-tertiary-fixed-variant": "#5e4028",
+                        "primary-fixed-dim": "#bec5e5",
+                        "outline": "#76767e",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-tint": "#565d79",
+                        "tertiary-fixed": "#ffdcc3",
+                        "on-tertiary-fixed": "#2d1603",
+                        "surface-container-high": "#eae7ea",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#000000",
+                        "on-tertiary-container": "#a27c60",
+                        "surface": "#fcf8fb",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#b5eae6",
+                        "inverse-surface": "#303032",
+                        "surface-bright": "#fcf8fb",
+                        "surface-container": "#f0edef",
+                        "on-secondary-fixed": "#00201f",
+                        "on-surface": "#1b1b1d",
+                        "on-secondary-container": "#386b69",
+                        "outline-variant": "#c6c6ce",
+                        "on-primary-fixed": "#131a33",
+                        "on-secondary-fixed-variant": "#184e4d",
+                        "on-primary-fixed-variant": "#3e4660",
+                        "surface-container-low": "#f6f3f5",
+                        "on-surface-variant": "#45464d",
+                        "academic-blue": "#0a122a",
+                        "academic-orange": "#f26419"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "12px",
+                        "gutter": "24px",
+                        "container-max": "1200px",
+                        "lg": "40px",
+                        "base": "8px",
+                        "md": "24px",
+                        "margin-mobile": "16px",
+                        "xl": "64px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .drag-active {
+            box-shadow: 0 10px 25px -5px rgba(10, 18, 42, 0.15), 0 8px 10px -6px rgba(10, 18, 42, 0.1);
+            transform: scale(1.02);
+            z-index: 50;
+        }
+        .insertion-line {
+            position: relative;
+        }
+        .insertion-line::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #f26419;
+            border-radius: 2px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface antialiased min-h-screen pb-[80px]">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-40 bg-background flex items-center justify-between px-margin-mobile h-16 max-w-md mx-auto left-0 right-0">
+<button class="p-2 text-primary hover:bg-surface-container-low rounded-full transition-colors active:scale-95">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md-mobile font-bold text-primary truncate px-4">Inteligencia Artificial</h1>
+<button class="p-2 text-primary hover:bg-surface-container-low rounded-full transition-colors active:scale-95">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-20 px-margin-mobile pb-md max-w-md mx-auto space-y-md">
+<!-- Resumen de Curso -->
+<section class="bg-surface-container-lowest rounded-[18px] p-md shadow-[0_4px_20px_0_rgba(10,18,42,0.06)] border border-outline-variant/10">
+<div class="flex justify-between items-center mb-sm">
+<p class="font-body-md text-body-md text-on-surface-variant">3 temas · 93 tarjetas</p>
+<span class="font-label-md text-label-md text-academic-blue font-bold">68%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-academic-orange rounded-full" style="width: 68%;"></div>
+</div>
+</section>
+<!-- Botón de Acción Principal -->
+<button class="w-full h-12 bg-academic-orange text-white rounded-lg flex items-center justify-center space-x-2 shadow-sm hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">upload</span>
+<span class="font-label-md text-label-md font-bold">Agregar tema CSV</span>
+</button>
+<!-- Encabezado de Sección & Lista de Temas -->
+<section>
+<div class="flex items-center justify-between mb-sm">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-academic-blue">Temas del curso</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Mantén pulsado para reordenar</p>
+</div>
+<div class="flex items-center space-x-1 bg-surface-container px-2 py-1 rounded-full text-academic-blue text-opacity-80">
+<span class="material-symbols-outlined text-[16px]">drag_handle</span>
+<span class="font-label-sm text-label-sm">Ordenando</span>
+</div>
+</div>
+<div class="space-y-sm">
+<!-- Card 1 (Efecto Drag con línea de inserción) -->
+<div class="bg-surface-container-lowest rounded-lg p-sm shadow-[0_4px_20px_0_rgba(10,18,42,0.06)] border border-outline-variant/10 flex items-start drag-active insertion-line relative transition-all duration-200 cursor-grab">
+<div class="py-2 pr-2 text-outline cursor-grab flex-shrink-0">
+<span class="material-symbols-outlined">drag_indicator</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-label-md text-label-md text-academic-blue font-bold leading-tight pr-2">Introducción a los Sistemas Basados en el Conocimiento</h3>
+<button class="text-on-surface-variant"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-2">Unidad 1 · 31 preguntas</p>
+<div class="flex justify-between items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant">82% · Estudiado hoy</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container">En progreso</span>
+</div>
+</div>
+</div>
+<!-- Card 2 (Menú Abierto) -->
+<div class="bg-surface-container-lowest rounded-lg p-sm shadow-[0_4px_20px_0_rgba(10,18,42,0.06)] border border-outline-variant/10 flex items-start relative transition-all duration-200">
+<div class="py-2 pr-2 text-outline cursor-grab flex-shrink-0">
+<span class="material-symbols-outlined">drag_indicator</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-label-md text-label-md text-academic-blue font-bold leading-tight pr-2">Factor de certeza y razonamiento con incertidumbre</h3>
+<button class="text-academic-blue bg-surface-container-low rounded-full p-0.5"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-2">Unidad 2 · 34 preguntas</p>
+<div class="flex justify-between items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant">72% · Ayer</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container">En progreso</span>
+</div>
+</div>
+<!-- Menú Contextual (Flotante) -->
+<div class="absolute right-sm top-[40px] bg-surface-container-lowest shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-outline-variant/20 rounded-lg py-1 w-48 z-10">
+<button class="w-full text-left px-3 py-2 flex items-center space-x-2 hover:bg-surface-container-low text-academic-blue font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">drive_file_move</span>
+<span>Mover a otro curso</span>
+</button>
+<button class="w-full text-left px-3 py-2 flex items-center space-x-2 hover:bg-surface-container-low text-academic-blue font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+<span>Editar tema</span>
+</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-lg p-sm shadow-[0_4px_20px_0_rgba(10,18,42,0.06)] border border-outline-variant/10 flex items-start transition-all duration-200">
+<div class="py-2 pr-2 text-outline cursor-grab flex-shrink-0">
+<span class="material-symbols-outlined">drag_indicator</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-label-md text-label-md text-academic-blue font-bold leading-tight pr-2">Redes Bayesianas</h3>
+<button class="text-on-surface-variant"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-2">Unidad 3 · 28 preguntas</p>
+<div class="flex justify-between items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant">35% · 12 may</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant">Pendiente</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface-container-lowest border-t border-on-surface/10 shadow-[0_-4px_20px_0_rgba(10,18,42,0.06)] rounded-t-xl max-w-md mx-auto right-0">
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:bg-surface-container-high transition-all active:scale-90 duration-200 p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm mt-1">Inicio</span>
+</a>
+<!-- Active Destination -->
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 hover:bg-surface-container-high transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<span class="font-label-sm text-label-sm mt-1">Cursos</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:bg-surface-container-high transition-all active:scale-90 duration-200 p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined">query_stats</span>
+<span class="font-label-sm text-label-sm mt-1">Estadísticas</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:bg-surface-container-high transition-all active:scale-90 duration-200 p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-sm text-label-sm mt-1">Configuración</span>
+</a>
+</nav>
+</body></html>

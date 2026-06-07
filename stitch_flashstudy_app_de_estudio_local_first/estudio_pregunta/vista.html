@@ -1,0 +1,334 @@
+<!doctype html>
+<html class="light" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Estudio — Pregunta - FlashStudy</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary": "#ffffff",
+              "on-error": "#ffffff",
+              "error-container": "#ffdad6",
+              "secondary-container": "#b5eae6",
+              "surface-container-high": "#eae7ea",
+              secondary: "#346764",
+              "primary-container": "#131a33",
+              "surface-container-highest": "#e4e2e4",
+              surface: "#fcf8fb",
+              "secondary-fixed": "#b8ece9",
+              "on-tertiary-fixed": "#2d1603",
+              "on-surface": "#1b1b1d",
+              "secondary-fixed-dim": "#9cd0cd",
+              "primary-fixed-dim": "#bec5e5",
+              tertiary: "#000000",
+              background:
+                "#EEEBD3" /* Eggshell background override for academic minimalism */,
+              "on-tertiary-container": "#a27c60",
+              "tertiary-container": "#2d1603",
+              "on-tertiary-fixed-variant": "#5e4028",
+              "on-secondary-fixed": "#00201f",
+              "inverse-primary": "#bec5e5",
+              "inverse-surface": "#303032",
+              "surface-container": "#f0edef",
+              "surface-variant": "#e4e2e4",
+              "primary-fixed": "#dbe1ff",
+              "on-surface-variant": "#45464d",
+              "on-tertiary": "#ffffff",
+              "on-secondary-container": "#386b69",
+              "surface-dim": "#dcd9dc",
+              "surface-bright": "#fcf8fb",
+              "on-primary-container": "#7b83a0",
+              "on-background": "#1b1b1d",
+              primary: "#F26419" /* Blaze Orange primary */,
+              "tertiary-fixed": "#ffdcc3",
+              "outline-variant": "#c6c6ce",
+              error: "#ba1a1a",
+              "inverse-on-surface": "#f3f0f2",
+              "on-secondary": "#ffffff",
+              "surface-container-lowest": "#ffffff",
+              "surface-tint": "#565d79",
+              "surface-container-low": "#f6f3f5",
+              "on-primary-fixed-variant": "#3e4660",
+              "tertiary-fixed-dim": "#eabe9e",
+              "on-primary-fixed": "#131a33",
+              "on-error-container": "#93000a",
+              outline: "#76767e",
+              "on-secondary-fixed-variant": "#184e4d",
+              "dark-slate-grey": "#255957",
+              "prussian-blue": "#0A122A",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "18px" /* 18px for cards as requested */,
+              full: "9999px",
+            },
+            spacing: {
+              "margin-mobile": "16px",
+              "container-max": "1200px",
+              base: "8px",
+              sm: "12px",
+              md: "24px",
+              gutter: "24px",
+              lg: "40px",
+              xs: "4px",
+              xl: "64px",
+            },
+            fontFamily: {
+              "headline-md": ["Inter"],
+              "body-md": ["Inter"],
+              "label-md": ["Inter"],
+              "headline-sm": ["Inter"],
+              "label-sm": ["Inter"],
+              "display-lg-mobile": ["Inter"],
+              "display-lg": ["Inter"],
+              "body-lg": ["Inter"],
+            },
+            fontSize: {
+              "headline-md": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "label-md": [
+                "14px",
+                {
+                  lineHeight: "20px",
+                  letterSpacing: "0.02em",
+                  fontWeight: "500",
+                },
+              ],
+              "headline-sm": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+              "label-sm": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "600",
+                },
+              ],
+              "display-lg-mobile": [
+                "32px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "display-lg": [
+                "48px",
+                {
+                  lineHeight: "56px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+            },
+            boxShadow: {
+              ambient: "0 4px 20px 0 rgba(10, 18, 42, 0.06)",
+              active: "0 8px 24px 0 rgba(10, 18, 42, 0.12)",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .flip-card {
+        perspective: 1000px;
+      }
+      .flip-card-inner {
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        transform-style: preserve-3d;
+      }
+      .flip-card.flipped .flip-card-inner {
+        transform: rotateY(180deg);
+      }
+      .flip-card-front,
+      .flip-card-back {
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+      }
+      .flip-card-back {
+        transform: rotateY(180deg);
+      }
+    </style>
+    <style>
+      body {
+        min-height: max(884px, 100dvh);
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background text-on-surface antialiased min-h-screen flex flex-col items-center justify-start max-w-[390px] mx-auto overflow-hidden relative"
+  >
+    <!-- Top AppBar (Immersive Mode) -->
+    <header
+      class="w-full flex items-center justify-between px-margin-mobile h-16 shrink-0 mt-safe"
+    >
+      <button
+        aria-label="Close session"
+        class="w-12 h-12 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors active:scale-95"
+      >
+        <span class="material-symbols-outlined text-[24px]">close</span>
+      </button>
+      <h1
+        class="font-headline-md text-headline-md text-on-surface truncate flex-1 text-center px-4"
+      >
+        Sistemas Basados en el Conocimiento
+      </h1>
+      <button
+        aria-label="Pause session"
+        class="w-12 h-12 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors active:scale-95"
+      >
+        <span class="material-symbols-outlined text-[24px]">pause</span>
+      </button>
+    </header>
+    <main
+      class="w-full flex-1 flex flex-col px-margin-mobile pb-8 overflow-y-auto"
+    >
+      <!-- Info Row -->
+      <div class="flex items-center justify-between w-full mt-sm mb-base">
+        <span
+          class="bg-secondary/10 text-dark-slate-grey px-3 py-1 rounded-full font-label-md text-label-md uppercase tracking-wider"
+        >
+          Pasada 1
+        </span>
+        <span class="font-label-md text-label-md text-on-surface-variant">
+          Pregunta 5 de 31
+        </span>
+      </div>
+      <!-- Progress Bar -->
+      <div
+        class="w-full h-2 bg-dark-slate-grey/10 rounded-full mb-md overflow-hidden relative"
+      >
+        <div
+          class="absolute top-0 left-0 h-full bg-primary rounded-full transition-all duration-500 ease-out"
+          style="width: 16%"
+        ></div>
+      </div>
+      <!-- Category Chip -->
+      <div class="mb-sm flex">
+        <span
+          class="bg-secondary/10 text-dark-slate-grey px-3 py-1 rounded-full font-label-sm text-label-sm uppercase tracking-wider"
+        >
+          Antecedentes históricos
+        </span>
+      </div>
+      <!-- Flashcard Area -->
+      <div
+        class="flex-1 w-full flex flex-col justify-center mb-lg perspective-1000"
+      >
+        <div
+          class="flip-card w-full h-full min-h-[360px] cursor-pointer group"
+          onclick="this.classList.toggle('flipped')"
+        >
+          <div class="flip-card-inner relative w-full h-full">
+            <!-- Front (Question) -->
+            <div
+              class="flip-card-front absolute w-full h-full bg-surface-container-lowest rounded-xl shadow-ambient p-md flex flex-col justify-between border border-transparent group-hover:shadow-active transition-shadow duration-300"
+            >
+              <div>
+                <span
+                  class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-sm block"
+                  >Pregunta</span
+                >
+                <h2
+                  class="font-headline-md text-headline-md text-prussian-blue leading-snug"
+                >
+                  ¿Qué fue DENDRAL y por qué se considera un hito en la historia
+                  de los sistemas expertos?
+                </h2>
+              </div>
+              <div
+                class="flex items-center justify-center gap-xs text-on-surface-variant/70 mt-auto pt-md border-t border-dark-slate-grey/10"
+              >
+                <span class="material-symbols-outlined text-[18px]">sync</span>
+                <span class="font-label-sm text-label-sm"
+                  >Toca la tarjeta o usa el botón para voltearla</span
+                >
+              </div>
+            </div>
+            <!-- Back (Answer Placeholder for demonstration of flip structure) -->
+            <div
+              class="flip-card-back absolute w-full h-full bg-surface-container-lowest rounded-xl shadow-ambient p-md flex flex-col justify-between border border-transparent"
+            >
+              <div>
+                <span
+                  class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-sm block"
+                  >Respuesta</span
+                >
+                <p
+                  class="text-label-sm font-label-sm text-on-surface-variant/70 mb-sm"
+                >
+                  ¿Qué fue DENDRAL y por qué se considera un hito en la historia
+                  de los sistemas expertos?
+                </p>
+                <p class="font-body-lg text-body-lg text-prussian-blue">
+                  DENDRAL fue el primer sistema experto basado en el
+                  conocimiento, desarrollado en la Universidad de Stanford en la
+                  década de 1960. Se considera un hito porque demostró que los
+                  programas informáticos podían igualar o superar el rendimiento
+                  de expertos humanos en tareas altamente especializadas
+                  (deducir la estructura molecular a partir de datos de
+                  espectrometría de masas). Fue pionero al demostrar que el
+                  conocimiento experto podía ser codificado en reglas para
+                  resolver problemas complejos en un dominio específico.
+                </p>
+              </div>
+              <div
+                class="flex items-center justify-center gap-xs text-on-surface-variant/70 mt-auto pt-md border-t border-dark-slate-grey/10"
+              >
+                <span class="material-symbols-outlined text-[18px]">sync</span>
+                <span class="font-label-sm text-label-sm"
+                  >Toca para volver a la pregunta</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Action Area -->
+      <div class="w-full flex flex-col gap-md mt-auto shrink-0">
+        <button
+          class="w-full h-12 bg-primary text-on-primary rounded-lg font-label-md text-label-md flex items-center justify-center gap-sm hover:bg-primary/90 active:scale-[0.98] transition-all duration-200"
+          onclick="
+            document.querySelector('.flip-card').classList.toggle('flipped')
+          "
+        >
+          <span class="material-symbols-outlined">sync</span>
+          Ver respuesta
+        </button>
+        <button
+          class="w-full h-12 text-on-surface-variant font-label-md text-label-md hover:text-on-surface transition-colors"
+        >
+          Salir de la sesión
+        </button>
+      </div>
+    </main>
+  </body>
+</html>

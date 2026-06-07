@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Estadísticas - FlashStudy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f6f3f5",
+                        "inverse-surface": "#303032",
+                        "secondary-container": "#b5eae6",
+                        "on-secondary-fixed": "#00201f",
+                        "tertiary-fixed": "#ffdcc3",
+                        "surface-dim": "#dcd9dc",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-bright": "#fcf8fb",
+                        "surface-container-highest": "#e4e2e4",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#a27c60",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#565d79",
+                        "primary-fixed-dim": "#bec5e5",
+                        "on-surface": "#1b1b1d",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#eae7ea",
+                        "surface-variant": "#e4e2e4",
+                        "on-secondary-container": "#386b69",
+                        "on-primary-fixed-variant": "#3e4660",
+                        "tertiary-container": "#2d1603",
+                        "primary-fixed": "#dbe1ff",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#000000",
+                        "inverse-primary": "#bec5e5",
+                        "secondary-fixed-dim": "#9cd0cd",
+                        "on-background": "#1b1b1d",
+                        "tertiary-fixed-dim": "#eabe9e",
+                        "primary": "#000000",
+                        "secondary-fixed": "#b8ece9",
+                        "on-primary-container": "#7b83a0",
+                        "secondary": "#346764",
+                        "outline": "#76767e",
+                        "on-tertiary-fixed-variant": "#5e4028",
+                        "on-surface-variant": "#45464d",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#184e4d",
+                        "inverse-on-surface": "#f3f0f2",
+                        "outline-variant": "#c6c6ce",
+                        "surface": "#fcf8fb",
+                        "primary-container": "#131a33",
+                        "surface-container": "#f0edef",
+                        "on-tertiary-fixed": "#2d1603",
+                        "background": "#EEEBD3", /* Background Override from Prompt */
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed": "#131a33",
+                        "brand-orange": "#F26419",
+                        "brand-blue": "#0A122A",
+                        "brand-green": "#255957",
+                        "brand-red": "#B3001B"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "18px", /* Card radius from style guidance */
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1200px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "md": "24px",
+                        "xl": "64px",
+                        "lg": "40px",
+                        "sm": "12px",
+                        "base": "8px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    },
+                    "boxShadow": {
+                        "academic-card": "0 4px 20px 0 rgba(10, 18, 42, 0.06)"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #EEEBD3; /* Eggshell */
+            color: #1b1b1d;
+        }
+        .academic-card {
+            background-color: #FFFFFF;
+            border-radius: 18px;
+            box-shadow: 0 4px 20px 0 rgba(10, 18, 42, 0.06);
+            padding: 24px;
+        }
+        .academic-button-primary {
+            background-color: #F26419;
+            color: #FFFFFF;
+            min-height: 48px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 16px;
+        }
+        .academic-button-secondary {
+            background-color: transparent;
+            color: #0A122A;
+            border: 2px solid #0A122A;
+            min-height: 48px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 16px;
+        }
+        .academic-progress-track {
+            background-color: rgba(37, 89, 87, 0.1); /* Dark Slate Grey 10% */
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .academic-progress-fill {
+            background-color: #F26419; /* Blaze Orange */
+            height: 100%;
+        }
+        .academic-divider {
+            border-bottom: 1px solid rgba(37, 89, 87, 0.1);
+        }
+        /* Mobile Specific Overrides */
+        @media (max-width: 768px) {
+            .md\:hidden {
+                display: none !important;
+            }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-on-surface antialiased min-h-screen pb-[80px]">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full bg-background z-40 flex items-center justify-between px-margin-mobile h-16 w-full mx-auto" style="box-shadow: none;">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined font-headline-md text-headline-md-mobile">school</span>
+<span class="font-headline-md text-headline-md-mobile font-bold">FlashStudy</span>
+</div>
+<div class="flex items-center">
+<!-- Optional Actions can go here -->
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-[80px] px-margin-mobile pb-lg max-w-md mx-auto flex flex-col gap-md">
+<!-- Page Header -->
+<section class="flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<div>
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-brand-blue mb-1">Estadísticas</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Tu rendimiento de estudio</p>
+</div>
+<button class="flex items-center gap-1 bg-surface-container-highest px-3 py-2 rounded-lg text-sm text-brand-blue font-medium mt-1">
+                    Últimos 30 días
+                    <span class="material-symbols-outlined text-[18px]">arrow_drop_down</span>
+</button>
+</div>
+<!-- Segmented Tabs -->
+<div class="flex bg-[rgba(37,89,87,0.1)] p-1 rounded-lg mt-sm">
+<button class="flex-1 bg-white text-brand-blue font-label-md text-label-md py-2 rounded-md shadow-sm">General</button>
+<button class="flex-1 text-on-surface-variant font-label-md text-label-md py-2 rounded-md">Por curso</button>
+</div>
+</section>
+<!-- Metrics Grid (2x2) -->
+<section class="grid grid-cols-2 gap-4">
+<!-- Metric 1 -->
+<div class="academic-card !p-4 flex flex-col justify-between aspect-square">
+<span class="material-symbols-outlined text-outline mb-2">style</span>
+<div>
+<div class="font-display-lg-mobile text-[28px] leading-tight text-brand-orange font-bold">184</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mt-1">Tarjetas estudiadas</div>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="academic-card !p-4 flex flex-col justify-between aspect-square">
+<span class="material-symbols-outlined text-outline mb-2">military_tech</span>
+<div>
+<div class="font-display-lg-mobile text-[28px] leading-tight text-brand-orange font-bold">68%</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mt-1">Dominio</div>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="academic-card !p-4 flex flex-col justify-between aspect-square">
+<span class="material-symbols-outlined text-outline mb-2">done_all</span>
+<div>
+<div class="font-display-lg-mobile text-[28px] leading-tight text-brand-orange font-bold">71%</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mt-1">Acierto en primera pasada</div>
+</div>
+</div>
+<!-- Metric 4 -->
+<div class="academic-card !p-4 flex flex-col justify-between aspect-square">
+<span class="material-symbols-outlined text-outline mb-2">replay</span>
+<div>
+<div class="font-display-lg-mobile text-[28px] leading-tight text-brand-orange font-bold">2.3</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mt-1">Promedio de pasadas</div>
+</div>
+</div>
+</section>
+<!-- Card: Evolución del rendimiento -->
+<section class="academic-card">
+<h2 class="font-headline-sm text-headline-sm text-brand-blue mb-6">Evolución del rendimiento</h2>
+<div class="relative h-48 w-full border-b border-l border-[rgba(37,89,87,0.1)] flex items-end justify-between px-2 pb-2 pt-8">
+<!-- Y Axis Labels -->
+<div class="absolute left-[-24px] bottom-2 font-label-sm text-[10px] text-outline">50%</div>
+<div class="absolute left-[-24px] top-4 font-label-sm text-[10px] text-outline">80%</div>
+<!-- Fake SVG Line Chart -->
+<svg class="absolute inset-0 h-full w-full" preserveaspectratio="none" viewbox="0 0 100 100">
+<polyline fill="none" points="10,80 30,60 50,50 70,30 90,10" stroke="#F26419" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></polyline>
+<!-- Data Points -->
+<circle cx="10" cy="80" fill="#FFFFFF" r="4" stroke="#F26419" stroke-width="2"></circle>
+<circle cx="30" cy="60" fill="#FFFFFF" r="4" stroke="#F26419" stroke-width="2"></circle>
+<circle cx="50" cy="50" fill="#FFFFFF" r="4" stroke="#F26419" stroke-width="2"></circle>
+<circle cx="70" cy="30" fill="#FFFFFF" r="4" stroke="#F26419" stroke-width="2"></circle>
+<circle cx="90" cy="10" fill="#F26419" r="5" stroke="#FFFFFF" stroke-width="2"></circle>
+</svg>
+<!-- Tooltip for last point -->
+<div class="absolute right-[5%] top-[0%] bg-brand-blue text-white font-label-sm text-xs px-2 py-1 rounded shadow-md transform -translate-y-full mt-1">
+                    76%
+                </div>
+</div>
+</section>
+<!-- Card: Resultado por dificultad -->
+<section class="academic-card">
+<h2 class="font-headline-sm text-headline-sm text-brand-blue mb-4">Resultado por dificultad</h2>
+<div class="flex flex-col gap-4 mt-6">
+<!-- Bar 1 -->
+<div>
+<div class="flex justify-between font-label-sm text-label-sm mb-1">
+<span class="text-on-surface">Primera pasada</span>
+<span class="text-brand-green font-bold">131 tarjetas</span>
+</div>
+<div class="h-6 w-full bg-[rgba(37,89,87,0.1)] rounded-sm overflow-hidden">
+<div class="h-full bg-brand-green" style="width: 71%;"></div>
+</div>
+</div>
+<!-- Bar 2 -->
+<div>
+<div class="flex justify-between font-label-sm text-label-sm mb-1">
+<span class="text-on-surface">Varias pasadas</span>
+<span class="text-brand-orange font-bold">53 tarjetas</span>
+</div>
+<div class="h-6 w-full bg-[rgba(37,89,87,0.1)] rounded-sm overflow-hidden">
+<div class="h-full bg-brand-orange" style="width: 29%;"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Temas con más errores -->
+<section class="academic-card">
+<h2 class="font-headline-sm text-headline-sm text-brand-blue mb-2">Temas con más errores</h2>
+<div class="flex flex-col">
+<!-- Row 1 -->
+<div class="flex items-center justify-between py-4 academic-divider">
+<span class="font-body-md text-body-md text-on-surface">Factor de certeza</span>
+<span class="bg-brand-red/10 text-brand-red font-label-sm text-label-sm px-3 py-1 rounded-full">18 errores</span>
+</div>
+<!-- Row 2 -->
+<div class="flex items-center justify-between py-4 academic-divider">
+<span class="font-body-md text-body-md text-on-surface">Sistemas expertos</span>
+<span class="bg-brand-red/10 text-brand-red font-label-sm text-label-sm px-3 py-1 rounded-full">12 errores</span>
+</div>
+<!-- Row 3 -->
+<div class="flex items-center justify-between py-4">
+<span class="font-body-md text-body-md text-on-surface">Sociedades</span>
+<span class="bg-brand-red/10 text-brand-red font-label-sm text-label-sm px-3 py-1 rounded-full">9 errores</span>
+</div>
+</div>
+</section>
+<!-- Course Summary Cards -->
+<h2 class="font-headline-sm text-headline-sm text-brand-blue mt-2">Resumen por curso</h2>
+<section class="academic-card !p-4 flex flex-col gap-3">
+<div class="flex justify-between items-center">
+<span class="font-label-md text-label-md text-brand-blue font-bold">Inteligencia Artificial</span>
+<span class="font-label-sm text-label-sm text-brand-orange">72%</span>
+</div>
+<div class="academic-progress-track">
+<div class="academic-progress-fill" style="width: 72%;"></div>
+</div>
+</section>
+<section class="academic-card !p-4 flex flex-col gap-3">
+<div class="flex justify-between items-center">
+<span class="font-label-md text-label-md text-brand-blue font-bold">Economía Financiera</span>
+<span class="font-label-sm text-label-sm text-brand-orange">45%</span>
+</div>
+<div class="academic-progress-track">
+<div class="academic-progress-fill" style="width: 45%;"></div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface-container-lowest border-t border-on-surface/10 shadow-[0_-4px_20px_0_rgba(10,18,42,0.06)] rounded-t-xl font-label-sm text-label-sm">
+<!-- Inactive: Inicio -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:bg-surface-container-high transition-all p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span>Inicio</span>
+</a>
+<!-- Inactive: Cursos -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:bg-surface-container-high transition-all p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1">menu_book</span>
+<span>Cursos</span>
+</a>
+<!-- ACTIVE: Estadísticas -->
+<!-- Note: Using Brand Orange for active state per prompt "Estadísticas active in orange", 
+             but mapping to the structural style_active_navigation from JSON -->
+<a class="flex flex-col items-center justify-center bg-[#F26419]/10 text-[#F26419] rounded-full px-4 py-1 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">query_stats</span>
+<span class="font-bold">Estadísticas</span>
+</a>
+<!-- Inactive: Configuración -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:bg-surface-container-high transition-all p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined mb-1">settings</span>
+<span>Configuración</span>
+</a>
+</nav>
+</body></html>

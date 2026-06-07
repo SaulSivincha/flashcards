@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Resultado de la pasada</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#346764",
+                        "secondary-fixed": "#b8ece9",
+                        "tertiary": "#000000",
+                        "surface-dim": "#dcd9dc",
+                        "surface-container-low": "#f6f3f5",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#131a33",
+                        "tertiary-container": "#2d1603",
+                        "on-secondary-fixed-variant": "#184e4d",
+                        "surface-variant": "#e4e2e4",
+                        "on-surface-variant": "#45464d",
+                        "on-tertiary-container": "#a27c60",
+                        "tertiary-fixed-dim": "#eabe9e",
+                        "inverse-primary": "#bec5e5",
+                        "primary-fixed-dim": "#bec5e5",
+                        "on-secondary-container": "#386b69",
+                        "on-primary-container": "#7b83a0",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#3e4660",
+                        "tertiary-fixed": "#ffdcc3",
+                        "secondary-container": "#b5eae6",
+                        "primary-fixed": "#dbe1ff",
+                        "on-secondary-fixed": "#00201f",
+                        "surface": "#fcf8fb",
+                        "inverse-on-surface": "#f3f0f2",
+                        "background": "#fcf8fb",
+                        "primary": "#000000",
+                        "outline-variant": "#c6c6ce",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#5e4028",
+                        "surface-container-high": "#eae7ea",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#131a33",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "surface-container": "#f0edef",
+                        "on-tertiary-fixed": "#2d1603",
+                        "on-background": "#1b1b1d",
+                        "surface-container-highest": "#e4e2e4",
+                        "on-surface": "#1b1b1d",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#565d79",
+                        "secondary-fixed-dim": "#9cd0cd",
+                        "outline": "#76767e",
+                        "inverse-surface": "#303032",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#fcf8fb",
+                        "brand-orange": "#F26419",
+                        "brand-dark-slate": "#0A122A",
+                        "brand-mahogany": "#8B0000",
+                        "brand-eggshell": "#EEEBD3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "card": "18px"
+                    },
+                    "spacing": {
+                        "container-max": "1200px",
+                        "lg": "40px",
+                        "base": "8px",
+                        "md": "24px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "xl": "64px",
+                        "xs": "4px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    },
+                    "boxShadow": {
+                        "academic-card": "0 4px 20px 0 rgba(10, 18, 42, 0.06)",
+                        "academic-hover": "0 6px 24px 0 rgba(10, 18, 42, 0.12)"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #fcf8fb; } /* Eggshell fallback from prompt, but using theme background */
+        /* Circular Progress */
+        .circular-chart {
+            display: block;
+            margin: 10px auto;
+            max-width: 80%;
+            max-height: 250px;
+        }
+        .circle-bg {
+            fill: none;
+            stroke: #eee;
+            stroke-width: 3.8;
+        }
+        .circle {
+            fill: none;
+            stroke-width: 2.8;
+            stroke-linecap: round;
+            animation: progress 1s ease-out forwards;
+        }
+        @keyframes progress {
+            0% { stroke-dasharray: 0 100; }
+        }
+        .percentage {
+            fill: #F26419;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.5em;
+            text-anchor: middle;
+            font-weight: 700;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full bg-background dark:bg-background text-primary dark:text-primary-fixed z-50">
+<div class="flex items-center justify-between px-margin-mobile h-16 w-full max-w-7xl mx-auto">
+<button aria-label="Close" class="flex items-center justify-center w-12 h-12 rounded-full hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-colors active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed" data-icon="close">close</span>
+</button>
+<h1 class="font-headline-md text-headline-md-mobile text-primary dark:text-primary-fixed font-bold text-center flex-1">
+                Resumen de la pasada
+            </h1>
+<div class="w-12 h-12"></div> <!-- Spacer for centering -->
+</div>
+</header>
+<main class="pt-24 px-margin-mobile max-w-container-max mx-auto space-y-lg pb-md">
+<!-- 1. Encabezado centrado -->
+<section class="flex flex-col items-center justify-center text-center space-y-md">
+<div class="relative w-48 h-48">
+<svg class="circular-chart text-brand-orange" viewbox="0 0 36 36">
+<path class="circle-bg" d="M18 2.0845
+                        a 15.9155 15.9155 0 0 1 0 31.831
+                        a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+<path class="circle" d="M18 2.0845
+                        a 15.9155 15.9155 0 0 1 0 31.831
+                        a 15.9155 15.9155 0 0 1 0 -31.831" stroke="#F26419" stroke-dasharray="71, 100"></path>
+<text class="percentage" x="18" y="20.35">71%</text>
+</svg>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm font-semibold text-primary mb-2">Pasada 1 completada</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md mx-auto">Buen avance. Repasa las que faltan para dominar el tema.</p>
+</div>
+</section>
+<!-- 2. Grid 2x2 de métricas -->
+<section class="grid grid-cols-2 gap-sm">
+<!-- Estudiadas -->
+<div class="bg-surface-container-lowest rounded-card p-md shadow-academic-card flex flex-col items-center justify-center transition-shadow hover:shadow-academic-hover">
+<span class="font-display-lg text-display-lg-mobile text-primary mb-1">31</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Estudiadas</span>
+</div>
+<!-- Correctas -->
+<div class="bg-surface-container-lowest rounded-card p-md shadow-academic-card flex flex-col items-center justify-center transition-shadow hover:shadow-academic-hover">
+<span class="font-display-lg text-display-lg-mobile text-brand-dark-slate mb-1">22</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Correctas</span>
+</div>
+<!-- Incorrectas -->
+<div class="bg-surface-container-lowest rounded-card p-md shadow-academic-card flex flex-col items-center justify-center transition-shadow hover:shadow-academic-hover border border-brand-mahogany/10">
+<span class="font-display-lg text-display-lg-mobile text-brand-mahogany mb-1">9</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Incorrectas</span>
+</div>
+<!-- Acierto -->
+<div class="bg-surface-container-lowest rounded-card p-md shadow-academic-card flex flex-col items-center justify-center transition-shadow hover:shadow-academic-hover">
+<span class="font-display-lg text-display-lg-mobile text-[#e67e22] mb-1">71%</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Acierto</span>
+</div>
+</section>
+<!-- 3. Sección 'Avance entre pasadas' -->
+<section class="bg-surface-container-lowest rounded-card p-md shadow-academic-card">
+<h3 class="font-headline-sm text-headline-sm text-primary mb-sm">Avance entre pasadas</h3>
+<p class="font-label-md text-label-md text-on-surface-variant mb-md">La siguiente pasada incluirá solo 9 tarjetas.</p>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between mb-1">
+<span class="font-label-sm text-label-sm text-primary">Pasada 1</span>
+<span class="font-label-sm text-label-sm text-brand-orange">71%</span>
+</div>
+<div class="w-full bg-outline-variant/30 h-2 rounded-full overflow-hidden">
+<div class="bg-brand-orange h-full rounded-full" style="width: 71%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Siguiente objetivo</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">29%</span>
+</div>
+<div class="w-full border-2 border-dashed border-outline-variant/50 h-2 rounded-full"></div>
+</div>
+</div>
+</section>
+<!-- 4. Sección 'Necesitan repaso' -->
+<section class="bg-surface-container-lowest rounded-card p-md shadow-academic-card">
+<div class="flex justify-between items-center mb-md border-b border-[#255957]/10 pb-sm">
+<h3 class="font-headline-sm text-headline-sm text-primary">Necesitan repaso</h3>
+<span class="bg-brand-mahogany/10 text-brand-mahogany font-label-sm text-label-sm px-2 py-1 rounded-full">9 tarjetas</span>
+</div>
+<div class="space-y-sm">
+<!-- Item 1 -->
+<div class="flex items-start justify-between p-sm hover:bg-surface-container-low rounded-lg transition-colors border-b border-[#255957]/10 last:border-0">
+<div class="flex-1 mr-4">
+<p class="font-body-md text-body-md text-primary truncate max-w-[200px] md:max-w-xs">¿Qué fue DENDRAL y por qué...</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Sistemas Expertos</p>
+</div>
+<span class="bg-brand-mahogany text-white font-label-sm text-[10px] px-2 py-1 rounded-full whitespace-nowrap">Incorrecta</span>
+</div>
+<!-- Item 2 -->
+<div class="flex items-start justify-between p-sm hover:bg-surface-container-low rounded-lg transition-colors border-b border-[#255957]/10 last:border-0">
+<div class="flex-1 mr-4">
+<p class="font-body-md text-body-md text-primary truncate max-w-[200px] md:max-w-xs">Definición de Heurística en IA</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Conceptos Básicos</p>
+</div>
+<span class="bg-brand-mahogany text-white font-label-sm text-[10px] px-2 py-1 rounded-full whitespace-nowrap">Incorrecta</span>
+</div>
+<!-- Item 3 -->
+<div class="flex items-start justify-between p-sm hover:bg-surface-container-low rounded-lg transition-colors border-b border-[#255957]/10 last:border-0">
+<div class="flex-1 mr-4">
+<p class="font-body-md text-body-md text-primary truncate max-w-[200px] md:max-w-xs">Diferencia entre BFS y DFS</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Búsquedas</p>
+</div>
+<span class="bg-brand-mahogany text-white font-label-sm text-[10px] px-2 py-1 rounded-full whitespace-nowrap">Incorrecta</span>
+</div>
+</div>
+<div class="mt-md text-center">
+<a class="font-label-md text-label-md text-brand-orange hover:text-[#d35400] transition-colors inline-flex items-center" href="#">
+                    Ver las 9
+                    <span class="material-symbols-outlined ml-1 text-[18px]" data-icon="chevron_right">chevron_right</span>
+</a>
+</div>
+</section>
+<!-- 5. Botones de acción -->
+<section class="space-y-sm pt-sm">
+<button class="w-full bg-brand-orange text-white font-label-md text-label-md rounded-lg h-12 flex items-center justify-center transition-transform active:scale-95 hover:bg-[#d35400]">
+<span class="material-symbols-outlined mr-2" data-icon="repeat">repeat</span>
+                Repasar 9 incorrectas
+            </button>
+<button class="w-full bg-transparent border-2 border-brand-dark-slate text-brand-dark-slate font-label-md text-label-md rounded-lg h-12 flex items-center justify-center transition-transform active:scale-95 hover:bg-surface-container-low">
+                Volver al tema
+            </button>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full rounded-t-xl bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-on-surface/10 shadow-[0_-4px_20px_0_rgba(10,18,42,0.06)] z-50 md:hidden">
+<div class="flex justify-around items-center px-4 py-2 w-full">
+<!-- Inicio (Inactive) -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-all active:scale-90 transition-transform duration-200 px-4 py-1 rounded-full">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-label-sm text-[10px]">Inicio</span>
+</button>
+<!-- Cursos (Active) -->
+<button class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-container text-on-secondary-container dark:text-on-secondary-container rounded-full px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-all active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined mb-1" data-icon="menu_book" data-weight="fill" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<span class="font-label-sm text-[10px]">Cursos</span>
+</button>
+<!-- Estadísticas (Inactive) -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-all active:scale-90 transition-transform duration-200 px-4 py-1 rounded-full">
+<span class="material-symbols-outlined mb-1" data-icon="query_stats">query_stats</span>
+<span class="font-label-sm text-[10px]">Estadísticas</span>
+</button>
+<!-- Configuración (Inactive) -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-all active:scale-90 transition-transform duration-200 px-4 py-1 rounded-full">
+<span class="material-symbols-outlined mb-1" data-icon="settings">settings</span>
+<span class="font-label-sm text-[10px]">Configuración</span>
+</button>
+</div>
+</nav>
+</body></html>

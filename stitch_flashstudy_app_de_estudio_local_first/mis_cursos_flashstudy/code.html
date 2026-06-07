@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cursos - FlashStudy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#fcf8fb",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f3f0f2",
+                        "tertiary-container": "#2d1603",
+                        "on-primary-container": "#7b83a0",
+                        "inverse-primary": "#bec5e5",
+                        "secondary": "#346764",
+                        "on-background": "#1b1b1d",
+                        "on-secondary-container": "#386b69",
+                        "surface-container-highest": "#e4e2e4",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-container": "#a27c60",
+                        "surface-bright": "#fcf8fb",
+                        "outline-variant": "#c6c6ce",
+                        "surface": "#fcf8fb",
+                        "on-primary-fixed-variant": "#3e4660",
+                        "secondary-fixed": "#b8ece9",
+                        "primary-container": "#131a33",
+                        "on-secondary-fixed": "#00201f",
+                        "on-error": "#ffffff",
+                        "surface-container": "#f0edef",
+                        "secondary-container": "#b5eae6",
+                        "tertiary-fixed": "#ffdcc3",
+                        "on-primary-fixed": "#131a33",
+                        "tertiary": "#000000",
+                        "on-surface": "#1b1b1d",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed": "#dbe1ff",
+                        "on-error-container": "#93000a",
+                        "primary": "#000000",
+                        "inverse-surface": "#303032",
+                        "surface-container-high": "#eae7ea",
+                        "secondary-fixed-dim": "#9cd0cd",
+                        "outline": "#76767e",
+                        "on-secondary-fixed-variant": "#184e4d",
+                        "surface-tint": "#565d79",
+                        "surface-dim": "#dcd9dc",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#bec5e5",
+                        "on-surface-variant": "#45464d",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#eabe9e",
+                        "on-tertiary-fixed-variant": "#5e4028",
+                        "surface-variant": "#e4e2e4",
+                        "surface-container-low": "#f6f3f5",
+                        "on-tertiary-fixed": "#2d1603",
+                        
+                        "brand-eggshell": "#EEEBD3",
+                        "brand-white": "#FFFFFF",
+                        "brand-orange": "#F26419",
+                        "brand-blue": "#0A122A",
+                        "brand-slate": "#255957"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "card": "18px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "base": "8px",
+                        "lg": "40px",
+                        "md": "24px",
+                        "xs": "4px",
+                        "sm": "12px",
+                        "container-max": "1200px",
+                        "xl": "64px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    },
+                    "boxShadow": {
+                        "soft": "0 4px 20px rgba(10, 18, 42, 0.06)",
+                        "active": "0 6px 24px rgba(10, 18, 42, 0.1)"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #EEEBD3; /* Eggshell background */
+            color: #0A122A; /* Prussian Blue text */
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen w-full max-w-[390px] mx-auto relative pb-[88px] overflow-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full max-w-[390px] z-40 bg-brand-eggshell px-margin-mobile pt-lg pb-sm flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-brand-blue font-headline-md text-headline-md" style="font-variation-settings: 'FILL' 1;">school</span>
+<h1 class="font-headline-md text-headline-md font-bold text-brand-blue tracking-tight">FlashStudy</h1>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-[90px] px-margin-mobile pb-xl relative z-10">
+<!-- Header Section -->
+<div class="flex justify-between items-end mb-md mt-sm">
+<div>
+<h2 class="font-display-lg-mobile text-display-lg-mobile text-brand-blue">Mis cursos</h2>
+<p class="font-body-md text-body-md text-brand-slate mt-xs">Organiza tus temas de estudio</p>
+</div>
+<button aria-label="Agregar curso" class="w-[48px] h-[48px] rounded-full bg-brand-orange text-brand-white flex items-center justify-center shadow-soft active:scale-95 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<!-- Search Input -->
+<div class="relative mb-lg">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-brand-slate">search</span>
+<input class="w-full h-[48px] pl-10 pr-sm rounded-lg bg-brand-eggshell border border-brand-slate/20 text-brand-blue font-body-md text-body-md focus:border-brand-blue focus:ring-0 transition-colors placeholder:text-brand-slate" placeholder="Buscar curso" type="text"/>
+</div>
+<!-- Course Cards List -->
+<div class="space-y-sm">
+<!-- Card 1 -->
+<div class="bg-brand-white rounded-card p-md shadow-soft">
+<div class="flex items-start justify-between">
+<div class="flex gap-sm items-start">
+<div class="w-10 h-10 rounded-lg bg-brand-slate/10 flex items-center justify-center text-brand-blue">
+<span class="material-symbols-outlined">memory</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-brand-blue">Inteligencia Artificial</h3>
+<p class="font-body-md text-body-md text-brand-slate mt-xs">3 temas, 93 flashcards</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-brand-slate">chevron_right</span>
+</div>
+<div class="mt-md">
+<div class="flex justify-between font-label-md text-label-md text-brand-slate mb-xs">
+<span>Progreso</span>
+<span>68%</span>
+</div>
+<div class="w-full h-2 bg-brand-slate/10 rounded-full overflow-hidden">
+<div class="h-full bg-brand-orange rounded-full" style="width: 68%;"></div>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-brand-white rounded-card p-md shadow-soft">
+<div class="flex items-start justify-between">
+<div class="flex gap-sm items-start">
+<div class="w-10 h-10 rounded-lg bg-brand-slate/10 flex items-center justify-center text-brand-blue">
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-brand-blue leading-tight">Economía Financiera</h3>
+<p class="font-body-md text-body-md text-brand-slate mt-xs">2 temas, 57 flashcards</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-brand-slate">chevron_right</span>
+</div>
+<div class="mt-md">
+<div class="flex justify-between font-label-md text-label-md text-brand-slate mb-xs">
+<span>Progreso</span>
+<span>45%</span>
+</div>
+<div class="w-full h-2 bg-brand-slate/10 rounded-full overflow-hidden">
+<div class="h-full bg-brand-orange rounded-full" style="width: 45%;"></div>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-brand-white rounded-card p-md shadow-soft opacity-80">
+<div class="flex items-start justify-between">
+<div class="flex gap-sm items-start">
+<div class="w-10 h-10 rounded-lg bg-brand-slate/10 flex items-center justify-center text-brand-blue">
+<span class="material-symbols-outlined">biotech</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-brand-blue leading-tight">Metodología de la Investigación</h3>
+<p class="font-body-md text-body-md text-brand-slate mt-xs">0 temas, 0 tarjetas</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-brand-slate">chevron_right</span>
+</div>
+<div class="mt-md pt-sm border-t border-brand-slate/10">
+<span class="font-label-md text-label-md text-brand-slate bg-brand-slate/10 px-sm py-xs rounded-full">Sin contenido</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full max-w-[390px] mx-auto z-40 bg-surface-container-lowest rounded-t-xl shadow-[0_-4px_20px_0_rgba(10,18,42,0.06)] flex justify-around items-center px-4 py-2 border-t border-brand-slate/10">
+<!-- Inicio (Inactive) -->
+<button class="flex flex-col items-center justify-center w-16 h-14 text-on-surface-variant opacity-70 hover:bg-surface-container-high transition-all rounded-lg">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-label-sm text-label-sm">Inicio</span>
+</button>
+<!-- Cursos (Active) -->
+<button class="flex flex-col items-center justify-center w-16 h-14 bg-secondary-container text-brand-orange rounded-full px-4 py-1 active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<span class="font-label-sm text-label-sm">Cursos</span>
+</button>
+<!-- Estadísticas (Inactive) -->
+<button class="flex flex-col items-center justify-center w-16 h-14 text-on-surface-variant opacity-70 hover:bg-surface-container-high transition-all rounded-lg">
+<span class="material-symbols-outlined mb-1">query_stats</span>
+<span class="font-label-sm text-label-sm">Estadísticas</span>
+</button>
+<!-- Configuración (Inactive) -->
+<button class="flex flex-col items-center justify-center w-16 h-14 text-on-surface-variant opacity-70 hover:bg-surface-container-high transition-all rounded-lg">
+<span class="material-symbols-outlined mb-1">settings</span>
+<span class="font-label-sm text-label-sm">Configuración</span>
+</button>
+</nav>
+<!-- Overlay & Bottom Sheet (Active State) -->
+<div class="fixed inset-0 z-50 flex items-end justify-center pointer-events-auto">
+<!-- Backdrop -->
+<div class="absolute inset-0 bg-brand-blue/40 backdrop-blur-sm transition-opacity"></div>
+<!-- Sheet Content -->
+<div class="relative w-full max-w-[390px] bg-brand-white rounded-t-[24px] p-md pt-lg shadow-active transform translate-y-0 transition-transform duration-300">
+<!-- Drag Handle -->
+<div class="absolute top-sm left-1/2 -translate-x-1/2 w-12 h-1.5 bg-brand-slate/20 rounded-full"></div>
+<h2 class="font-headline-md text-headline-md text-brand-blue mb-lg">Crear nuevo curso</h2>
+<div class="space-y-md mb-xl">
+<div>
+<label class="block font-label-md text-label-md text-brand-slate mb-xs">Nombre del curso</label>
+<input class="w-full h-[48px] px-sm rounded-lg bg-brand-eggshell border border-brand-blue text-brand-blue font-body-md text-body-md focus:border-brand-blue focus:ring-0" type="text" value="Derecho Empresarial"/>
+<p class="font-label-sm text-label-sm text-brand-slate mt-xs">Podrás agregar temas mediante CSV</p>
+</div>
+</div>
+<div class="flex flex-col gap-sm pb-md">
+<button class="w-full h-[48px] bg-brand-orange text-brand-white font-label-md text-label-md rounded-lg active:scale-[0.98] transition-transform">
+                    Crear curso
+                </button>
+<button class="w-full h-[48px] bg-transparent border-2 border-brand-blue text-brand-blue font-label-md text-label-md rounded-lg active:scale-[0.98] transition-transform">
+                    Cancelar
+                </button>
+</div>
+</div>
+</div>
+</body></html>

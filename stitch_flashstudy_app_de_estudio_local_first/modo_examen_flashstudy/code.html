@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Modo Examen - FlashStudy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#7b83a0",
+                        "tertiary": "#000000",
+                        "on-tertiary-fixed-variant": "#5e4028",
+                        "surface-bright": "#fcf8fb",
+                        "secondary": "#346764",
+                        "surface-variant": "#e4e2e4",
+                        "surface-container-highest": "#e4e2e4",
+                        "tertiary-fixed-dim": "#eabe9e",
+                        "surface-container-high": "#eae7ea",
+                        "primary-fixed": "#dbe1ff",
+                        "on-surface-variant": "#45464d",
+                        "on-secondary": "#ffffff",
+                        "surface-container-low": "#f6f3f5",
+                        "on-primary-fixed": "#131a33",
+                        "inverse-on-surface": "#f3f0f2",
+                        "tertiary-fixed": "#ffdcc3",
+                        "primary-fixed-dim": "#bec5e5",
+                        "secondary-container": "#b5eae6",
+                        "on-tertiary-container": "#a27c60",
+                        "inverse-surface": "#303032",
+                        "background": "#fcf8fb",
+                        "secondary-fixed": "#b8ece9",
+                        "surface": "#fcf8fb",
+                        "primary": "#000000",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#2d1603",
+                        "on-surface": "#1b1b1d",
+                        "on-secondary-fixed-variant": "#184e4d",
+                        "error": "#ba1a1a",
+                        "surface-container": "#f0edef",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dcd9dc",
+                        "inverse-primary": "#bec5e5",
+                        "on-secondary-container": "#386b69",
+                        "on-tertiary-fixed": "#2d1603",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#131a33",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#565d79",
+                        "secondary-fixed-dim": "#9cd0cd",
+                        "on-background": "#1b1b1d",
+                        "outline-variant": "#c6c6ce",
+                        "outline": "#76767e",
+                        "on-secondary-fixed": "#00201f",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#3e4660"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "12px",
+                        "gutter": "24px",
+                        "md": "24px",
+                        "margin-mobile": "16px",
+                        "base": "8px",
+                        "xs": "4px",
+                        "lg": "40px",
+                        "xl": "64px",
+                        "container-max": "1200px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #000; } /* Outer body to frame the mobile view */
+        .mobile-frame { max-width: 390px; height: 844px; margin: 0 auto; overflow: hidden; position: relative; }
+        
+        /* Hide scrollbar for a cleaner mobile look */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex items-center justify-center min-h-screen">
+<!-- Mobile Screen Wrapper using Theme Tokens for Dark Academic Aesthetic -->
+<div class="mobile-frame bg-primary-container text-surface-bright flex flex-col font-body-md w-full shadow-2xl">
+<!-- Top Action Bar (Task-Focused, No Global Nav) -->
+<header class="flex items-center justify-between px-margin-mobile py-sm shrink-0">
+<button aria-label="Cerrar examen" class="w-[48px] h-[48px] flex items-center justify-start text-surface-bright opacity-80 hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+<h1 class="font-headline-sm text-headline-sm text-surface-bright">Modo examen</h1>
+<button aria-label="Información" class="w-[48px] h-[48px] flex items-center justify-end text-surface-bright opacity-80 hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined" data-icon="info">info</span>
+</button>
+</header>
+<!-- Informational Banner -->
+<div class="mx-margin-mobile bg-surface-tint/20 rounded-lg p-sm flex items-start gap-base shrink-0 mt-xs">
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="visibility_off" style="font-size: 20px;">visibility_off</span>
+<p class="font-label-sm text-label-sm text-primary-fixed-dim flex-1">
+                Sin retroalimentación inmediata. Revisa tus resultados al finalizar.
+            </p>
+</div>
+<!-- Progress Indicator -->
+<div class="px-margin-mobile mt-md shrink-0">
+<div class="flex justify-between items-end mb-base">
+<span class="font-label-md text-label-md text-primary-fixed">Pregunta 5 de 31</span>
+<span class="font-label-md text-label-md text-tertiary-fixed">16%</span>
+</div>
+<div class="w-full h-[8px] bg-surface-tint/30 rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-fixed rounded-full w-[16%] transition-all duration-300"></div>
+</div>
+</div>
+<!-- Main Scrollable Canvas -->
+<main class="flex-1 overflow-y-auto no-scrollbar px-margin-mobile pt-md pb-xl flex flex-col gap-md">
+<!-- Question Card -->
+<article class="bg-on-primary-fixed-variant rounded-xl p-md shadow-[0_4px_20px_0_rgba(0,0,0,0.2)]">
+<div class="inline-flex items-center px-sm py-[4px] bg-primary-container/50 rounded-full mb-md border border-outline-variant/10">
+<span class="font-label-sm text-label-sm text-primary-fixed">Antecedentes históricos</span>
+</div>
+<h2 class="font-body-lg text-body-lg text-surface-bright">
+                    ¿Qué fue DENDRAL y cuál era el propósito principal de su base de conocimiento?
+                </h2>
+<!-- Self-Evaluation Accordion (Simulated Open State) -->
+<div class="mt-lg border border-outline-variant/20 rounded-lg overflow-hidden bg-primary-container/20">
+<button class="w-full flex items-center justify-between p-sm text-left hover:bg-surface-tint/10 transition-colors" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.icon').textContent = this.nextElementSibling.classList.contains('hidden') ? 'expand_more' : 'expand_less';">
+<span class="font-label-md text-label-md text-primary-fixed">Mostrar respuesta para autoevaluar</span>
+<span class="material-symbols-outlined text-primary-fixed icon" data-icon="expand_less">expand_less</span>
+</button>
+<div class="p-sm border-t border-outline-variant/20 bg-primary-container/40">
+<p class="font-body-md text-body-md text-inverse-on-surface opacity-90">
+                            DENDRAL fue uno de los primeros sistemas expertos desarrollados en la década de 1960. Su propósito principal era analizar datos de espectrometría de masas para deducir la estructura molecular de compuestos químicos orgánicos complejos.
+                        </p>
+</div>
+</div>
+</article>
+<!-- Manual Control (Self-grading) -->
+<section class="mt-sm">
+<h3 class="font-label-md text-label-md text-primary-fixed mb-sm">Mi respuesta fue:</h3>
+<div class="grid grid-cols-2 gap-sm">
+<!-- Selected Option -->
+<label class="relative flex items-center justify-center gap-base p-sm rounded-lg border-2 border-tertiary-fixed bg-tertiary-fixed/10 cursor-pointer transition-colors h-[48px]">
+<input checked="" class="sr-only" name="self_eval" type="radio" value="correcta"/>
+<span class="material-symbols-outlined text-tertiary-fixed" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md text-label-md text-tertiary-fixed">Correcta</span>
+</label>
+<!-- Unselected Option -->
+<label class="relative flex items-center justify-center gap-base p-sm rounded-lg border border-outline-variant/30 hover:border-outline-variant/60 cursor-pointer transition-colors h-[48px]">
+<input class="sr-only" name="self_eval" type="radio" value="incorrecta"/>
+<span class="material-symbols-outlined text-on-primary-container" data-icon="cancel">cancel</span>
+<span class="font-label-md text-label-md text-on-primary-container">Incorrecta</span>
+</label>
+</div>
+</section>
+</main>
+<!-- Bottom Controls & Footer -->
+<div class="bg-primary-container pt-sm pb-margin-mobile px-margin-mobile border-t border-outline-variant/10 shrink-0">
+<div class="flex gap-sm mb-sm">
+<button class="flex-1 h-[48px] rounded-lg border border-outline-variant/30 flex items-center justify-center text-surface-bright font-label-md text-label-md hover:bg-surface-tint/20 transition-colors active:scale-95">
+                    Anterior
+                </button>
+<button class="flex-[2] h-[48px] rounded-lg bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-label-md flex items-center justify-center hover:opacity-90 transition-opacity active:scale-95">
+                    Guardar y siguiente
+                </button>
+</div>
+<div class="flex flex-col items-center justify-center gap-xs mt-sm">
+<button class="font-label-sm text-label-sm text-tertiary-fixed opacity-80 hover:opacity-100 transition-opacity underline underline-offset-4 decoration-tertiary-fixed/50">
+                    Finalizar examen
+                </button>
+<span class="font-label-sm text-label-sm text-on-primary-container opacity-60">
+                    4 respondidas · 27 pendientes
+                </span>
+</div>
+</div>
+</div>
+</body></html>

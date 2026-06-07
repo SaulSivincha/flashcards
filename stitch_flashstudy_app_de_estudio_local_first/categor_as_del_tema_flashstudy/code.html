@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Categorías del tema - FlashStudy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e4e2e4",
+                        "primary-fixed": "#dbe1ff",
+                        "on-surface-variant": "#45464d",
+                        "surface-container": "#f0edef",
+                        "inverse-surface": "#303032",
+                        "tertiary-container": "#2d1603",
+                        "on-tertiary-fixed-variant": "#5e4028",
+                        "on-secondary-fixed": "#00201f",
+                        "inverse-primary": "#bec5e5",
+                        "on-tertiary-container": "#a27c60",
+                        "tertiary": "#000000",
+                        "background": "#fcf8fb",
+                        "secondary-fixed-dim": "#9cd0cd",
+                        "primary-fixed-dim": "#bec5e5",
+                        "on-surface": "#1b1b1d",
+                        "surface-container-highest": "#e4e2e4",
+                        "surface": "#fcf8fb",
+                        "secondary-fixed": "#b8ece9",
+                        "on-tertiary-fixed": "#2d1603",
+                        "primary-container": "#131a33",
+                        "secondary-container": "#b5eae6",
+                        "surface-container-high": "#eae7ea",
+                        "secondary": "#346764",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "outline": "#76767e",
+                        "on-secondary-fixed-variant": "#184e4d",
+                        "on-primary-fixed": "#131a33",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed-dim": "#eabe9e",
+                        "surface-container-low": "#f6f3f5",
+                        "on-primary-fixed-variant": "#3e4660",
+                        "surface-tint": "#565d79",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f3f0f2",
+                        "tertiary-fixed": "#ffdcc3",
+                        "outline-variant": "#c6c6ce",
+                        "primary": "#000000",
+                        "surface-bright": "#fcf8fb",
+                        "on-primary-container": "#7b83a0",
+                        "on-background": "#1b1b1d",
+                        "on-secondary-container": "#386b69",
+                        "surface-dim": "#dcd9dc",
+                        "on-tertiary": "#ffffff",
+                        "brand-orange": "#F26419",
+                        "brand-blue": "#0A122A"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1.125rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "sm": "12px",
+                        "md": "24px",
+                        "gutter": "24px",
+                        "container-max": "1200px",
+                        "base": "8px",
+                        "lg": "40px",
+                        "xs": "4px",
+                        "xl": "64px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Inter", "sans-serif"],
+                        "label-sm": ["Inter", "sans-serif"],
+                        "label-md": ["Inter", "sans-serif"],
+                        "headline-sm": ["Inter", "sans-serif"],
+                        "headline-md": ["Inter", "sans-serif"],
+                        "body-md": ["Inter", "sans-serif"],
+                        "body-lg": ["Inter", "sans-serif"],
+                        "display-lg": ["Inter", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    },
+                    "boxShadow": {
+                        "elevation-1": "0 4px 20px 0 rgba(10, 18, 42, 0.06)",
+                        "elevation-2": "0 8px 30px 0 rgba(10, 18, 42, 0.12)"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md font-sans antialiased min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-background flex items-center justify-between px-margin-mobile h-16 max-w-md mx-auto left-0 right-0">
+<button class="p-2 -ml-2 text-primary active:scale-95 transition-transform hover:bg-surface-container-low rounded-full">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md-mobile text-primary font-bold">Categorías del tema</h1>
+<button class="p-2 -mr-2 text-primary active:scale-95 transition-transform hover:bg-surface-container-low rounded-full">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</header>
+<main class="pt-20 px-margin-mobile max-w-md mx-auto pb-8">
+<!-- Header Section -->
+<section class="mb-lg">
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest mb-base">INTELIGENCIA ARTIFICIAL · UNIDAD 1</p>
+<h2 class="font-display-lg-mobile text-display-lg-mobile text-primary mb-sm">Introducción a los Sistemas Basados en el Conocimiento</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">31 tarjetas · 8 categorías · Última práctica: hoy</p>
+</section>
+<!-- Preparation Card -->
+<section class="bg-surface-container-lowest rounded-2xl p-md shadow-elevation-1 mb-lg">
+<!-- Segmented Control -->
+<div class="flex p-1 bg-surface-container-high rounded-lg mb-sm">
+<button class="flex-1 py-2 font-label-md text-label-md bg-surface-container-lowest text-primary rounded-md shadow-sm">En orden</button>
+<button class="flex-1 py-2 font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors">Aleatorio</button>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-md text-center">El orden se mantendrá durante esta sesión</p>
+<!-- CTAs -->
+<button class="w-full h-12 bg-brand-orange text-on-primary rounded-lg font-label-md text-label-md flex items-center justify-center gap-2 mb-sm active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="play_arrow" data-weight="fill">play_arrow</span>
+                Estudiar todo el tema
+            </button>
+<button class="w-full h-12 border-2 border-brand-blue text-brand-blue rounded-lg font-label-md text-label-md flex items-center justify-center active:scale-95 transition-transform">
+                Modo examen
+            </button>
+</section>
+<!-- Categories Section -->
+<section>
+<div class="mb-md">
+<h3 class="font-headline-sm text-headline-sm text-primary">Categorías</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Elige una categoría para practicarla</p>
+</div>
+<div class="flex flex-col gap-sm">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-2xl p-sm shadow-elevation-1 flex items-center gap-sm active:scale-[0.98] transition-transform cursor-pointer group">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary font-label-md text-label-md shrink-0">1</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-label-md text-label-md text-primary truncate">Antecedentes históricos</h4>
+<div class="flex items-center justify-between mt-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant">5 preguntas</span>
+<span class="font-label-sm text-label-sm text-primary">80%</span>
+</div>
+<div class="h-1 bg-surface-container w-full rounded-full mt-2 overflow-hidden">
+<div class="h-full bg-brand-orange rounded-full" style="width: 80%"></div>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-2xl p-sm shadow-elevation-1 flex items-center gap-sm active:scale-[0.98] transition-transform cursor-pointer group">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary font-label-md text-label-md shrink-0">2</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-label-md text-label-md text-primary truncate">Comparación</h4>
+<div class="flex items-center justify-between mt-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant">4 preguntas</span>
+<span class="font-label-sm text-label-sm text-primary">50%</span>
+</div>
+<div class="h-1 bg-surface-container w-full rounded-full mt-2 overflow-hidden">
+<div class="h-full bg-brand-orange rounded-full" style="width: 50%"></div>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-2xl p-sm shadow-elevation-1 flex items-center gap-sm active:scale-[0.98] transition-transform cursor-pointer group">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary font-label-md text-label-md shrink-0">3</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-label-md text-label-md text-primary truncate">Componentes</h4>
+<div class="flex items-center justify-between mt-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant">6 preguntas</span>
+<span class="font-label-sm text-label-sm text-primary">67%</span>
+</div>
+<div class="h-1 bg-surface-container w-full rounded-full mt-2 overflow-hidden">
+<div class="h-full bg-brand-orange rounded-full" style="width: 67%"></div>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Card 4 (Dominada) -->
+<div class="bg-surface-container-lowest rounded-2xl p-sm shadow-elevation-1 flex items-center gap-sm active:scale-[0.98] transition-transform cursor-pointer group border border-secondary/10 relative overflow-hidden">
+<div class="absolute top-0 right-0 bg-secondary text-on-secondary font-label-sm text-[10px] px-2 py-1 rounded-bl-lg rounded-tr-xl font-bold">DOMINADA</div>
+<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center text-secondary font-label-md text-label-md shrink-0">4</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-label-md text-label-md text-primary truncate pr-16">Desarrollo de sistemas expertos</h4>
+<div class="flex items-center justify-between mt-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant">3 preguntas</span>
+<span class="font-label-sm text-label-sm text-secondary">100%</span>
+</div>
+<div class="h-1 bg-surface-container w-full rounded-full mt-2 overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 100%"></div>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Card 5 -->
+<div class="bg-surface-container-lowest rounded-2xl p-sm shadow-elevation-1 flex items-center gap-sm active:scale-[0.98] transition-transform cursor-pointer group">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary font-label-md text-label-md shrink-0">5</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-label-md text-label-md text-primary truncate">El conocimiento</h4>
+<div class="flex items-center justify-between mt-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant">4 preguntas</span>
+<span class="font-label-sm text-label-sm text-primary">25%</span>
+</div>
+<div class="h-1 bg-surface-container w-full rounded-full mt-2 overflow-hidden">
+<div class="h-full bg-brand-orange rounded-full" style="width: 25%"></div>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-on-surface/10 shadow-[0_-4px_20px_0_rgba(10,18,42,0.06)] md:hidden">
+<!-- Inactive: Inicio -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-all active:scale-90 duration-200 p-2 rounded-lg min-w-[64px]" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm mt-1">Inicio</span>
+</a>
+<!-- Active: Cursos -->
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-container text-on-secondary-container dark:text-on-secondary-container rounded-full px-4 py-1 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book" data-weight="fill">menu_book</span>
+<span class="font-label-sm text-label-sm mt-1">Cursos</span>
+</a>
+<!-- Inactive: Estadísticas -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-all active:scale-90 duration-200 p-2 rounded-lg min-w-[64px]" href="#">
+<span class="material-symbols-outlined" data-icon="query_stats">query_stats</span>
+<span class="font-label-sm text-label-sm mt-1">Estadísticas</span>
+</a>
+<!-- Inactive: Configuración -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-all active:scale-90 duration-200 p-2 rounded-lg min-w-[64px]" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm mt-1">Configuración</span>
+</a>
+</nav>
+</body></html>
