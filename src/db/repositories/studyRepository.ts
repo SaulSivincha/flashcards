@@ -11,6 +11,7 @@ import type {
   StudyPass,
   StudySession,
 } from "../../types/study";
+import type { AttemptTelemetry } from "../../types/telemetry";
 import {
   answerCurrentCard,
   createInitialPass,
@@ -190,6 +191,7 @@ export class StudyRepository {
   async recordAnswer(
     sessionId: string,
     result: AttemptResult,
+    telemetry: AttemptTelemetry = {},
   ): Promise<StudyAnswerOutcome> {
     let outcome: StudyAnswerOutcome | undefined;
 
@@ -230,6 +232,7 @@ export class StudyRepository {
           cardId,
           result,
           answeredAt: timestamp,
+          ...telemetry,
         };
         const currentStats = await this.database.cardStats.get(cardId);
         const stats: CardStats = {

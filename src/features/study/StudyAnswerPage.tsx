@@ -9,6 +9,7 @@ import { IconButton } from "../../components/ui/IconButton";
 import { useSettingsStore } from "../../stores/settingsStore";
 import { useStudyStore } from "../../stores/studyStore";
 import type { AttemptResult } from "../../types/study";
+import { telemetryService } from "../../services/telemetry/telemetryService";
 
 export function StudyAnswerPage() {
   const history = useHistory();
@@ -66,6 +67,22 @@ export function StudyAnswerPage() {
     }
   }, [currentCard, history, isLoading, session, topicId]);
 
+  useEffect(() => {
+    if (!currentCard || !session || !pass) {
+      return;
+    }
+    void telemetryService.presentCard({
+      studySessionId: session.id,
+      passId: pass.id,
+      cardId: currentCard.id,
+      mode: session.mode,
+      passNumber: pass.passNumber,
+      presentationNumber: (session.currentCardIndex ?? 0) + 1,
+      resumed: true,
+    });
+    void telemetryService.revealCard();
+  }, [currentCard, pass, session]);
+
   if (isLoading || !snapshot || !topic) {
     return (
       <ScreenContainer className="!bg-paper" focused>
@@ -94,6 +111,16 @@ export function StudyAnswerPage() {
     return null;
   }
 
+  const pauseStudy = () => {
+    void telemetryService.recordStudyEvent({
+      type: "study_paused",
+      topicId,
+      studySessionId: session.id,
+      cardId: currentCard.id,
+    });
+    history.push(`/temas/${topicId}`);
+  };
+
   return (
     <ScreenContainer className="study-session-screen !bg-[#F5F3E7]" focused>
       <header className="sticky top-0 z-20 -mx-4 -mt-6 border-b border-black/5 bg-[#F5F3E7]/90 px-4 pt-[calc(12px+env(safe-area-inset-top))] backdrop-blur-md">
@@ -101,7 +128,7 @@ export function StudyAnswerPage() {
           <IconButton
             icon="close"
             label="Cerrar sesión"
-            onClick={() => history.push(`/temas/${topicId}`)}
+            onClick={pauseStudy}
           />
           <h1 className="line-clamp-1 min-w-0 flex-1 px-4 text-center text-xl font-semibold text-ink">
             {topic.title}
@@ -109,7 +136,7 @@ export function StudyAnswerPage() {
           <IconButton
             icon="pause"
             label="Pausar sesión"
-            onClick={() => history.push(`/temas/${topicId}`)}
+            onClick={pauseStudy}
           />
         </div>
         <StudyProgress

@@ -9,6 +9,7 @@ import {
   buildStudySessionSummary,
   type StudySessionSummary,
 } from "../services/study/studySummary";
+import { telemetryService } from "../services/telemetry/telemetryService";
 import type { AttemptResult, StudyMode } from "../types/study";
 import type { StudySession } from "../types/study";
 import type { TopicDetails } from "../types/topic";
@@ -99,6 +100,20 @@ export const useStudyStore = create<StudyState>((set, get) => ({
           activeTopic: topic,
           isLoading: false,
         });
+        const resumed =
+          Date.now() - new Date(snapshot.session.startedAt).getTime() > 2_000;
+        void telemetryService.recordStudyEvent({
+          type: resumed ? "study_resumed" : "study_started",
+          courseId: topic?.courseId,
+          topicId,
+          studySessionId: snapshot.session.id,
+          data: {
+            mode,
+            shuffle: snapshot.session.shuffle,
+            totalCards: snapshot.session.totalCards,
+            category: snapshot.session.selectedCategory ?? null,
+          },
+        });
         return snapshot;
       })
       .catch((error) => {
@@ -140,7 +155,13 @@ export const useStudyStore = create<StudyState>((set, get) => ({
 
     set({ isSubmitting: true, error: undefined });
     try {
-      const outcome = await studyRepository.recordAnswer(sessionId, result);
+      const attemptTelemetry = await telemetryService.getAttemptTelemetry();
+      const outcome = await studyRepository.recordAnswer(
+        sessionId,
+        result,
+        attemptTelemetry,
+      );
+      await telemetryService.completeCard(result, outcome.attempt.id);
       const [snapshot, history] = await Promise.all([
         studyRepository.getSnapshot(sessionId),
         studyRepository.getHistory(sessionId),
@@ -154,6 +175,12 @@ export const useStudyStore = create<StudyState>((set, get) => ({
         isSubmitting: false,
       });
       if (outcome.sessionCompleted) {
+        void telemetryService.recordStudyEvent({
+          type: "study_finished",
+          topicId: snapshot.session.topicId,
+          studySessionId: sessionId,
+          data: { mode: snapshot.session.mode },
+        });
         await Promise.all([
           useStatsStore.getState().load(),
           useTopicStore.getState().loadRecent(),
@@ -196,6 +223,15 @@ export const useStudyStore = create<StudyState>((set, get) => ({
         activeTopic: get().topic,
         isSubmitting: false,
       });
+      void telemetryService.recordStudyEvent({
+        type: "pass_started",
+        topicId: snapshot.session.topicId,
+        studySessionId: sessionId,
+        data: {
+          passNumber: snapshot.pass.passNumber,
+          totalCards: snapshot.pass.totalCards,
+        },
+      });
     } catch (error) {
       set({
         error:
@@ -224,6 +260,16 @@ export const useStudyStore = create<StudyState>((set, get) => ({
         activeSession: undefined,
         activeTopic: undefined,
         isSubmitting: false,
+      });
+      void telemetryService.recordStudyEvent({
+        type: "exam_finished",
+        topicId: history.session.topicId,
+        studySessionId: sessionId,
+        data: {
+          answeredCards: history.attempts.length,
+          totalCards: history.session.totalCards,
+          finishedEarly: history.attempts.length < history.session.totalCards,
+        },
       });
       await Promise.all([
         useStatsStore.getState().load(),

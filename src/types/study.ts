@@ -38,6 +38,13 @@ export type CardAttempt = {
   cardId: string;
   result: AttemptResult;
   answeredAt: string;
+  presentedAt?: string;
+  revealedAt?: string;
+  timeToRevealMs?: number;
+  answerViewingMs?: number;
+  responseTimeMs?: number;
+  appSessionId?: string;
+  interactionId?: string;
 };
 
 export type StartStudySessionInput = {

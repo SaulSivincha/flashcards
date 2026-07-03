@@ -128,6 +128,66 @@ function isSettings(value: unknown): boolean {
   );
 }
 
+function isAppUsageSession(value: unknown): boolean {
+  return (
+    isRecord(value) &&
+    hasString(value, "id") &&
+    hasString(value, "openedAt") &&
+    hasString(value, "lastActiveAt") &&
+    hasNumber(value, "activeDurationMs") &&
+    hasNumber(value, "backgroundDurationMs") &&
+    hasNumber(value, "foregroundCount") &&
+    hasNumber(value, "routeChangeCount") &&
+    hasString(value, "entryRoute") &&
+    hasString(value, "timezone") &&
+    hasString(value, "language") &&
+    hasString(value, "platform")
+  );
+}
+
+function isActivityEvent(value: unknown): boolean {
+  return (
+    isRecord(value) &&
+    hasString(value, "id") &&
+    hasString(value, "appSessionId") &&
+    hasString(value, "type") &&
+    hasString(value, "occurredAt")
+  );
+}
+
+function isCardInteraction(value: unknown): boolean {
+  return (
+    isRecord(value) &&
+    hasString(value, "id") &&
+    hasString(value, "studySessionId") &&
+    hasString(value, "passId") &&
+    hasString(value, "cardId") &&
+    (value.mode === "review" || value.mode === "exam") &&
+    hasNumber(value, "passNumber") &&
+    hasNumber(value, "presentationNumber") &&
+    hasString(value, "presentedAt") &&
+    hasNumber(value, "revealCount") &&
+    hasNumber(value, "routeChanges") &&
+    hasBoolean(value, "resumed")
+  );
+}
+
+function isCardLearningState(value: unknown): boolean {
+  return (
+    isRecord(value) &&
+    hasString(value, "cardId") &&
+    hasNumber(value, "intervalDays") &&
+    hasNumber(value, "easeFactor") &&
+    hasNumber(value, "correctStreak") &&
+    hasNumber(value, "longestCorrectStreak") &&
+    hasNumber(value, "lapseCount") &&
+    hasNumber(value, "totalReviews") &&
+    hasNumber(value, "totalResponseMs") &&
+    hasNumber(value, "averageResponseMs") &&
+    hasString(value, "updatedAt")
+  );
+}
+
 function assertUniqueIds(
   values: unknown[],
   label: string,
@@ -143,7 +203,7 @@ export function validateBackup(value: unknown): FlashStudyBackup {
   if (
     !isRecord(value) ||
     value.format !== "flashstudy-backup" ||
-    value.version !== 1 ||
+    (value.version !== 1 && value.version !== 2) ||
     !hasString(value, "exportedAt") ||
     !isRecord(value.data)
   ) {
@@ -151,6 +211,7 @@ export function validateBackup(value: unknown): FlashStudyBackup {
   }
 
   const data = value.data;
+  const legacy = value.version === 1;
   const valid =
     isArrayOf(data.courses, isCourse) &&
     isArrayOf(data.topics, isTopic) &&
@@ -159,13 +220,30 @@ export function validateBackup(value: unknown): FlashStudyBackup {
     isArrayOf(data.studyPasses, isStudyPass) &&
     isArrayOf(data.cardAttempts, isCardAttempt) &&
     isArrayOf(data.cardStats, isCardStats) &&
-    isArrayOf(data.settings, isSettings);
+    isArrayOf(data.settings, isSettings) &&
+    (legacy ||
+      (isArrayOf(data.appUsageSessions, isAppUsageSession) &&
+        isArrayOf(data.activityEvents, isActivityEvent) &&
+        isArrayOf(data.cardInteractions, isCardInteraction) &&
+        isArrayOf(data.cardLearningStates, isCardLearningState)));
 
   if (!valid) {
     throw new Error("El respaldo contiene tablas o registros inválidos.");
   }
 
-  const backup = value as FlashStudyBackup;
+  const backup: FlashStudyBackup = legacy
+    ? {
+        ...(value as Omit<FlashStudyBackup, "version" | "data">),
+        version: 2,
+        data: {
+          ...(data as FlashStudyBackup["data"]),
+          appUsageSessions: [],
+          activityEvents: [],
+          cardInteractions: [],
+          cardLearningStates: [],
+        },
+      }
+    : (value as FlashStudyBackup);
   assertUniqueIds(backup.data.courses, "cursos");
   assertUniqueIds(backup.data.topics, "temas");
   assertUniqueIds(backup.data.flashcards, "tarjetas");
@@ -173,6 +251,14 @@ export function validateBackup(value: unknown): FlashStudyBackup {
   assertUniqueIds(backup.data.studyPasses, "pasadas");
   assertUniqueIds(backup.data.cardAttempts, "intentos");
   assertUniqueIds(backup.data.cardStats, "estadísticas de tarjeta", "cardId");
+  assertUniqueIds(backup.data.appUsageSessions, "sesiones de uso");
+  assertUniqueIds(backup.data.activityEvents, "eventos de actividad");
+  assertUniqueIds(backup.data.cardInteractions, "interacciones");
+  assertUniqueIds(
+    backup.data.cardLearningStates,
+    "estados de aprendizaje",
+    "cardId",
+  );
 
   const courseIds = new Set(backup.data.courses.map((course) => course.id));
   const topicIds = new Set(backup.data.topics.map((topic) => topic.id));
@@ -183,6 +269,9 @@ export function validateBackup(value: unknown): FlashStudyBackup {
   const passIds = new Set(backup.data.studyPasses.map((pass) => pass.id));
   const passSessionIds = new Map(
     backup.data.studyPasses.map((pass) => [pass.id, pass.sessionId]),
+  );
+  const appSessionIds = new Set(
+    backup.data.appUsageSessions.map((session) => session.id),
   );
 
   if (backup.data.topics.some((topic) => !courseIds.has(topic.courseId))) {
@@ -221,6 +310,40 @@ export function validateBackup(value: unknown): FlashStudyBackup {
   ) {
     throw new Error(
       "El respaldo contiene estadísticas de tarjetas inexistentes.",
+    );
+  }
+  if (
+    backup.data.activityEvents.some(
+      (event) => !appSessionIds.has(event.appSessionId),
+    )
+  ) {
+    throw new Error(
+      "El respaldo contiene eventos sin una sesión de uso válida.",
+    );
+  }
+  if (
+    backup.data.cardInteractions.some(
+      (interaction) =>
+        !sessionIds.has(interaction.studySessionId) ||
+        !passIds.has(interaction.passId) ||
+        passSessionIds.get(interaction.passId) !==
+          interaction.studySessionId ||
+        !cardIds.has(interaction.cardId) ||
+        (interaction.appSessionId &&
+          !appSessionIds.has(interaction.appSessionId)),
+    )
+  ) {
+    throw new Error(
+      "El respaldo contiene interacciones con referencias inválidas.",
+    );
+  }
+  if (
+    backup.data.cardLearningStates.some(
+      (state) => !cardIds.has(state.cardId),
+    )
+  ) {
+    throw new Error(
+      "El respaldo contiene estados de aprendizaje para tarjetas inexistentes.",
     );
   }
   if (backup.data.settings.length !== 1) {

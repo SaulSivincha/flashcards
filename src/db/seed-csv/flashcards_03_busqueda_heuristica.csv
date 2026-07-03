@@ -1,0 +1,20 @@
+curso,Inteligencia Artificial
+unidad,Unidad 2
+tema,Metodos Informados Heuristicamente
+
+categoria,pregunta,respuesta
+"Busqueda heuristica","Por que se usan metodos heuristicos?","Porque la busqueda en anchura y profundidad puede ser ineficaz por el crecimiento exponencial de tiempo y espacio."
+"Heuristica","Que permite mejorar la eficiencia de la busqueda?","Ordenar las selecciones para explorar primero las opciones mas prometedoras."
+"Busqueda heuristica","Que intenta hacer el enfoque heuristico en un arbol de busqueda?","Reducir el tamano del arbol cortando nodos poco prometedores."
+"Heuristica","Que es una heuristica?","Es un conjunto de reglas que evalua si la busqueda va en la direccion correcta."
+"Heuristica","Como puede entenderse una heuristica respecto al objetivo?","Como una medida conceptual de distancia entre un estado dado y el estado objetivo."
+"Primero el mejor","Que idea sigue la busqueda primero el mejor?","Explorar primero el nodo que parece mas prometedor por su funcion heuristica."
+"A estrella","Que relacion tiene A* con Best First?","Es una variante de Best First donde cambia la funcion de evaluacion."
+"A estrella","Que considera A* ademas de la heuristica?","Considera el costo de llegar desde el nodo inicial hasta el nodo actual."
+"A estrella","Que expresa la funcion f(n)=g(n)+h(n)?","Una estimacion del costo desde el estado inicial hasta el objetivo siguiendo el camino actual."
+"A estrella","Que estructuras usa A* para organizar la busqueda?","Mantiene nodos abiertos en una cola con prioridad y nodos cerrados en una lista."
+"A estrella","Cuando puede ser optimo A*?","Cuando la heuristica no sobrestima el costo minimo hacia el objetivo."
+"Admisibilidad","Que significa que un algoritmo sea admisible?","Que garantiza encontrar una solucion optima si existe."
+"Comparacion","Cuando suelen ser mejores los metodos heuristicos que los metodos a ciegas?","Cuando se elige correctamente la heuristica para el problema."
+"Heuristica","De que depende la definicion de una heuristica?","Depende del problema que se desea resolver."
+"A estrella","Que ocurre si la heuristica h vale cero?","La busqueda queda controlada por el costo g."

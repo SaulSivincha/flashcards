@@ -34,6 +34,7 @@ describe("parseFlashcardCsv", () => {
     expect(result.cards[0].answer).toContain("sistema experto, creado");
     expect(result.categories).toEqual(["Historia", "Comparación"]);
     expect(result.sourceHash).toMatch(/^[a-f0-9]{8}$/);
+    expect(result.sourceText).toBe(validCsv);
   });
 
   it("acepta BOM, CRLF y encabezados con espacios", () => {

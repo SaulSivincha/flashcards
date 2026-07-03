@@ -1,0 +1,20 @@
+curso,Inteligencia Artificial
+unidad,Unidad 2
+tema,Busqueda a Ciegas
+
+categoria,pregunta,respuesta
+"Solucion de problemas","Que caracteriza a los problemas que motivan la busqueda en inteligencia artificial?","No tienen una solucion algoritmica conocida o la solucion conocida es demasiado compleja para una implementacion practica."
+"Solucion de problemas","Que es la solucion de problemas?","Es una forma compleja de razonamiento que requiere generar y asimilar estructuras de memoria para responder una interrogante."
+"Vias de solucion","Que vias de solucion se mencionan para resolver problemas?","Aplicar una formula explicita, usar una definicion recursiva, usar un algoritmo que converge o aplicar prueba y error."
+"Busqueda","Que busca conectar la busqueda en inteligencia artificial?","Conecta la descripcion inicial del problema con una descripcion del estado deseado o problema resuelto."
+"Busqueda","Que representa el camino encontrado por una busqueda?","Representa los pasos de solucion del problema."
+"Tipos de busqueda","Que alternativas de busqueda se distinguen?","Busqueda aleatoria, busqueda a ciegas y busqueda dirigida."
+"Direccion de busqueda","Que direcciones puede seguir una busqueda?","Puede ser dirigida por datos hacia adelante o dirigida por objetivos hacia atras."
+"Definicion formal","Que elementos forman la definicion formal de un problema de busqueda?","Estado inicial, acciones posibles, espacio de estados, camino, criterio objetivo, costos y solucion."
+"Estados","Por que es importante la representacion de estados?","Porque describe situaciones posibles, debe incluir informacion relevante e influye en el numero de estados y en la busqueda."
+"Operadores","Que son las acciones u operadores?","Son acciones basicas que transforman unos estados en otros."
+"Camino","Que es un camino en el espacio de estados?","Es una secuencia de acciones que conduce de un estado a otro."
+"Criterio objetivo","Para que sirve el criterio objetivo?","Sirve para determinar si un estado cumple con la meta del problema."
+"Solucion","Que es una solucion en busqueda?","Es la secuencia de acciones que permite alcanzar el objetivo."
+"Calidad de busqueda","Que criterios se consideran al elegir una tecnica de busqueda?","Completitud, complejidad temporal, complejidad espacial y optimalidad."
+"Algoritmo general","Que hace el algoritmo general de busqueda?","Inicializa el arbol con el estado inicial, selecciona nodos para expandir y termina al hallar un estado objetivo o fallar."

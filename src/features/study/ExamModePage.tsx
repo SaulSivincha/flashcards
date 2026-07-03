@@ -7,6 +7,7 @@ import { ProgressBar } from "../../components/ui/ProgressBar";
 import { useSettingsStore } from "../../stores/settingsStore";
 import { useStudyStore } from "../../stores/studyStore";
 import type { AttemptResult } from "../../types/study";
+import { telemetryService } from "../../services/telemetry/telemetryService";
 
 export function ExamModePage() {
   const history = useHistory();
@@ -57,6 +58,20 @@ export function ExamModePage() {
     setResult(undefined);
   }, [card?.id]);
 
+  useEffect(() => {
+    if (!card || !session || !pass) {
+      return;
+    }
+    void telemetryService.presentCard({
+      studySessionId: session.id,
+      passId: pass.id,
+      cardId: card.id,
+      mode: session.mode,
+      passNumber: pass.passNumber,
+      presentationNumber: (session.currentCardIndex ?? 0) + 1,
+    });
+  }, [card, pass, session]);
+
   async function saveAndContinue(): Promise<void> {
     if (!result) {
       return;
@@ -70,6 +85,26 @@ export function ExamModePage() {
   async function finishEarly(): Promise<void> {
     await finishExam();
     history.replace(`/estudio/${topicId}/resumen?mode=exam`);
+  }
+
+  function toggleAnswer(): void {
+    setAnswerOpen((currentValue) => {
+      if (!currentValue) {
+        void telemetryService.revealCard();
+      }
+      return !currentValue;
+    });
+  }
+
+  function pauseExam(): void {
+    void telemetryService.recordStudyEvent({
+      type: "study_paused",
+      topicId,
+      studySessionId: session?.id,
+      cardId: card?.id,
+      data: { mode: "exam" },
+    });
+    history.push(`/temas/${topicId}`);
   }
 
   if (isLoading || !snapshot || !topic || !session || !pass) {
@@ -94,7 +129,7 @@ export function ExamModePage() {
         <button
           aria-label="Cerrar examen"
           className="flex h-12 w-12 items-center justify-start"
-          onClick={() => history.push(`/temas/${topicId}`)}
+          onClick={pauseExam}
           type="button"
         >
           <AppIcon className="text-3xl" name="close" />
@@ -127,7 +162,7 @@ export function ExamModePage() {
         <div className="mt-10 overflow-hidden rounded-xl border border-white/20 bg-[#303A58]">
           <button
             className="flex min-h-14 w-full items-center justify-between px-4 text-left text-sm font-semibold"
-            onClick={() => setAnswerOpen((currentValue) => !currentValue)}
+            onClick={toggleAnswer}
             type="button"
           >
             Mostrar respuesta para autoevaluar

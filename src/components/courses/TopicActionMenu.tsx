@@ -4,11 +4,15 @@ import { AppIcon } from "../ui/AppIcon";
 type TopicActionMenuProps = {
   topicId: string;
   onClose: () => void;
+  onEdit: () => void;
+  onDelete: () => void;
 };
 
 export function TopicActionMenu({
   topicId,
   onClose,
+  onEdit,
+  onDelete,
 }: TopicActionMenuProps) {
   const history = useHistory();
 
@@ -28,12 +32,35 @@ export function TopicActionMenu({
         className="flex min-h-12 w-full items-center gap-3 px-4 text-left text-sm hover:bg-mist"
         onClick={() => {
           onClose();
+          onEdit();
+        }}
+        type="button"
+      >
+        <AppIcon className="text-xl" name="edit" />
+        Editar nombre
+      </button>
+      <button
+        className="flex min-h-12 w-full items-center gap-3 px-4 text-left text-sm hover:bg-mist"
+        onClick={() => {
+          onClose();
           history.push(`/temas/${topicId}`);
         }}
         type="button"
       >
         <AppIcon className="text-xl" name="files" />
         Abrir tema
+      </button>
+      <div className="my-1 border-t border-slate/10" />
+      <button
+        className="flex min-h-12 w-full items-center gap-3 px-4 text-left text-sm text-mahogany hover:bg-mahogany/5"
+        onClick={() => {
+          onClose();
+          onDelete();
+        }}
+        type="button"
+      >
+        <AppIcon className="text-xl" name="trash" />
+        Eliminar tema
       </button>
     </div>
   );

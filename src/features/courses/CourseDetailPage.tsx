@@ -10,11 +10,13 @@ import { Card } from "../../components/ui/Card";
 import { Chip } from "../../components/ui/Chip";
 import { ConfirmDialog } from "../../components/ui/ConfirmDialog";
 import { EmptyState } from "../../components/ui/EmptyState";
+import { NameEditorSheet } from "../../components/ui/NameEditorSheet";
 import { ProgressBar } from "../../components/ui/ProgressBar";
 import { useCourseStore } from "../../stores/courseStore";
 import { useStatsStore } from "../../stores/statsStore";
 import { useStudyStore } from "../../stores/studyStore";
 import { useTopicStore } from "../../stores/topicStore";
+import type { TopicSummary } from "../../types/topic";
 
 export function CourseDetailPage() {
   const history = useHistory();
@@ -22,13 +24,21 @@ export function CourseDetailPage() {
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [deleteError, setDeleteError] = useState("");
+  const [topicToDelete, setTopicToDelete] = useState<TopicSummary>();
+  const [isDeletingTopic, setIsDeletingTopic] = useState(false);
+  const [topicDeleteError, setTopicDeleteError] = useState("");
+  const [courseEditOpen, setCourseEditOpen] = useState(false);
+  const [topicToEdit, setTopicToEdit] = useState<TopicSummary>();
   const course = useCourseStore((state) =>
     state.courses.find((item) => item.id === courseId),
   );
   const deleteCourse = useCourseStore((state) => state.deleteCourse);
+  const renameCourse = useCourseStore((state) => state.renameCourse);
   const topics = useTopicStore((state) => state.topics);
   const loadByCourse = useTopicStore((state) => state.loadByCourse);
   const saveOrder = useTopicStore((state) => state.saveOrder);
+  const deleteTopic = useTopicStore((state) => state.deleteTopic);
+  const renameTopic = useTopicStore((state) => state.renameTopic);
 
   useEffect(() => {
     void loadByCourse(courseId);
@@ -55,6 +65,32 @@ export function CourseDetailPage() {
     }
   }
 
+  async function confirmTopicDelete(): Promise<void> {
+    if (!topicToDelete) {
+      return;
+    }
+    setIsDeletingTopic(true);
+    setTopicDeleteError("");
+    try {
+      await deleteTopic(topicToDelete.id);
+      useStudyStore.getState().resetState();
+      await Promise.all([
+        useCourseStore.getState().loadCourses(),
+        useStatsStore.getState().load(),
+        useStudyStore.getState().loadActiveSession(),
+      ]);
+      setTopicToDelete(undefined);
+    } catch (error) {
+      setTopicDeleteError(
+        error instanceof Error
+          ? error.message
+          : "No se pudo eliminar el tema.",
+      );
+    } finally {
+      setIsDeletingTopic(false);
+    }
+  }
+
   return (
     <ScreenContainer>
       <PageHeader back title={course?.name ?? "Curso"} />
@@ -76,6 +112,14 @@ export function CourseDetailPage() {
         <AppIcon className="text-2xl" name="upload" />
         Agregar tema CSV
       </Button>
+      <Button
+        className="mt-3"
+        onClick={() => setCourseEditOpen(true)}
+        variant="secondary"
+      >
+        <AppIcon className="text-xl" name="edit" />
+        Editar nombre del curso
+      </Button>
 
       <section className="mt-10">
         <div className="mb-5 flex items-center justify-between">
@@ -92,6 +136,11 @@ export function CourseDetailPage() {
         </div>
         {topics.length > 0 ? (
           <TopicSortableList
+            onEdit={(topic) => setTopicToEdit(topic)}
+            onDelete={(topic) => {
+              setTopicDeleteError("");
+              setTopicToDelete(topic);
+            }}
             onReorder={(topicIds) => saveOrder(courseId, topicIds)}
             topics={topics}
           />
@@ -126,6 +175,55 @@ export function CourseDetailPage() {
         onConfirm={() => void confirmDelete()}
         open={deleteOpen}
         title="Eliminar curso"
+      />
+      <ConfirmDialog
+        busy={isDeletingTopic}
+        confirmLabel="Eliminar tema"
+        description={`Se eliminará “${topicToDelete?.title ?? "este tema"}” junto con sus ${topicToDelete?.cardCount ?? 0} tarjetas, sesiones, estadísticas y datos de aprendizaje. Esta acción no se puede deshacer.`}
+        onCancel={() => {
+          if (!isDeletingTopic) {
+            setTopicToDelete(undefined);
+          }
+        }}
+        onConfirm={() => void confirmTopicDelete()}
+        open={Boolean(topicToDelete)}
+        title="Eliminar tema"
+      />
+      {topicDeleteError ? (
+        <p className="mt-3 text-sm text-mahogany">{topicDeleteError}</p>
+      ) : null}
+      <NameEditorSheet
+        initialName={course?.name}
+        label="Nombre del curso"
+        onClose={() => setCourseEditOpen(false)}
+        onSubmit={async (name) => {
+          await renameCourse(courseId, name);
+          setCourseEditOpen(false);
+        }}
+        open={courseEditOpen}
+        submitLabel="Guardar nombre"
+        submittingLabel="Guardando…"
+        title="Editar curso"
+      />
+      <NameEditorSheet
+        initialName={topicToEdit?.title}
+        label="Nombre del tema"
+        onClose={() => setTopicToEdit(undefined)}
+        onSubmit={async (name) => {
+          if (!topicToEdit) {
+            return;
+          }
+          await renameTopic(topicToEdit.id, name);
+          await Promise.all([
+            useCourseStore.getState().loadCourses(),
+            useStatsStore.getState().load(),
+          ]);
+          setTopicToEdit(undefined);
+        }}
+        open={Boolean(topicToEdit)}
+        submitLabel="Guardar nombre"
+        submittingLabel="Guardando…"
+        title="Editar tema"
       />
     </ScreenContainer>
   );

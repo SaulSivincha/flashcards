@@ -10,9 +10,18 @@ import { BottomSheet } from "../../components/ui/BottomSheet";
 import { Button } from "../../components/ui/Button";
 import { ConfirmDialog } from "../../components/ui/ConfirmDialog";
 import { readBackupFile } from "../../services/backup/backupService";
+import {
+  automaticSync,
+  getAutomaticSyncDirectory,
+  isAutomaticSyncAvailable,
+  isAutomaticSyncEnabled,
+  readSyncPackageFile,
+  setAutomaticSyncEnabled,
+} from "../../services/sync/syncService";
 import { useDataManagementStore } from "../../stores/dataManagementStore";
 import { useSettingsStore } from "../../stores/settingsStore";
 import type { FlashStudyBackup } from "../../types/backup";
+import type { FlashStudySyncPackage } from "../../types/sync";
 
 const csvExample = `curso,Inteligencia Artificial
 unidad,Unidad 1
@@ -98,10 +107,16 @@ function DataAction({
 
 export function SettingsPage() {
   const fileInput = useRef<HTMLInputElement>(null);
+  const syncFileInput = useRef<HTMLInputElement>(null);
   const [resetOpen, setResetOpen] = useState(false);
   const [storageOpen, setStorageOpen] = useState(false);
   const [csvOpen, setCsvOpen] = useState(false);
+  const [automaticSyncEnabled, setAutomaticSyncEnabledState] = useState(
+    isAutomaticSyncEnabled,
+  );
   const [pendingBackup, setPendingBackup] = useState<FlashStudyBackup>();
+  const [pendingSyncPackage, setPendingSyncPackage] =
+    useState<FlashStudySyncPackage>();
   const settings = useSettingsStore((state) => state.settings);
   const setTheme = useSettingsStore((state) => state.setTheme);
   const setDefaultStudyOrder = useSettingsStore(
@@ -116,6 +131,12 @@ export function SettingsPage() {
   const error = useDataManagementStore((state) => state.error);
   const loadStorage = useDataManagementStore((state) => state.loadStorage);
   const exportBackup = useDataManagementStore((state) => state.exportBackup);
+  const exportSyncPackage = useDataManagementStore(
+    (state) => state.exportSyncPackage,
+  );
+  const mergeSyncPackage = useDataManagementStore(
+    (state) => state.mergeSyncPackage,
+  );
   const restoreBackup = useDataManagementStore((state) => state.restoreBackup);
   const resetProgress = useDataManagementStore((state) => state.resetProgress);
   const clearFeedback = useDataManagementStore(
@@ -148,6 +169,25 @@ export function SettingsPage() {
     }
   }
 
+  async function handleSyncFile(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+    if (!file) {
+      return;
+    }
+
+    clearFeedback();
+    try {
+      setPendingSyncPackage(await readSyncPackageFile(file));
+    } catch (fileError) {
+      setDataError(
+        fileError instanceof Error
+          ? fileError.message
+          : "No se pudo leer el paquete de sincronización.",
+      );
+    }
+  }
+
   async function confirmRestore() {
     if (!pendingBackup) {
       return;
@@ -166,6 +206,36 @@ export function SettingsPage() {
       setResetOpen(false);
     } catch {
       // El store mantiene el mensaje específico para mostrarlo en la pantalla.
+    }
+  }
+
+  async function confirmSyncMerge() {
+    if (!pendingSyncPackage) {
+      return;
+    }
+    try {
+      await mergeSyncPackage(pendingSyncPackage);
+      setPendingSyncPackage(undefined);
+    } catch {
+      // El store mantiene el mensaje específico para mostrarlo en la pantalla.
+    }
+  }
+
+  async function toggleAutomaticSync(): Promise<void> {
+    const enabled = !automaticSyncEnabled;
+    setAutomaticSyncEnabled(enabled);
+    setAutomaticSyncEnabledState(enabled);
+    clearFeedback();
+    if (enabled) {
+      try {
+        await automaticSync();
+      } catch (syncError) {
+        setDataError(
+          syncError instanceof Error
+            ? syncError.message
+            : "No se pudo activar la sincronización automática.",
+        );
+      }
     }
   }
 
@@ -265,11 +335,41 @@ export function SettingsPage() {
           Datos locales
         </p>
         <div className="academic-card overflow-hidden">
+          {isAutomaticSyncAvailable() ? (
+            <div className="subtle-divider flex min-h-[88px] items-center justify-between border-b px-6">
+              <span className="flex items-center gap-4">
+                <AppIcon className="text-2xl text-slate" name="sync" />
+                <span>
+                  <span className="block">Sincronización automática</span>
+                  <span className="muted-text mt-1 block text-xs">
+                    {getAutomaticSyncDirectory()}
+                  </span>
+                </span>
+              </span>
+              <Toggle
+                checked={automaticSyncEnabled}
+                label="Alternar sincronización automática"
+                onChange={() => void toggleAutomaticSync()}
+              />
+            </div>
+          ) : null}
           <DataAction
             disabled={isBusy}
             icon="download"
             label="Exportar progreso (JSON)"
             onClick={() => void exportBackup()}
+          />
+          <DataAction
+            disabled={isBusy}
+            icon="download"
+            label="Exportar paquete sync"
+            onClick={() => void exportSyncPackage()}
+          />
+          <DataAction
+            disabled={isBusy}
+            icon="refresh"
+            label="Fusionar paquete sync"
+            onClick={() => syncFileInput.current?.click()}
           />
           <DataAction
             disabled={isBusy}
@@ -295,10 +395,19 @@ export function SettingsPage() {
           ref={fileInput}
           type="file"
         />
+        <input
+          accept=".json,application/json"
+          className="hidden"
+          onChange={(event) => void handleSyncFile(event)}
+          ref={syncFileInput}
+          type="file"
+        />
         <div className="subtle-divider muted-text mt-4 flex items-start gap-3 rounded-xl border p-4 text-sm">
           <AppIcon className="mt-0.5 text-lg text-slate" name="info" />
-          Tus datos permanecen en este dispositivo. FlashStudy funciona sin
-          conexión.
+          En Android, comparte {getAutomaticSyncDirectory()} con Syncthing. La
+          app publica los cambios al salir y fusiona los archivos de otros
+          dispositivos al abrir o regresar. Los botones manuales quedan como
+          respaldo.
         </div>
         {message ? (
           <p
@@ -429,6 +538,21 @@ export function SettingsPage() {
         onConfirm={() => void confirmRestore()}
         open={Boolean(pendingBackup)}
         title="Restaurar respaldo"
+      />
+      <ConfirmDialog
+        busy={isBusy}
+        confirmLabel="Fusionar"
+        description={
+          pendingSyncPackage
+            ? `El paquete fue exportado el ${new Date(
+                pendingSyncPackage.exportedAt,
+              ).toLocaleString()} y se fusionará con los datos actuales sin reemplazarlos.`
+            : ""
+        }
+        onCancel={() => setPendingSyncPackage(undefined)}
+        onConfirm={() => void confirmSyncMerge()}
+        open={Boolean(pendingSyncPackage)}
+        title="Fusionar sincronización"
       />
     </ScreenContainer>
   );

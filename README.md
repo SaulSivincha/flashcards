@@ -59,6 +59,8 @@ npm run android:build
 ## Implementado en Fase 3
 
 - Parser CSV con Papa Parse y metadatos antes del encabezado.
+- Copia automática de cada CSV en `Documents/FlashStudy/CSV`, con fecha y
+  hora añadidas al nombre.
 - Validaciones con errores asociados a sus filas.
 - Vista previa del archivo antes de importar.
 - Importación transaccional a IndexedDB.

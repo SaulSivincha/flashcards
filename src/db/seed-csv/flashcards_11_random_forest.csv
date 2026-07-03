@@ -1,0 +1,20 @@
+curso,Inteligencia Artificial
+unidad,Unidad 2
+tema,Random Forest
+
+categoria,pregunta,respuesta
+"Random Forest","Que es Random Forest?","Un algoritmo que combina multiples arboles de decision para llegar a un resultado unico."
+"Uso","Que tipos de problemas puede manejar Random Forest?","Problemas de clasificacion y regresion."
+"Origen del problema","Que problema tienen los arboles de decision individuales?","Pueden sufrir overfitting al memorizar datos de entrenamiento y fallar con datos nuevos."
+"Overfitting","Como ayuda Random Forest contra el overfitting?","Entrena muchos arboles con muestras distintas y promedia o vota sus resultados."
+"Fundamentos","En que tres pilares se apoya Random Forest?","Bootstrap sampling, seleccion aleatoria de features y agregacion de predicciones."
+"Bootstrap","Que es bootstrap sampling?","Tomar muestras aleatorias con reemplazo del dataset."
+"Features","Que ocurre con las features en cada nodo?","Se evalua solo un subconjunto aleatorio de variables."
+"Agregacion","Como combina Random Forest las predicciones?","Usa votacion mayoritaria en clasificacion o promedio en regresion."
+"Gini","Que mide la impureza de Gini?","La probabilidad de clasificar incorrectamente un elemento elegido al azar."
+"Entropia","Que mide la entropia en los nodos?","El nivel de desorden o incertidumbre."
+"Flujo","Que division de datos se usa para entrenamiento y evaluacion?","Una division 80/20, con 80% para entrenamiento y 20% para evaluacion."
+"Parametros","Que parametros estructurales se mencionan?","n_estimators, max_depth y min_samples_leaf."
+"Ventajas","Que ventajas tiene Random Forest?","Maneja datos mixtos, es robusto al ruido y reduce el sobreajuste."
+"Limitaciones","Que limitaciones tiene Random Forest?","Baja interpretabilidad y mayor consumo de memoria por almacenar el bosque."
+"Aplicacion","Para que se aplica Random Forest en rendimiento estudiantil?","Para predecir rendimiento academico final y apoyar sistemas de alerta temprana."

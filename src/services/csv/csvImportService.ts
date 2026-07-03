@@ -4,6 +4,10 @@ import type {
   CsvImportOptions,
   CsvImportResult,
 } from "./csvImportTypes";
+import {
+  archiveCsvFile,
+  removeArchivedCsvFile,
+} from "./csvArchiveService";
 import { parseFlashcardCsvFile } from "./csvParser";
 import type { ParsedFlashcardCsv } from "./csvTypes";
 
@@ -28,8 +32,18 @@ export async function importCsv(
   analysis: CsvImportAnalysis,
   options: Omit<CsvImportOptions, "preferredCourseId">,
 ): Promise<CsvImportResult> {
-  return csvImportRepository.import(analysis.parsed, {
-    ...options,
-    preferredCourseId: analysis.targetCourseId,
-  });
+  const archivedPath = await archiveCsvFile(
+    analysis.parsed.fileName,
+    analysis.parsed.sourceText,
+  );
+
+  try {
+    return await csvImportRepository.import(analysis.parsed, {
+      ...options,
+      preferredCourseId: analysis.targetCourseId,
+    });
+  } catch (error) {
+    await removeArchivedCsvFile(archivedPath).catch(() => undefined);
+    throw error;
+  }
 }

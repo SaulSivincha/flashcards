@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { BrandMark } from "../../components/brand/BrandMark";
 import { ScreenContainer } from "../../components/layout/ScreenContainer";
 import { AppIcon } from "../../components/ui/AppIcon";
 import { Card } from "../../components/ui/Card";
@@ -123,7 +124,7 @@ export function StatsPage() {
   return (
     <ScreenContainer className="!bg-paper dark:!bg-ink">
       <div className="flex items-center gap-2">
-        <AppIcon className="text-2xl" name="school" />
+        <BrandMark className="h-8 w-8" />
         <strong>FlashStudy</strong>
       </div>
 

@@ -103,6 +103,47 @@ describe("repositories Dexie", () => {
     await secondDatabase.delete();
   });
 
+  it("renombra cursos y temas y rechaza nombres duplicados", async () => {
+    const database = new FlashStudyDatabase(databaseName());
+    const courseRepository = new CourseRepository(database);
+    const topicRepository = new TopicRepository(database);
+    const firstCourse = await courseRepository.create({ name: "Curso inicial" });
+    await courseRepository.create({ name: "Curso existente" });
+    const firstTopic = await topicRepository.create({
+      courseId: firstCourse.id,
+      fileName: "uno.csv",
+      unit: "Unidad 1",
+      title: "Tema inicial",
+      order: 0,
+      sourceHash: "hash-uno",
+    });
+    await topicRepository.create({
+      courseId: firstCourse.id,
+      fileName: "dos.csv",
+      unit: "Unidad 2",
+      title: "Tema existente",
+      order: 1,
+      sourceHash: "hash-dos",
+    });
+
+    await courseRepository.rename(firstCourse.id, "Curso renombrado");
+    await topicRepository.rename(firstTopic.id, "Tema renombrado");
+
+    expect(await courseRepository.getById(firstCourse.id)).toMatchObject({
+      name: "Curso renombrado",
+    });
+    expect(await topicRepository.getById(firstTopic.id)).toMatchObject({
+      title: "Tema renombrado",
+    });
+    await expect(
+      courseRepository.rename(firstCourse.id, "curso existente"),
+    ).rejects.toThrow("Ya existe un curso");
+    await expect(
+      topicRepository.rename(firstTopic.id, "tema existente"),
+    ).rejects.toThrow("Ya existe un tema");
+    await database.delete();
+  });
+
   it("rechaza órdenes incompletos o con temas repetidos", async () => {
     const database = new FlashStudyDatabase(databaseName());
     const course = await new CourseRepository(database).create({
@@ -200,6 +241,143 @@ describe("repositories Dexie", () => {
     expect(await database.studyPasses.get("pass-delete")).toBeUndefined();
     expect(await database.cardAttempts.get("attempt-delete")).toBeUndefined();
     expect(await database.cardStats.get(card.id)).toBeUndefined();
+    await database.delete();
+  });
+
+  it("elimina un tema y todos sus datos de estudio y aprendizaje", async () => {
+    const database = new FlashStudyDatabase(databaseName());
+    const course = await new CourseRepository(database).create({
+      name: "Curso con temas",
+    });
+    const topicRepository = new TopicRepository(database);
+    const topic = await topicRepository.create({
+      courseId: course.id,
+      fileName: "eliminar.csv",
+      unit: "Unidad 1",
+      title: "Tema eliminable",
+      order: 0,
+      sourceHash: "hash-delete",
+    });
+    const remainingTopic = await topicRepository.create({
+      courseId: course.id,
+      fileName: "conservar.csv",
+      unit: "Unidad 2",
+      title: "Tema conservado",
+      order: 1,
+      sourceHash: "hash-keep",
+    });
+    const [card] = await new FlashcardRepository(database).createMany([
+      {
+        topicId: topic.id,
+        category: "General",
+        question: "Pregunta",
+        answer: "Respuesta",
+        order: 0,
+        isActive: true,
+      },
+    ]);
+    await database.studySessions.add({
+      id: "topic-session-delete",
+      topicId: topic.id,
+      mode: "review",
+      startedAt: "2026-06-06T10:00:00.000Z",
+      totalCards: 1,
+      totalPasses: 1,
+      shuffle: false,
+    });
+    await database.studyPasses.add({
+      id: "topic-pass-delete",
+      sessionId: "topic-session-delete",
+      passNumber: 1,
+      totalCards: 1,
+      correctCount: 1,
+      incorrectCount: 0,
+    });
+    await database.cardAttempts.add({
+      id: "topic-attempt-delete",
+      sessionId: "topic-session-delete",
+      passId: "topic-pass-delete",
+      cardId: card.id,
+      result: "correct",
+      answeredAt: "2026-06-06T10:01:00.000Z",
+    });
+    await database.cardStats.add({
+      cardId: card.id,
+      seenCount: 1,
+      correctCount: 1,
+      incorrectCount: 0,
+    });
+    await database.cardInteractions.add({
+      id: "topic-interaction-delete",
+      studySessionId: "topic-session-delete",
+      passId: "topic-pass-delete",
+      cardId: card.id,
+      mode: "review",
+      passNumber: 1,
+      presentationNumber: 1,
+      presentedAt: "2026-06-06T10:00:00.000Z",
+      revealCount: 1,
+      routeChanges: 1,
+      resumed: false,
+    });
+    await database.cardLearningStates.add({
+      cardId: card.id,
+      intervalDays: 1,
+      easeFactor: 2.5,
+      correctStreak: 1,
+      longestCorrectStreak: 1,
+      lapseCount: 0,
+      totalReviews: 1,
+      totalResponseMs: 1_000,
+      averageResponseMs: 1_000,
+      averageCorrectResponseMs: 1_000,
+      averageIncorrectResponseMs: 0,
+      correctResponseMs: 1_000,
+      incorrectResponseMs: 0,
+      correctResponseCount: 1,
+      incorrectResponseCount: 0,
+      totalReviewGapHours: 0,
+      reviewGapCount: 0,
+      updatedAt: "2026-06-06T10:01:00.000Z",
+    });
+    await database.appUsageSessions.add({
+      id: "topic-app-session",
+      openedAt: "2026-06-06T10:00:00.000Z",
+      lastActiveAt: "2026-06-06T10:01:00.000Z",
+      activeDurationMs: 60_000,
+      backgroundDurationMs: 0,
+      foregroundCount: 1,
+      routeChangeCount: 1,
+      entryRoute: "/",
+      timezone: "America/Lima",
+      language: "es",
+      platform: "test",
+    });
+    await database.activityEvents.add({
+      id: "topic-event-delete",
+      appSessionId: "topic-app-session",
+      type: "card_answered",
+      occurredAt: "2026-06-06T10:01:00.000Z",
+      topicId: topic.id,
+      studySessionId: "topic-session-delete",
+      cardId: card.id,
+    });
+
+    await topicRepository.delete(topic.id);
+
+    expect(await database.topics.get(topic.id)).toBeUndefined();
+    expect(await database.flashcards.get(card.id)).toBeUndefined();
+    expect(await database.studySessions.count()).toBe(0);
+    expect(await database.studyPasses.count()).toBe(0);
+    expect(await database.cardAttempts.count()).toBe(0);
+    expect(await database.cardStats.count()).toBe(0);
+    expect(await database.cardInteractions.count()).toBe(0);
+    expect(await database.cardLearningStates.count()).toBe(0);
+    expect(await database.activityEvents.count()).toBe(0);
+    expect(await database.appUsageSessions.count()).toBe(1);
+    expect(await database.topics.get(remainingTopic.id)).toMatchObject({
+      order: 0,
+    });
     await database.delete();
   });
 

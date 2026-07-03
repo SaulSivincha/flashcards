@@ -103,6 +103,120 @@ export class TopicRepository {
     return updated;
   }
 
+  async rename(id: string, title: string): Promise<Topic> {
+    const topic = await this.database.topics.get(id);
+    if (!topic) {
+      throw new Error("No se encontró el tema.");
+    }
+    const nextTitle = title.trim();
+    if (!nextTitle) {
+      throw new Error("El nombre del tema es obligatorio.");
+    }
+    const duplicate = await this.database.topics
+      .where("courseId")
+      .equals(topic.courseId)
+      .filter(
+        (item) =>
+          item.id !== id &&
+          item.title.toLocaleLowerCase() === nextTitle.toLocaleLowerCase(),
+      )
+      .first();
+    if (duplicate) {
+      throw new Error("Ya existe un tema con ese nombre en el curso.");
+    }
+
+    const updated = {
+      ...topic,
+      title: nextTitle,
+      updatedAt: nowIso(),
+    };
+    await this.database.topics.put(updated);
+    return updated;
+  }
+
+  async delete(id: string): Promise<void> {
+    const topic = await this.database.topics.get(id);
+    if (!topic) {
+      throw new Error("No se encontró el tema.");
+    }
+    const flashcardIds = await this.database.flashcards
+      .where("topicId")
+      .equals(id)
+      .primaryKeys();
+    const sessionIds = await this.database.studySessions
+      .where("topicId")
+      .equals(id)
+      .primaryKeys();
+    const passIds =
+      sessionIds.length > 0
+        ? await this.database.studyPasses
+            .where("sessionId")
+            .anyOf(sessionIds)
+            .primaryKeys()
+        : [];
+    const attemptIds =
+      sessionIds.length > 0
+        ? await this.database.cardAttempts
+            .where("sessionId")
+            .anyOf(sessionIds)
+            .primaryKeys()
+        : [];
+    const interactionIds =
+      sessionIds.length > 0
+        ? await this.database.cardInteractions
+            .where("studySessionId")
+            .anyOf(sessionIds)
+            .primaryKeys()
+        : [];
+    const activityEvents = await this.database.activityEvents.toArray();
+    const sessionIdSet = new Set(sessionIds);
+    const cardIdSet = new Set(flashcardIds);
+    const activityEventIds = activityEvents
+      .filter(
+        (event) =>
+          event.topicId === id ||
+          Boolean(
+            event.studySessionId && sessionIdSet.has(event.studySessionId),
+          ) ||
+          Boolean(event.cardId && cardIdSet.has(event.cardId)),
+      )
+      .map((event) => event.id);
+
+    await this.database.transaction(
+      "rw",
+      [
+        this.database.topics,
+        this.database.flashcards,
+        this.database.studySessions,
+        this.database.studyPasses,
+        this.database.cardAttempts,
+        this.database.cardStats,
+        this.database.activityEvents,
+        this.database.cardInteractions,
+        this.database.cardLearningStates,
+      ],
+      async () => {
+        await this.database.activityEvents.bulkDelete(activityEventIds);
+        await this.database.cardInteractions.bulkDelete(interactionIds);
+        await this.database.cardLearningStates.bulkDelete(flashcardIds);
+        await this.database.cardAttempts.bulkDelete(attemptIds);
+        await this.database.studyPasses.bulkDelete(passIds);
+        await this.database.studySessions.bulkDelete(sessionIds);
+        await this.database.cardStats.bulkDelete(flashcardIds);
+        await this.database.flashcards.bulkDelete(flashcardIds);
+        await this.database.topics.delete(id);
+
+        const remaining = await this.database.topics
+          .where("courseId")
+          .equals(topic.courseId)
+          .sortBy("order");
+        await this.database.topics.bulkPut(
+          remaining.map((item, order) => ({ ...item, order })),
+        );
+      },
+    );
+  }
+
   async saveOrder(courseId: string, topicIds: string[]): Promise<void> {
     const timestamp = nowIso();
     await this.database.transaction("rw", this.database.topics, async () => {

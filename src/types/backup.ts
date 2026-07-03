@@ -4,10 +4,16 @@ import type { AppSettings } from "./settings";
 import type { CardStats } from "./stats";
 import type { CardAttempt, StudyPass, StudySession } from "./study";
 import type { Topic } from "./topic";
+import type {
+  ActivityEvent,
+  AppUsageSession,
+  CardInteraction,
+  CardLearningState,
+} from "./telemetry";
 
 export type FlashStudyBackup = {
   format: "flashstudy-backup";
-  version: 1;
+  version: 2;
   exportedAt: string;
   data: {
     courses: Course[];
@@ -18,6 +24,10 @@ export type FlashStudyBackup = {
     cardAttempts: CardAttempt[];
     cardStats: CardStats[];
     settings: AppSettings[];
+    appUsageSessions: AppUsageSession[];
+    activityEvents: ActivityEvent[];
+    cardInteractions: CardInteraction[];
+    cardLearningStates: CardLearningState[];
   };
 };
 
@@ -31,4 +41,7 @@ export type StorageSummary = {
   activeFlashcards: number;
   sessions: number;
   attempts: number;
+  appSessions: number;
+  activityEvents: number;
+  cardInteractions: number;
 };

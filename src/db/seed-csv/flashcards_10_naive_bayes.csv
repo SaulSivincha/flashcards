@@ -1,0 +1,20 @@
+curso,Inteligencia Artificial
+unidad,Unidad 2
+tema,Naive Bayes
+
+categoria,pregunta,respuesta
+"Naive Bayes","Que es Naive Bayes?","Un algoritmo supervisado de clasificacion basado en el Teorema de Bayes."
+"Clasificacion","Que problema busca resolver Naive Bayes?","Determinar a que clase pertenece una nueva instancia a partir de sus caracteristicas."
+"Bayes","Que describe el Teorema de Bayes?","La probabilidad condicional de un evento a partir de conocimiento previo sobre condiciones relacionadas."
+"Probabilidades","Que se calcula primero en el funcionamiento paso a paso?","Las probabilidades a priori."
+"Atributos","Que se calcula para cada atributo por clase?","Frecuencias y probabilidades condicionales."
+"Laplace","Para que se aplica suavizado de Laplace?","Para evitar problemas de probabilidades nulas."
+"Preparacion","Que ocurre en la preparacion de datos?","Se transforman los datos de entrada para obtener probabilidades de cada atributo."
+"Entrenamiento","Que aprende el modelo durante el entrenamiento?","Probabilidades de cada clase y probabilidades de atributos dentro de cada clase."
+"Validacion","Que metricas se usan para validar Naive Bayes?","Exactitud, precision, recall y matriz de confusion."
+"Ajuste","En que consiste el ajuste de parametros?","Seleccionar la variante adecuada y aplicar tecnicas de suavizado."
+"Ventajas","Que ventajas tiene Naive Bayes?","Es simple, interpretable, eficiente y funciona bien con alta dimensionalidad."
+"Limitaciones","Que limitacion central tiene Naive Bayes?","Asume independencia entre atributos."
+"Limitaciones","Que ocurre si existen correlaciones fuertes entre variables?","Puede perder precision porque no modela relaciones complejas."
+"Aplicaciones","Que aplicaciones reales se mencionan?","Filtrado de spam, fraude, diagnostico medico y analisis de opiniones."
+"Noticias falsas","Por que Multinomial Naive Bayes se usa en noticias falsas?","Porque funciona bien con distribuciones discretas como conteos y pesos TF-IDF."

@@ -1,0 +1,20 @@
+curso,Inteligencia Artificial
+unidad,Unidad 2
+tema,Support Vector Machine
+
+categoria,pregunta,respuesta
+"SVM","Que es Support Vector Machine?","Una maquina de aprendizaje para problemas de clasificacion de dos grupos."
+"Hiperplano","Que es el hiperplano en SVM?","El separador matematico que divide dos clases."
+"Hiperplano","Que representa la ecuacion wTx + b = 0?","La frontera de separacion definida por pesos, datos de entrada y sesgo."
+"Vectores de soporte","Que son los vectores de soporte?","Los puntos del conjunto de datos mas cercanos al hiperplano de separacion."
+"Margen","Que es el margen?","La distancia entre el hiperplano divisor y los vectores de soporte."
+"Objetivo","Que busca maximizar SVM?","El margen entre las clases para favorecer la separacion."
+"No linealidad","Que problema aparece cuando los datos no son linealmente separables?","Se necesita trabajar en un espacio donde puedan separarse mejor."
+"Kernel trick","Para que sirve el kernel trick?","Permite resolver problemas no lineales sin transformar explicitamente los datos a mayor dimension."
+"Kernel RBF","Que mide el kernel RBF?","La similitud entre dos puntos a partir de la distancia entre ellos."
+"Flujo","Que pasos incluye el flujo de trabajo de SVM?","Escalado de datos, definicion de parametros, validacion cruzada y prediccion."
+"Escalado","Por que se usa StandardScaler en SVM?","Porque el modelo trabaja midiendo distancias entre puntos."
+"Hiperparametros","Que controla C?","La penalizacion por errores de clasificacion."
+"Hiperparametros","Que determina gamma?","El alcance de influencia de cada muestra."
+"Hiperparametros","Que define el kernel?","La funcion que transforma o compara datos en un espacio mas separable."
+"Limitaciones","Que limitaciones tiene SVM?","Escalabilidad limitada, sensibilidad a datos mezclados o ruidosos y dependencia del kernel."

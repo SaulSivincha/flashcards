@@ -5,7 +5,12 @@ import {
   resetStudyProgress,
   restoreBackup,
 } from "../services/backup/backupService";
+import {
+  exportSyncPackageFile,
+  mergeSyncPackage,
+} from "../services/sync/syncService";
 import type { FlashStudyBackup, StorageSummary } from "../types/backup";
+import type { FlashStudySyncPackage } from "../types/sync";
 import { useCourseStore } from "./courseStore";
 import { useSettingsStore } from "./settingsStore";
 import { useStatsStore } from "./statsStore";
@@ -19,6 +24,8 @@ type DataManagementState = {
   error?: string;
   loadStorage: () => Promise<void>;
   exportBackup: () => Promise<void>;
+  exportSyncPackage: () => Promise<void>;
+  mergeSyncPackage: (syncPackage: FlashStudySyncPackage) => Promise<void>;
   restoreBackup: (backup: FlashStudyBackup) => Promise<void>;
   resetProgress: () => Promise<void>;
   clearFeedback: () => void;
@@ -82,6 +89,56 @@ export const useDataManagementStore = create<DataManagementState>((set) => ({
         isBusy: false,
         error: errorMessage(error, "No se pudo exportar el respaldo."),
       });
+    }
+  },
+
+  exportSyncPackage: async () => {
+    set({ isBusy: true, message: undefined, error: undefined });
+    try {
+      await exportSyncPackageFile();
+      const storage = await getStorageSummary();
+      set({
+        storage,
+        isBusy: false,
+        message: "Paquete de sincronización exportado correctamente.",
+      });
+    } catch (error) {
+      set({
+        isBusy: false,
+        error: errorMessage(
+          error,
+          "No se pudo exportar el paquete de sincronización.",
+        ),
+      });
+    }
+  },
+
+  mergeSyncPackage: async (syncPackage) => {
+    set({ isBusy: true, message: undefined, error: undefined });
+    try {
+      const summary = await mergeSyncPackage(syncPackage);
+      await refreshApplicationState();
+      const storage = await getStorageSummary();
+      const added =
+        summary.coursesAdded +
+        summary.topicsAdded +
+        summary.flashcardsAdded +
+        summary.studySessionsAdded +
+        summary.cardAttemptsAdded;
+      set({
+        storage,
+        isBusy: false,
+        message: `Sincronización fusionada. ${added} registros principales nuevos; estadísticas reconstruidas para ${summary.cardStatsRebuilt} tarjetas.`,
+      });
+    } catch (error) {
+      set({
+        isBusy: false,
+        error: errorMessage(
+          error,
+          "No se pudo fusionar el paquete de sincronización.",
+        ),
+      });
+      throw error;
     }
   },
 

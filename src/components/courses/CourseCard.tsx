@@ -1,7 +1,7 @@
 import { useHistory } from "react-router-dom";
 import type { CourseSummary } from "../../types/course";
+import { BrandMark } from "../brand/BrandMark";
 import { AppIcon } from "../ui/AppIcon";
-import type { AppIconName } from "../ui/AppIcon";
 import { Card } from "../ui/Card";
 import { ProgressBar } from "../ui/ProgressBar";
 
@@ -12,11 +12,6 @@ type CourseCardProps = {
 export function CourseCard({ course }: CourseCardProps) {
   const history = useHistory();
   const empty = course.cardCount === 0;
-  const icon: AppIconName = course.name.toLowerCase().includes("inteligencia")
-    ? "hardware-chip"
-    : course.name.toLowerCase().includes("econom")
-      ? "trending-up"
-      : "flask";
 
   return (
     <button
@@ -26,9 +21,7 @@ export function CourseCard({ course }: CourseCardProps) {
     >
       <Card className="p-5 transition-transform active:scale-[0.99]">
         <div className="flex items-start gap-3">
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-slate/10 text-slate">
-            <AppIcon name={icon} />
-          </div>
+          <BrandMark className="h-11 w-11 shrink-0" />
           <div className="min-w-0 flex-1">
             <div className="flex items-center justify-between gap-3">
               <h2 className="line-clamp-1 text-lg font-semibold">{course.name}</h2>

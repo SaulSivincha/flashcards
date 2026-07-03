@@ -115,6 +115,7 @@ export function parseFlashcardCsv(
 
   return {
     fileName,
+    sourceText: csvText,
     metadata: completeMetadata,
     cards,
     categories,

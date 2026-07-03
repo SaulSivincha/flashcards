@@ -1,0 +1,20 @@
+curso,Inteligencia Artificial
+unidad,Unidad 2
+tema,DBSCAN
+
+categoria,pregunta,respuesta
+"DBSCAN","Que significa DBSCAN?","Density-Based Spatial Clustering of Applications with Noise."
+"DBSCAN","Que problema resuelve DBSCAN frente a metodos basados en centroides?","Forma clusters sin especificar K, detecta formas arbitrarias y separa ruido."
+"Densidad","Como define DBSCAN los clusters?","Como regiones de alta densidad separadas por regiones de baja densidad."
+"Parametros","Que representa epsilon en DBSCAN?","El radio de vecindad alrededor de un punto."
+"Parametros","Que representa MinPts en DBSCAN?","El minimo de puntos requeridos dentro de la vecindad."
+"Vecindad","Que es la vecindad epsilon de un punto?","El conjunto de puntos cuya distancia al punto es menor o igual a epsilon."
+"Punto nucleo","Que es un core point?","Un punto que tiene al menos MinPts vecinos dentro del radio epsilon."
+"Punto frontera","Que es un border point?","Un punto con menos de MinPts vecinos pero vecino de algun core point."
+"Ruido","Que es un noise point?","Un punto que no es core ni border y se etiqueta como outlier."
+"Flujo","Que pasos sigue el flujo de trabajo de DBSCAN?","Preparar datos, elegir epsilon, elegir MinPts, ajustar DBSCAN, obtener etiquetas y validar."
+"Epsilon","Como puede elegirse epsilon?","Mediante la curva k-distance y buscando el codo."
+"Ventajas","Que ventajas tiene DBSCAN?","No requiere K, detecta clusters arbitrarios, aisla outliers y maneja clusters de tamanos distintos."
+"Limitaciones","Que limitaciones tiene DBSCAN?","Es sensible a epsilon y MinPts, se dificulta con densidad variable y puede degradarse en alta dimensionalidad."
+"Comparacion","En que se diferencia DBSCAN de K-Means?","DBSCAN aisla outliers y captura geometria irregular, mientras K-Means asigna todos los puntos a un centroide."
+"Aplicacion","Como se aplica DBSCAN en seguridad informatica?","Agrupa conexiones de red y etiqueta como outliers posibles ataques o intrusiones."

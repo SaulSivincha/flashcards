@@ -1,0 +1,20 @@
+curso,Inteligencia Artificial
+unidad,Unidad 2
+tema,Arboles de Decision
+
+categoria,pregunta,respuesta
+"Clasificacion","Que es un problema de clasificacion?","Es una tarea donde los ejemplos deben asignarse a uno de varios valores discretos de categorias."
+"Arboles de decision","Que es un arbol de decision?","Es un conjunto de condiciones organizadas jerarquicamente para determinar una decision desde la raiz hasta una hoja."
+"Arboles de decision","Como se interpreta un camino de la raiz a una hoja?","Como una conjuncion de evaluaciones de atributos que conduce a una clasificacion."
+"Sistemas de reglas","Como se relacionan los sistemas de reglas con los arboles de decision?","Son una generalizacion donde no se exige exclusion ni exhaustividad en las condiciones."
+"ID3","Que tipo de busqueda usa ID3 para construir arboles?","Usa una busqueda voraz top-down en el espacio de posibles arboles de decision."
+"ID3","Con que tipo de atributos trabaja ID3?","Trabaja con atributos nominales y un atributo objetivo binario."
+"ID3","Que elementos forman el arbol construido por ID3?","Nodos con atributos, arcos con valores posibles y hojas que clasifican el ejemplo."
+"Information gain","Para que se usa information gain en ID3?","Se usa para seleccionar el atributo que mejor clasifica en cada paso del crecimiento del arbol."
+"Entropia","Que representa la entropia en el aprendizaje de arboles?","Representa el nivel de ruido, desorden o impureza de una coleccion de datos."
+"Information gain","Que mide la ganancia de informacion?","Mide la reduccion esperada de entropia al conocer el valor de un atributo."
+"ID3","Que ocurre si todos los ejemplos son positivos o negativos?","ID3 devuelve un nodo positivo o negativo, respectivamente."
+"ID3","Que ocurre si ya no quedan atributos disponibles?","ID3 devuelve un nodo con el voto mayoritario del atributo objetivo."
+"Espacio de hipotesis","Como se caracteriza el espacio de busqueda de ID3?","Como el conjunto de posibles arboles de decision que se ajustan a los ejemplos de entrenamiento."
+"Sesgo inductivo","Que es el sesgo inductivo?","Es el conjunto de asunciones que permite justificar clasificaciones futuras a partir de datos de entrenamiento."
+"Sesgo de ID3","Que arboles prefiere ID3?","Prefiere arboles pequenos y arboles con atributos de alta ganancia de informacion cerca de la raiz."

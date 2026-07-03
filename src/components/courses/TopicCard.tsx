@@ -11,12 +11,16 @@ import { TopicActionMenu } from "./TopicActionMenu";
 
 type TopicCardProps = {
   topic: TopicSummary;
+  onEdit: (topic: TopicSummary) => void;
+  onDelete: (topic: TopicSummary) => void;
   dragHandleProps?: ComponentPropsWithRef<"button">;
   isDragging?: boolean;
 };
 
 export function TopicCard({
   topic,
+  onEdit,
+  onDelete,
   dragHandleProps,
   isDragging = false,
 }: TopicCardProps) {
@@ -67,7 +71,12 @@ export function TopicCard({
         <AppIcon className="text-xl muted-text" name="more" />
       </button>
       {menuOpen ? (
-        <TopicActionMenu onClose={() => setMenuOpen(false)} topicId={topic.id} />
+        <TopicActionMenu
+          onClose={() => setMenuOpen(false)}
+          onEdit={() => onEdit(topic)}
+          onDelete={() => onDelete(topic)}
+          topicId={topic.id}
+        />
       ) : null}
     </article>
   );

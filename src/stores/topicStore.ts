@@ -12,6 +12,8 @@ type TopicState = {
   loadByCourse: (courseId: string) => Promise<void>;
   loadRecent: (limit?: number) => Promise<void>;
   loadDetails: (topicId: string) => Promise<void>;
+  renameTopic: (topicId: string, title: string) => Promise<void>;
+  deleteTopic: (topicId: string) => Promise<void>;
   saveOrder: (courseId: string, topicIds: string[]) => Promise<void>;
 };
 
@@ -63,6 +65,39 @@ export const useTopicStore = create<TopicState>((set, get) => ({
         isLoading: false,
       });
     }
+  },
+
+  renameTopic: async (topicId, title) => {
+    const updated = await topicRepository.rename(topicId, title);
+    set((state) => ({
+      topics: state.topics.map((topic) =>
+        topic.id === topicId ? { ...topic, title: updated.title } : topic,
+      ),
+      recentTopics: state.recentTopics.map((topic) =>
+        topic.id === topicId ? { ...topic, title: updated.title } : topic,
+      ),
+      currentTopic:
+        state.currentTopic?.id === topicId
+          ? { ...state.currentTopic, title: updated.title }
+          : state.currentTopic,
+      error: undefined,
+    }));
+  },
+
+  deleteTopic: async (topicId) => {
+    const courseId = get().currentCourseId;
+    await topicRepository.delete(topicId);
+    set((state) => ({
+      currentTopic:
+        state.currentTopic?.id === topicId ? undefined : state.currentTopic,
+      topics: state.topics.filter((topic) => topic.id !== topicId),
+      recentTopics: state.recentTopics.filter((topic) => topic.id !== topicId),
+      error: undefined,
+    }));
+    await Promise.all([
+      courseId ? get().loadByCourse(courseId) : Promise.resolve(),
+      get().loadRecent(),
+    ]);
   },
 
   saveOrder: async (courseId, topicIds) => {

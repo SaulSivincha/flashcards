@@ -1,8 +1,9 @@
-import { useRef, useState, type DragEvent } from "react";
+import { useEffect, useRef, useState, type DragEvent } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { PageHeader } from "../../components/layout/PageHeader";
 import { ScreenContainer } from "../../components/layout/ScreenContainer";
 import { AppIcon } from "../../components/ui/AppIcon";
+import { BottomSheet } from "../../components/ui/BottomSheet";
 import { Button } from "../../components/ui/Button";
 import { Card } from "../../components/ui/Card";
 import { Chip } from "../../components/ui/Chip";
@@ -23,19 +24,42 @@ import { useTopicStore } from "../../stores/topicStore";
 
 type ImportStatus = "idle" | "parsing" | "ready" | "importing" | "error";
 
+type BatchCsvItem = {
+  fileName: string;
+  analysis?: CsvImportAnalysis;
+  issues: CsvValidationIssue[];
+  error?: string;
+};
+
+const csvExample = `curso,Inteligencia Artificial
+unidad,Unidad 1
+tema,Sistemas Basados en el Conocimiento
+
+categoria,pregunta,respuesta
+Historia,¿Qué fue DENDRAL?,"Fue un sistema experto, creado en Stanford."
+Comparación,¿Datos o conocimiento?,"Los datos describen hechos; el conocimiento permite razonar."`;
+
 export function ImportCsvPage() {
   const history = useHistory();
   const { courseId } = useParams<{ courseId: string }>();
   const inputRef = useRef<HTMLInputElement>(null);
   const [status, setStatus] = useState<ImportStatus>("idle");
   const [analysis, setAnalysis] = useState<CsvImportAnalysis>();
+  const [batchItems, setBatchItems] = useState<BatchCsvItem[]>([]);
   const [issues, setIssues] = useState<CsvValidationIssue[]>([]);
   const [genericError, setGenericError] = useState("");
   const [dragActive, setDragActive] = useState(false);
+  const [exampleOpen, setExampleOpen] = useState(false);
   const loadCourses = useCourseStore((state) => state.loadCourses);
   const loadByCourse = useTopicStore((state) => state.loadByCourse);
   const loadRecent = useTopicStore((state) => state.loadRecent);
   const activeStep = status === "idle" || status === "parsing" ? 1 : 2;
+  const validBatchItems = batchItems.filter((item) => item.analysis);
+  const invalidBatchItems = batchItems.filter((item) => !item.analysis);
+  const batchCardCount = validBatchItems.reduce(
+    (total, item) => total + (item.analysis?.parsed.cards.length ?? 0),
+    0,
+  );
 
   async function handleFile(file?: File): Promise<void> {
     if (!file) {
@@ -52,6 +76,7 @@ export function ImportCsvPage() {
 
     setStatus("parsing");
     setAnalysis(undefined);
+    setBatchItems([]);
     setIssues([]);
     setGenericError("");
 
@@ -73,10 +98,70 @@ export function ImportCsvPage() {
     }
   }
 
+  async function handleFiles(files: FileList | File[]): Promise<void> {
+    const selectedFiles = Array.from(files);
+    if (selectedFiles.length === 0) {
+      return;
+    }
+
+    if (selectedFiles.length === 1) {
+      await handleFile(selectedFiles[0]);
+      return;
+    }
+
+    setStatus("parsing");
+    setAnalysis(undefined);
+    setBatchItems([]);
+    setIssues([]);
+    setGenericError("");
+
+    const nextItems = await Promise.all(
+      selectedFiles.map(async (file): Promise<BatchCsvItem> => {
+        if (!file.name.toLocaleLowerCase().endsWith(".csv")) {
+          return {
+            fileName: file.name,
+            issues: [],
+            error: "No tiene extensión .csv.",
+          };
+        }
+
+        try {
+          return {
+            fileName: file.name,
+            analysis: await analyzeCsvFile(file, courseId),
+            issues: [],
+          };
+        } catch (error) {
+          if (error instanceof CsvValidationError) {
+            return {
+              fileName: file.name,
+              issues: error.issues,
+            };
+          }
+
+          return {
+            fileName: file.name,
+            issues: [],
+            error:
+              error instanceof Error
+                ? error.message
+                : "No se pudo analizar el archivo CSV.",
+          };
+        }
+      }),
+    );
+
+    setBatchItems(nextItems);
+    setStatus(nextItems.some((item) => item.analysis) ? "ready" : "error");
+    if (!nextItems.some((item) => item.analysis)) {
+      setGenericError("No se pudo validar ningún CSV del lote.");
+    }
+  }
+
   function handleDrop(event: DragEvent<HTMLLabelElement>): void {
     event.preventDefault();
     setDragActive(false);
-    void handleFile(event.dataTransfer.files[0]);
+    void handleFiles(event.dataTransfer.files);
   }
 
   async function handleImport(mode: CsvImportMode): Promise<void> {
@@ -108,6 +193,46 @@ export function ImportCsvPage() {
     }
   }
 
+  async function handleBatchImport(): Promise<void> {
+    if (validBatchItems.length === 0) {
+      return;
+    }
+
+    setStatus("importing");
+    setGenericError("");
+    try {
+      const results = [];
+      for (const item of validBatchItems) {
+        const itemAnalysis = item.analysis;
+        if (!itemAnalysis) {
+          continue;
+        }
+
+        results.push(
+          await importCsv(itemAnalysis, {
+            mode: itemAnalysis.conflict ? "update" : "create",
+            existingTopicId: itemAnalysis.conflict?.topicId,
+          }),
+        );
+      }
+
+      const affectedCourseIds = new Set(results.map((result) => result.courseId));
+      await Promise.all([
+        loadCourses(),
+        ...Array.from(affectedCourseIds).map((id) => loadByCourse(id)),
+        loadRecent(),
+      ]);
+      history.replace(`/cursos/${courseId}`);
+    } catch (error) {
+      setGenericError(
+        error instanceof Error
+          ? error.message
+          : "No se pudo guardar la importación por lote.",
+      );
+      setStatus("error");
+    }
+  }
+
   return (
     <ScreenContainer focused>
       <PageHeader back title="Importar CSV" />
@@ -132,7 +257,7 @@ export function ImportCsvPage() {
       <section>
         <h1 className="text-[32px] font-bold leading-tight">Carga tu tema</h1>
         <p className="mt-3 muted-text">
-          Selecciona un CSV con metadatos de curso, unidad y tema.
+          Selecciona uno o varios CSV con metadatos de curso, unidad y tema.
         </p>
       </section>
 
@@ -150,16 +275,19 @@ export function ImportCsvPage() {
           {status === "parsing" ? "Validando archivo…" : "Seleccionar archivo CSV"}
         </strong>
         <span className="mt-2 text-sm muted-text">
-          o arrástralo aquí desde tu dispositivo
+          o arrástralos aquí desde tu dispositivo
         </span>
         <input
           accept=".csv,text/csv"
           className="sr-only"
           disabled={status === "parsing" || status === "importing"}
           onChange={(event) => {
-            void handleFile(event.target.files?.[0]);
+            if (event.target.files) {
+              void handleFiles(event.target.files);
+            }
             event.target.value = "";
           }}
+          multiple
           ref={inputRef}
           type="file"
         />
@@ -189,8 +317,72 @@ export function ImportCsvPage() {
             onClick={() => inputRef.current?.click()}
             variant="secondary"
           >
-            Seleccionar otro archivo
+            Seleccionar otros archivos
           </Button>
+        </Card>
+      ) : null}
+
+      {batchItems.length > 0 ? (
+        <Card className="mt-7">
+          <div className="flex items-center gap-3 border-b subtle-divider pb-4">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate/10 text-slate">
+              <AppIcon name="files" />
+            </span>
+            <div className="min-w-0 flex-1">
+              <p className="font-semibold">Lote de CSV validado</p>
+              <p className="mt-1 text-xs muted-text">
+                {validBatchItems.length} válidos, {invalidBatchItems.length} con
+                errores, {batchCardCount} tarjetas
+              </p>
+            </div>
+            <Chip tone={invalidBatchItems.length > 0 ? "orange" : "success"}>
+              {validBatchItems.length} listos
+            </Chip>
+          </div>
+
+          <div className="mt-5 divide-y subtle-divider">
+            {batchItems.map((item) => {
+              const itemAnalysis = item.analysis;
+              return (
+                <div className="py-4 first:pt-0 last:pb-0" key={item.fileName}>
+                  <div className="flex items-start gap-3">
+                    <AppIcon
+                      className={`mt-0.5 text-xl ${
+                        itemAnalysis ? "text-slate" : "text-mahogany"
+                      }`}
+                      name={itemAnalysis ? "check" : "alert"}
+                    />
+                    <div className="min-w-0 flex-1">
+                      <p className="line-clamp-1 text-sm font-semibold">
+                        {item.fileName}
+                      </p>
+                      {itemAnalysis ? (
+                        <p className="mt-1 text-xs muted-text">
+                          {itemAnalysis.parsed.metadata.topic} ·{" "}
+                          {itemAnalysis.parsed.cards.length} tarjetas ·{" "}
+                          {itemAnalysis.conflict
+                            ? "actualizará tema existente"
+                            : "creará tema nuevo"}
+                        </p>
+                      ) : (
+                        <p className="mt-1 text-xs text-mahogany">
+                          {item.error ?? item.issues[0]?.message}
+                        </p>
+                      )}
+                    </div>
+                    {itemAnalysis ? <Chip tone="success">Válido</Chip> : null}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {invalidBatchItems.length > 0 ? (
+            <div className="mt-5 rounded-xl bg-blaze/5 p-4 text-sm leading-6">
+              Los archivos con errores no se importarán. Puedes corregirlos y
+              volver a seleccionarlos sin afectar los CSV válidos.
+            </div>
+          ) : null}
         </Card>
       ) : null}
 
@@ -326,10 +518,93 @@ export function ImportCsvPage() {
               : "Confirmar importación"}
           </Button>
         ) : null}
-        <Button onClick={() => history.goBack()} variant="secondary">
+        {batchItems.length > 0 && validBatchItems.length > 0 ? (
+          <Button
+            disabled={status === "importing"}
+            onClick={() => void handleBatchImport()}
+          >
+            {status === "importing"
+              ? "Importando lote…"
+              : `Importar ${validBatchItems.length} CSV`}
+          </Button>
+        ) : null}
+        <Button onClick={() => setExampleOpen(true)} variant="soft">
+          <AppIcon name="help" />
+          Ver ejemplo de CSV
+        </Button>
+        <Button onClick={() => history.goBack()} variant="cancel">
           Cancelar
         </Button>
       </div>
+
+      <CsvExampleSheet
+        onClose={() => setExampleOpen(false)}
+        open={exampleOpen}
+      />
     </ScreenContainer>
+  );
+}
+
+type CsvExampleSheetProps = {
+  open: boolean;
+  onClose: () => void;
+};
+
+function CsvExampleSheet({ open, onClose }: CsvExampleSheetProps) {
+  const [copyStatus, setCopyStatus] = useState<"idle" | "copied" | "error">(
+    "idle",
+  );
+
+  useEffect(() => {
+    if (open) {
+      setCopyStatus("idle");
+    }
+  }, [open]);
+
+  async function handleCopy(): Promise<void> {
+    try {
+      await navigator.clipboard.writeText(csvExample);
+      setCopyStatus("copied");
+    } catch {
+      setCopyStatus("error");
+    }
+  }
+
+  return (
+    <BottomSheet onClose={onClose} open={open} title="Ejemplo de CSV">
+      <div className="mt-7">
+        <p className="text-sm leading-6 muted-text">
+          Usa metadatos arriba y luego el encabezado obligatorio de tarjetas.
+          Las respuestas con comas deben ir entre comillas.
+        </p>
+
+        <div className="mt-5 overflow-hidden rounded-xl border subtle-divider bg-[var(--fs-surface-muted)]">
+          <pre className="max-h-72 overflow-auto p-4 text-xs leading-5 text-[var(--fs-text)]">
+            <code>{csvExample}</code>
+          </pre>
+        </div>
+
+        {copyStatus === "copied" ? (
+          <p className="mt-3 text-sm font-medium text-slate">
+            Ejemplo copiado.
+          </p>
+        ) : null}
+        {copyStatus === "error" ? (
+          <p className="mt-3 text-sm font-medium text-mahogany">
+            No se pudo copiar automáticamente.
+          </p>
+        ) : null}
+
+        <div className="mt-10 space-y-3">
+          <Button onClick={() => void handleCopy()}>
+            <AppIcon name="copy" />
+            Copiar ejemplo
+          </Button>
+          <Button onClick={onClose} variant="secondary">
+            Cerrar
+          </Button>
+        </div>
+      </div>
+    </BottomSheet>
   );
 }

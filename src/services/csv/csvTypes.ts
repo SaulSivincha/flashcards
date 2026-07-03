@@ -13,6 +13,7 @@ export type ParsedCsvCard = {
 
 export type ParsedFlashcardCsv = {
   fileName: string;
+  sourceText: string;
   metadata: CsvMetadata;
   cards: ParsedCsvCard[];
   categories: string[];

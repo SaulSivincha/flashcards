@@ -8,6 +8,7 @@ import { Button } from "../../components/ui/Button";
 import { IconButton } from "../../components/ui/IconButton";
 import { useSettingsStore } from "../../stores/settingsStore";
 import { useStudyStore } from "../../stores/studyStore";
+import { telemetryService } from "../../services/telemetry/telemetryService";
 
 type StudyQuestionLocationState = {
   returningFromAnswer?: boolean;
@@ -75,6 +76,26 @@ export function StudyQuestionPage() {
     }
   }, [currentCard, history, isLoading, session, topicId]);
 
+  useEffect(() => {
+    if (!currentCard || !session || !pass) {
+      return;
+    }
+    void telemetryService.presentCard({
+      studySessionId: session.id,
+      passId: pass.id,
+      cardId: currentCard.id,
+      mode: session.mode,
+      passNumber: pass.passNumber,
+      presentationNumber: (session.currentCardIndex ?? 0) + 1,
+      resumed: location.state?.returningFromAnswer === true,
+    });
+  }, [
+    currentCard,
+    location.state,
+    pass,
+    session,
+  ]);
+
   if (isLoading || !snapshot || !topic) {
     return (
       <ScreenContainer className="!bg-paper" focused>
@@ -104,6 +125,19 @@ export function StudyQuestionPage() {
   }
 
   const current = (session.currentCardIndex ?? 0) + 1;
+  const pauseStudy = () => {
+    void telemetryService.recordStudyEvent({
+      type: "study_paused",
+      topicId,
+      studySessionId: session.id,
+      cardId: currentCard.id,
+    });
+    history.push(`/temas/${topicId}`);
+  };
+  const revealAnswer = () => {
+    void telemetryService.revealCard();
+    history.push(`/estudio/${topicId}/respuesta`);
+  };
 
   return (
     <ScreenContainer className="study-session-screen !bg-[#F5F3E7]" focused>
@@ -112,7 +146,7 @@ export function StudyQuestionPage() {
           <IconButton
             icon="close"
             label="Cerrar sesión"
-            onClick={() => history.push(`/temas/${topicId}`)}
+            onClick={pauseStudy}
           />
           <h1 className="line-clamp-1 min-w-0 flex-1 px-4 text-center text-xl font-semibold text-ink">
             {topic.title}
@@ -120,7 +154,7 @@ export function StudyQuestionPage() {
           <IconButton
             icon="pause"
             label="Pausar sesión"
-            onClick={() => history.push(`/temas/${topicId}`)}
+            onClick={pauseStudy}
           />
         </div>
         <StudyProgress
@@ -144,18 +178,18 @@ export function StudyQuestionPage() {
         onFlip={
           settings?.flipCardOnTap === false
             ? undefined
-            : () => history.push(`/estudio/${topicId}/respuesta`)
+            : revealAnswer
         }
         question={currentCard.question}
         side="question"
       />
       <StudyActionBar
         answerVisible={false}
-        onReveal={() => history.push(`/estudio/${topicId}/respuesta`)}
+        onReveal={revealAnswer}
       />
       <button
         className="mt-3 min-h-12 w-full text-sm font-semibold text-slate/70 transition-colors hover:text-ink"
-        onClick={() => history.push(`/temas/${topicId}`)}
+        onClick={pauseStudy}
         type="button"
       >
         Terminar repaso

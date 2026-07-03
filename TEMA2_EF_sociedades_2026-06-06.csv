@@ -1,0 +1,84 @@
+curso,Educacion Financiera
+unidad,Unidad 1
+tema,Sociedades
+
+categoria,pregunta,respuesta
+Acto Constitutivo,¿Qué es el acto constitutivo?,Es el acto mediante el cual se crea una sociedad por escritura pública.
+Acto Constitutivo,¿Qué formalidad usa el acto constitutivo?,Se realiza mediante escritura pública.
+Acto Constitutivo,¿Dónde debe inscribirse el acto constitutivo?,Debe inscribirse en Registros Públicos.
+Acto Constitutivo,¿Para qué sirve inscribir la sociedad en Registros Públicos?,Sirve para que la sociedad tenga existencia legal frente a terceros.
+Pacto Social,¿Qué es el pacto social?,Es el documento donde los socios acuerdan crear la sociedad.
+Pacto Social,¿Qué contiene la identificación de socios?,Contiene los datos de quienes conforman la sociedad.
+Pacto Social,¿Qué es la voluntad de asociación?,Es la manifestación de los socios de querer constituir una sociedad.
+Estatuto,¿Qué es el estatuto?,Es el conjunto de reglas internas de funcionamiento de la sociedad.
+Estatuto,¿Qué es la denominación o razón social?,Es el nombre legal de la sociedad.
+Estatuto,¿Qué es la razón social?,Es el nombre de la sociedad formado con el nombre de uno o más socios.
+Estatuto,¿Qué es el objeto social?,Es la actividad económica lícita que realizará la sociedad.
+Estatuto,¿Qué es la duración de la sociedad?,Es el tiempo durante el cual existirá la sociedad.
+Estatuto,¿Qué es el domicilio de la sociedad?,Es el lugar donde desarrolla sus actividades principales o donde tiene su administración.
+Estatuto,¿Qué son los órganos de la sociedad?,Son las estructuras encargadas de tomar decisiones y administrar la sociedad.
+Estatuto,¿Qué regula la administración y representación?,Regula quién dirige la sociedad y quién puede actuar legalmente en su nombre.
+Estatuto,¿Qué es la distribución de utilidades?,Es la forma en que se reparten las ganancias entre los socios.
+Estatuto,¿Qué es el arbitraje?,Es un mecanismo para resolver conflictos societarios sin acudir directamente al Poder Judicial.
+Estatuto,¿Qué regulan la disolución y liquidación dentro del estatuto?,Regulan cómo se termina la sociedad y cómo se reparten sus bienes restantes.
+Órganos Societarios,¿Qué es la junta general de accionistas?,Es el órgano supremo de la sociedad que toma decisiones por voto mayoritario.
+Órganos Societarios,¿Qué órgano elige al directorio?,El directorio es elegido por la junta general de accionistas.
+Órganos Societarios,¿Cuánto dura el directorio?,Dura como mínimo 1 año y como máximo 3 años.
+Órganos Societarios,¿Los miembros del directorio pueden reelegirse?,"Sí, pueden reelegirse."
+Órganos Societarios,¿Los miembros del directorio pueden recibir pago?,"Sí, pueden recibir remuneración."
+Órganos Societarios,¿Quién decide al presidente del directorio?,El propio directorio decide al presidente.
+Órganos Societarios,¿Qué función cumple el gerente?,Dirige la gestión de la sociedad y puede representarla frente a terceros.
+Órganos Societarios,¿Qué significa que el gerente responda ante terceros?,Significa que puede asumir responsabilidad por los actos realizados en representación de la sociedad.
+Sociedad Anónima Cerrada (SAC),¿Qué caracteriza a una SAC?,"No cotiza en bolsa, tiene máximo 20 accionistas y el directorio es opcional."
+Sociedad Anónima Cerrada (SAC),¿La SAC cotiza en bolsa?,"No, la SAC no cotiza en bolsa."
+Sociedad Anónima Cerrada (SAC),¿Cuál es el máximo de accionistas en una SAC?,El máximo es 20 accionistas.
+Sociedad Anónima Cerrada (SAC),¿El directorio es obligatorio en una SAC?,"No, el directorio es opcional."
+Sociedad Anónima Abierta (SAA),¿Qué caracteriza a una SAA?,"Tiene 750 accionistas o más, cotiza en bolsa y tiene directorio obligatorio."
+Sociedad Anónima Abierta (SAA),¿Cuántos accionistas tiene una SAA?,Tiene 750 accionistas o más.
+Sociedad Anónima Abierta (SAA),¿La SAA cotiza en bolsa?,"Sí, cotiza en bolsa."
+Sociedad Anónima Abierta (SAA),¿Dónde debe estar inscrita una SAA?,Debe estar inscrita en Registros Públicos y en el mercado de valores.
+Sociedad Anónima Abierta (SAA),¿El directorio es obligatorio en una SAA?,"Sí, el directorio es obligatorio."
+Sociedad Colectiva (SC),¿Qué caracteriza a la Sociedad Colectiva?,Todos los socios intervienen en la gestión.
+Sociedad Colectiva (SC),¿Cómo debe formarse la razón social de una Sociedad Colectiva?,Debe llevar el nombre de uno o más socios.
+Sociedad Colectiva (SC),¿Se puede transferir libremente una participación en la Sociedad Colectiva?,"No, se necesita consentimiento de los demás socios."
+S. en Comandita Simple,¿Qué caracteriza a la Sociedad en Comandita Simple?,Tiene dos tipos de socios: colectivos y comanditarios.
+S. en Comandita Simple,¿Qué hacen los socios colectivos en la Comandita Simple?,Administran la sociedad y responden ilimitadamente.
+S. en Comandita Simple,¿Cómo responden los socios comanditarios en la Comandita Simple?,Responden solo según el capital aportado.
+S. en Comandita Simple,¿Qué debe detallar el pacto social en la Comandita Simple?,Debe detallar los aportes de capital.
+S. en Comandita por Acciones,¿Qué caracteriza a la Sociedad en Comandita por Acciones?,"Tiene socios colectivos y accionistas comanditarios, y su capital está dividido en acciones."
+S. en Comandita por Acciones,¿Cómo está dividido el capital en la Comandita por Acciones?,Está dividido en acciones.
+S. en Comandita por Acciones,¿Qué socios existen en la Comandita por Acciones?,Existen socios colectivos y accionistas comanditarios.
+S. en Comandita por Acciones,¿Cómo responden los socios colectivos en la Comandita por Acciones?,Responden con todo su patrimonio.
+S. en Comandita por Acciones,¿Cómo responden los accionistas comanditarios?,Responden solo hasta el monto de su inversión.
+S. Comercial de Responsabilidad Limitada,¿Qué caracteriza a la SRL?,"Tiene máximo 30 socios, capital dividido en participaciones y responsabilidad limitada al aporte."
+S. Comercial de Responsabilidad Limitada,¿Cuántos socios como máximo puede tener una SRL?,Puede tener máximo 30 socios.
+S. Comercial de Responsabilidad Limitada,¿El capital de la SRL se divide en acciones?,"No, se divide en participaciones."
+S. Comercial de Responsabilidad Limitada,¿Cómo es la responsabilidad de los socios en una SRL?,La responsabilidad está limitada al aporte de cada socio.
+S. Comercial de Responsabilidad Limitada,¿Las participaciones de una SRL se negocian como acciones?,"No, las participaciones no se negocian como acciones."
+Reorganización,¿Qué es la transformación societaria?,Es el cambio de tipo de sociedad sin que la sociedad se extinga.
+Reorganización,¿Qué se mantiene en la transformación?,Se mantiene el RUC y el patrimonio.
+Reorganización,¿Qué es la fusión?,Es la unión de dos o más sociedades.
+Reorganización,¿Qué es la fusión por absorción?,Es cuando una sociedad más grande absorbe o incorpora a otra.
+Reorganización,¿Qué es la fusión por constitución?,Es cuando dos o más sociedades se unen para formar una nueva sociedad.
+Reorganización,¿Qué es la escisión?,Es cuando una sociedad se divide en dos o más y transfiere parte o todo su patrimonio.
+Reorganización,¿Qué puede transferirse en una escisión?,Puede transferirse parte o todo el patrimonio.
+Disolución,¿Qué es la disolución?,Es la etapa en la que aparece una causa o se toma el acuerdo para iniciar el fin de la sociedad.
+Disolución,¿Qué causa de disolución está vinculada al plazo de existencia?,El vencimiento del plazo estipulado en el acto de constitución.
+Disolución,¿La junta general de accionistas puede acordar la disolución?,"Sí, puede acordar la disolución."
+Disolución,¿Las pérdidas graves pueden causar disolución?,"Sí, las pérdidas graves pueden ser causa de disolución."
+Disolución,¿Una resolución judicial puede causar disolución?,"Sí, puede darse por resolución judicial."
+Liquidación,¿Qué es la liquidación?,"Es la etapa posterior a la disolución en la que se pagan deudas, se cobran créditos y se reparte el patrimonio restante."
+Liquidación,¿Cuándo empieza la liquidación?,Empieza después de la disolución.
+Liquidación,¿Qué se hace con las deudas de la sociedad durante la liquidación?,Se pagan las deudas de la sociedad.
+Liquidación,¿Qué se hace con las deudas que otros tienen con la sociedad?,Se cobran esas deudas o créditos.
+Extinción,¿Qué es la extinción de una sociedad?,Es la desaparición legal definitiva de la sociedad.
+Extinción,¿Qué ocurre con los documentos después de la extinción?,Se designa una persona para conservar los documentos.
+Comparaciones Clave,¿Cuál es la diferencia entre pacto social y estatuto?,El pacto social es el acuerdo para crear la sociedad; el estatuto contiene las reglas internas de funcionamiento.
+Comparaciones Clave,¿Cuál es la diferencia entre SAC y SAA?,"La SAC es cerrada, tiene máximo 20 accionistas y no cotiza en bolsa; la SAA es abierta, tiene 750 o más accionistas, cotiza en bolsa y requiere directorio."
+Comparaciones Clave,¿Cuál es la diferencia entre acciones y participaciones?,Las acciones son propias de sociedades anónimas; las participaciones son propias de la SRL y no se negocian como acciones.
+Comparaciones Clave,¿Cuál es la diferencia entre transformación y fusión?,En la transformación la misma sociedad cambia de tipo; en la fusión dos o más sociedades se unen.
+Comparaciones Clave,¿Cuál es la diferencia entre fusión por absorción y fusión por constitución?,En la absorción una sociedad incorpora a otra; en la constitución se crea una nueva sociedad.
+Comparaciones Clave,¿Cuál es la diferencia entre transformación y escisión?,En la transformación cambia el tipo de sociedad; en la escisión la sociedad se divide y transfiere patrimonio.
+Comparaciones Clave,"¿Cuál es la diferencia entre disolución, liquidación y extinción?",La disolución inicia el fin; la liquidación paga deudas y reparte bienes; la extinción elimina legalmente la sociedad.
+Comparaciones Clave,¿Cuál es la diferencia entre socio colectivo y socio comanditario?,El socio colectivo administra y responde ilimitadamente; el comanditario responde solo por su aporte o inversión.
+Comparaciones Clave,¿Cuál es la diferencia entre Comandita Simple y Comandita por Acciones?,La Comandita Simple funciona con aportes; la Comandita por Acciones divide su capital en acciones.

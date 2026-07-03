@@ -1,0 +1,20 @@
+curso,Inteligencia Artificial
+unidad,Unidad 2
+tema,Isolation Forest
+
+categoria,pregunta,respuesta
+"Anomalias","Que es una anomalia?","Una observacion que se aleja significativamente del patron esperado."
+"Anomalias","Que tipos de anomalias se mencionan?","Puntual, contextual y colectiva."
+"Dificultad","Por que puede ser dificil detectar anomalias?","Por desbalance, falta de etiquetas, normalidad variable y alta dimension."
+"Isolation Forest","Que es Isolation Forest?","Un algoritmo no supervisado que detecta anomalias aislando observaciones mediante un bosque de arboles aleatorios."
+"Principio","Por que las anomalias se aislan mas facilmente?","Porque son pocas y diferentes respecto al patron normal."
+"iTrees","Que compone un Isolation Forest?","Un conjunto de Isolation Trees construidos con submuestras y particiones aleatorias."
+"Muestreo","Para que se usa el muestreo aleatorio?","Para construir cada arbol con una muestra diferente y aportar diversidad."
+"Particion","Como se construyen las particiones en cada nodo?","Se elige aleatoriamente una caracteristica y un valor de division entre su minimo y maximo."
+"Longitud de camino","Que representa h(x)?","El numero de particiones necesarias para aislar una observacion."
+"Interpretacion","Como se interpreta una longitud de camino corta?","Indica que la observacion se aisla rapido y puede ser una anomalia."
+"Score","Para que sirve el score de anomalia?","Cuantifica la probabilidad de que una observacion sea anomalia."
+"Ventajas","Que beneficios tiene Isolation Forest?","Es eficiente, rapido, no supervisado y descubre patrones inusuales."
+"Limitaciones","Que limitaciones presenta Isolation Forest?","Puede confundir ruido con anomalias, generar falsas alarmas y ser dificil de validar."
+"Prediccion","Como clasifica una nueva observacion?","Calcula su longitud promedio de aislamiento y una puntuacion de anomalia."
+"Parametros","Que permiten ajustar los parametros del modelo?","Configurar la sensibilidad y el comportamiento de la prediccion."

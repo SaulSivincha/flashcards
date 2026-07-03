@@ -5,7 +5,7 @@ function validBackup(): FlashStudyBackup {
   const timestamp = "2026-06-06T10:00:00.000Z";
   return {
     format: "flashstudy-backup",
-    version: 1,
+    version: 2,
     exportedAt: timestamp,
     data: {
       courses: [
@@ -95,6 +95,68 @@ function validBackup(): FlashStudyBackup {
           updatedAt: timestamp,
         },
       ],
+      appUsageSessions: [
+        {
+          id: "app-session-1",
+          openedAt: timestamp,
+          lastActiveAt: timestamp,
+          activeDurationMs: 1_000,
+          backgroundDurationMs: 0,
+          foregroundCount: 1,
+          routeChangeCount: 1,
+          entryRoute: "/",
+          timezone: "America/Lima",
+          language: "es",
+          platform: "test",
+        },
+      ],
+      activityEvents: [
+        {
+          id: "event-1",
+          appSessionId: "app-session-1",
+          type: "app_open",
+          occurredAt: timestamp,
+          route: "/",
+        },
+      ],
+      cardInteractions: [
+        {
+          id: "interaction-1",
+          appSessionId: "app-session-1",
+          studySessionId: "session-1",
+          passId: "pass-1",
+          cardId: "card-1",
+          mode: "review",
+          passNumber: 1,
+          presentationNumber: 1,
+          presentedAt: timestamp,
+          revealCount: 0,
+          routeChanges: 0,
+          resumed: false,
+        },
+      ],
+      cardLearningStates: [
+        {
+          cardId: "card-1",
+          intervalDays: 1,
+          easeFactor: 2.5,
+          correctStreak: 1,
+          longestCorrectStreak: 1,
+          lapseCount: 0,
+          totalReviews: 1,
+          totalResponseMs: 1_000,
+          averageResponseMs: 1_000,
+          averageCorrectResponseMs: 1_000,
+          averageIncorrectResponseMs: 0,
+          correctResponseMs: 1_000,
+          incorrectResponseMs: 0,
+          correctResponseCount: 1,
+          incorrectResponseCount: 0,
+          totalReviewGapHours: 0,
+          reviewGapCount: 0,
+          updatedAt: timestamp,
+        },
+      ],
     },
   };
 }
@@ -108,8 +170,36 @@ describe("validateBackup", () => {
 
   it("rechaza formatos incompatibles", () => {
     expect(() =>
-      validateBackup({ ...validBackup(), version: 2 }),
+      validateBackup({ ...validBackup(), version: 99 }),
     ).toThrow("no es un respaldo compatible");
+  });
+
+  it("migra respaldos versión 1 sin telemetría", () => {
+    const current = validBackup();
+    const legacy = {
+      ...current,
+      version: 1,
+      data: {
+        courses: current.data.courses,
+        topics: current.data.topics,
+        flashcards: current.data.flashcards,
+        studySessions: current.data.studySessions,
+        studyPasses: current.data.studyPasses,
+        cardAttempts: current.data.cardAttempts,
+        cardStats: current.data.cardStats,
+        settings: current.data.settings,
+      },
+    };
+
+    expect(validateBackup(legacy)).toMatchObject({
+      version: 2,
+      data: {
+        appUsageSessions: [],
+        activityEvents: [],
+        cardInteractions: [],
+        cardLearningStates: [],
+      },
+    });
   });
 
   it("rechaza intentos cuya pasada pertenece a otra sesión", () => {

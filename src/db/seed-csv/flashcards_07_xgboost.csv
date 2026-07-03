@@ -1,0 +1,20 @@
+curso,Inteligencia Artificial
+unidad,Unidad 2
+tema,Gradient Boosting con XGBoost
+
+categoria,pregunta,respuesta
+"Boosting","Que plantea la idea del boosting?","Convertir aprendices debiles en un modelo fuerte mediante combinacion progresiva."
+"Gradient Boosting","Cual es la idea central de Gradient Boosting?","Construir modelos fuertes corrigiendo errores iterativamente."
+"Gradient Boosting","Como se entrena cada nuevo modelo debil?","Se entrena sobre los errores o pseudo-residuos del modelo actual."
+"Actualizacion","Que controla la tasa de aprendizaje en Gradient Boosting?","Controla la gradualidad de la correccion aplicada en cada iteracion."
+"Perdida","Para que sirven las funciones de perdida?","Definen como se mide el error en tareas de regresion o clasificacion."
+"XGBoost","Que es XGBoost?","Es una implementacion optimizada de Gradient Boosting."
+"Innovaciones","Que innovaciones clave incorpora XGBoost?","Uso de segundo orden, regularizacion integrada, procesamiento paralelo, manejo de valores faltantes y eficiencia con datos dispersos."
+"Regularizacion","Para que sirve la regularizacion en XGBoost?","Penaliza modelos con demasiadas hojas o pesos grandes para controlar la complejidad."
+"Gamma","Que efecto tiene gamma en XGBoost?","Hace el modelo mas conservador al penalizar particiones."
+"Lambda","Que efecto tiene lambda en XGBoost?","Aplica regularizacion L2 para suavizar los pesos de las hojas."
+"Hiperparametros","Que hiperparametros principales se mencionan?","learning_rate, max_depth, gamma, subsample, reg_lambda y n_estimators."
+"Comparacion","Que ventaja tiene XGBoost frente a Gradient Boosting tradicional?","Converge mas rapido y es mas robusto contra el sobreajuste por regularizacion y uso de segundo orden."
+"Pipeline","Que pasos incluye el caso de prediccion de costos medicos?","Carga de datos, limpieza, correlacion, preprocesamiento, entrenamiento y evaluacion."
+"Evaluacion","Que metricas se usan en el caso de regresion?","MAE, RMSE y R2."
+"Correlacion","Para que se eliminaron variables altamente correlacionadas?","Para reducir redundancia y mejorar el modelo."

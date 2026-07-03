@@ -1,11 +1,12 @@
 import { useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { BrandMark } from "../../components/brand/BrandMark";
 import { CourseCard } from "../../components/courses/CourseCard";
 import { ScreenContainer } from "../../components/layout/ScreenContainer";
 import { AppIcon } from "../../components/ui/AppIcon";
 import { EmptyState } from "../../components/ui/EmptyState";
+import { NameEditorSheet } from "../../components/ui/NameEditorSheet";
 import { useCourseStore } from "../../stores/courseStore";
-import { CreateCourseSheet } from "./CreateCourseSheet";
 
 export function CoursesPage() {
   const history = useHistory();
@@ -20,13 +21,13 @@ export function CoursesPage() {
       courses.filter((course) =>
         course.name.toLowerCase().includes(search.toLowerCase()),
       ),
-    [search],
+    [courses, search],
   );
 
   return (
     <ScreenContainer className="!bg-paper">
       <div className="flex items-center gap-2 text-ink">
-        <AppIcon className="text-2xl" name="school" />
+        <BrandMark className="h-8 w-8" />
         <span className="text-xl font-semibold">FlashStudy</span>
       </div>
 
@@ -75,14 +76,19 @@ export function CoursesPage() {
         {error ? <p className="text-sm text-mahogany">{error}</p> : null}
       </div>
 
-      <CreateCourseSheet
+      <NameEditorSheet
+        helperText="Podrás agregar temas mediante CSV"
+        label="Nombre del curso"
         onClose={() => setSheetOpen(false)}
-        onCreate={async (name) => {
+        onSubmit={async (name) => {
           const course = await createCourse(name);
           setSheetOpen(false);
           history.push(`/cursos/${course.id}`);
         }}
         open={sheetOpen}
+        submitLabel="Crear curso"
+        submittingLabel="Creando…"
+        title="Crear nuevo curso"
       />
     </ScreenContainer>
   );

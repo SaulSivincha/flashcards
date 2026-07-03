@@ -89,6 +89,16 @@ export class CourseRepository {
     if (!nextName) {
       throw new Error("El nombre del curso es obligatorio.");
     }
+    const duplicate = await this.database.courses
+      .filter(
+        (item) =>
+          item.id !== id &&
+          item.name.toLocaleLowerCase() === nextName.toLocaleLowerCase(),
+      )
+      .first();
+    if (duplicate) {
+      throw new Error("Ya existe un curso con ese nombre.");
+    }
 
     const updated = {
       ...course,

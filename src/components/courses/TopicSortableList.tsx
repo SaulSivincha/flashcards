@@ -23,14 +23,20 @@ import { TopicCard } from "./TopicCard";
 
 type TopicSortableListProps = {
   topics: TopicSummary[];
+  onEdit: (topic: TopicSummary) => void;
   onReorder: (topicIds: string[]) => Promise<void>;
+  onDelete: (topic: TopicSummary) => void;
 };
 
 function SortableTopicCard({
   disabled,
+  onEdit,
+  onDelete,
   topic,
 }: {
   disabled: boolean;
+  onEdit: (topic: TopicSummary) => void;
+  onDelete: (topic: TopicSummary) => void;
   topic: TopicSummary;
 }) {
   const {
@@ -62,6 +68,8 @@ function SortableTopicCard({
           ref: setActivatorNodeRef,
         }}
         isDragging={isDragging}
+        onEdit={onEdit}
+        onDelete={onDelete}
         topic={topic}
       />
     </div>
@@ -70,6 +78,8 @@ function SortableTopicCard({
 
 export function TopicSortableList({
   topics,
+  onEdit,
+  onDelete,
   onReorder,
 }: TopicSortableListProps) {
   const [orderedTopics, setOrderedTopics] = useState(topics);
@@ -145,6 +155,8 @@ export function TopicSortableList({
               <SortableTopicCard
                 disabled={status === "saving"}
                 key={topic.id}
+                onEdit={onEdit}
+                onDelete={onDelete}
                 topic={topic}
               />
             ))}

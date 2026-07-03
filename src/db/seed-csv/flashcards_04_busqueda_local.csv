@@ -1,0 +1,20 @@
+curso,Inteligencia Artificial
+unidad,Unidad 2
+tema,Metodos Locales de Busqueda
+
+categoria,pregunta,respuesta
+"Busqueda local","Que diferencia a la busqueda local de la busqueda sistematica?","Se mueve a vecinos del estado actual y necesita poco almacenamiento."
+"Busqueda local","En que tipo de problemas es util la busqueda local?","En problemas de optimizacion donde se busca el mejor estado mediante una funcion objetivo."
+"Completitud","Que hace un algoritmo de busqueda local completo?","Siempre encuentra un objetivo si existe."
+"Optimalidad","Que hace un algoritmo optimo?","Siempre encuentra un extremo global."
+"Hill climbing","Que idea central sigue hill climbing?","Selecciona repetidamente el mejor sucesor desde el estado actual."
+"Hill climbing","En que problemas puede ser util hill climbing?","En problemas donde el camino hacia la solucion es irrelevante y el estado contiene la informacion necesaria."
+"Hill climbing","Por que hill climbing es una estrategia irrevocable?","Porque no permite volver la atencion a alternativas suspendidas previamente."
+"Hill climbing","Que ocurre cuando hill climbing llega a un nodo muerto?","No hay forma de hacer retroceso salvo generar otro nodo raiz."
+"Fallos","Que es un maximo local?","Es un estado mejor que sus vecinos pero peor que otros estados mas lejanos."
+"Fallos","Que es una meseta?","Es un area plana donde los estados vecinos tienen el mismo valor."
+"Soluciones","Que alternativas se proponen frente a maximos locales o mesetas?","Retroceder a un nodo previo, hacer saltos grandes, aplicar varias reglas o cambiar la heuristica."
+"Local Beam Search","Como funciona Local Beam Search?","Mantiene k estados, genera todos sus sucesores y conserva los k mejores en cada paso."
+"Recocido simulado","Que diferencia al recocido simulado de hill climbing?","Permite con cierta probabilidad moverse a estados peores que el actual."
+"Recocido simulado","Para que sirve aceptar movimientos peores al inicio?","Para reducir la posibilidad de quedar atrapado en maximos locales o mesetas."
+"Recocido simulado","Que controla el parametro T?","Controla la probabilidad de aceptar movimientos de ascenso y forma parte del esquema de recocido."

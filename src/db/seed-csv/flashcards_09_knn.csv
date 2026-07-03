@@ -1,0 +1,20 @@
+curso,Inteligencia Artificial
+unidad,Unidad 2
+tema,K-Nearest Neighbors
+
+categoria,pregunta,respuesta
+"KNN","Que es KNN?","Un algoritmo supervisado que clasifica o estima valores usando los K vecinos mas cercanos."
+"KNN","Que criterio usa KNN para decidir?","El criterio de proximidad entre registros similares."
+"No parametrico","Por que KNN es no parametrico?","Porque no asume una distribucion subyacente de los datos."
+"Distancia","Para que se usan las metricas de distancia en KNN?","Para medir similitud o separacion entre el nuevo registro y los datos de entrenamiento."
+"Metricas","Que metricas de distancia se mencionan?","Euclidiana, Manhattan y Minkowski."
+"Funcionamiento","Cuales son los pasos de KNN?","Seleccionar K, medir distancias, ordenar vecinos y predecir."
+"Prediccion","Como predice KNN en clasificacion y regresion?","En clasificacion usa voto mayoritario y en regresion calcula el promedio de los K vecinos."
+"Lazy learner","Por que KNN se considera lazy learner?","Porque no construye un modelo conceptual durante el entrenamiento y calcula distancias en la prediccion."
+"Normalizacion","Por que es obligatoria la normalizacion en KNN?","Porque variables con escalas grandes pueden dominar injustamente las distancias."
+"Ventajas","Que ventajas tiene KNN?","Es facil de implementar, no requiere entrenamiento complejo y es interpretable."
+"Limitaciones","Que desventajas tiene KNN?","Alto costo computacional, consumo de memoria, sensibilidad al ruido y dependencia del valor K."
+"Aplicacion medica","Como se aplica KNN en riesgo cardiaco?","Compara un paciente con pacientes similares y clasifica por los vecinos mas cercanos."
+"Variables clinicas","Que variables clinicas puede comparar KNN?","Edad, colesterol, presion arterial, frecuencia cardiaca y otros indicadores clinicos."
+"K","Que importancia tiene elegir el valor K?","Afecta el balance entre precision, estabilidad y sensibilidad del clasificador."
+"Escalas","Que problema evita StandardScaler en KNN?","Evita que variables de mayor magnitud pesen mas que variables de menor escala."

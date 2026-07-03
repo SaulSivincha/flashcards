@@ -1,7 +1,13 @@
 import type { PropsWithChildren } from "react";
 import { motion, type HTMLMotionProps } from "framer-motion";
 
-type ButtonVariant = "primary" | "secondary" | "ghost" | "danger" | "soft";
+type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "ghost"
+  | "danger"
+  | "soft"
+  | "cancel";
 
 type ButtonProps = PropsWithChildren<
   HTMLMotionProps<"button"> & {
@@ -16,6 +22,8 @@ const variants: Record<ButtonVariant, string> = {
   ghost: "bg-transparent text-[var(--fs-text)] border-transparent",
   danger: "bg-transparent text-mahogany border-mahogany",
   soft: "bg-slate/10 text-slate dark:text-paper border-transparent",
+  cancel:
+    "bg-blaze/10 text-blaze border-blaze/35 dark:bg-blaze/20 dark:text-[#ffb28f] dark:border-blaze/55",
 };
 
 export function Button({

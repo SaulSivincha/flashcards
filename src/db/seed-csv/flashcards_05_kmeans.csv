@@ -1,0 +1,20 @@
+curso,Inteligencia Artificial
+unidad,Unidad 2
+tema,Clustering K-Means
+
+categoria,pregunta,respuesta
+"K-Means","Que es K-Means?","Es un algoritmo de clustering no supervisado que divide datos en K clusters representados por centroides."
+"Clustering","Que busca K-Means al formar clusters?","Maximizar la similitud dentro de cada cluster y minimizarla entre clusters."
+"Aplicacion","Que problema permite abordar K-Means en rendimiento academico?","Agrupar estudiantes con desempeno similar para identificar perfiles de rendimiento."
+"Centroides","Que representa un centroide?","Representa el centro de un cluster y se recalcula como la media de sus puntos."
+"Distancia","Para que se usa la distancia euclidiana en K-Means?","Para asignar cada punto al centroide mas cercano."
+"Inercia","Que mide la inercia?","Mide que tan compactos son los clusters mediante distancias cuadraticas dentro de cada cluster."
+"Inercia","Como se interpreta una menor inercia?","Como clusters mas compactos."
+"Algoritmo","Cuales son los pasos principales de K-Means?","Inicializar centroides, asignar puntos, actualizar centroides y repetir hasta converger."
+"Preprocesamiento","Por que se usa normalizacion en K-Means?","Para equilibrar el peso de las variables antes de agrupar por similitud."
+"Validacion","Que evalua el coeficiente de silhouette?","Mide cohesion interna y separacion entre clusters en una escala de -1 a 1."
+"Prediccion","Como se clasifica un nuevo estudiante con K-Means?","Se calculan sus distancias a los centroides y se asigna al cluster mas cercano."
+"Ventajas","Que ventajas tiene K-Means?","Es simple, rapido, interpretable, escalable y util con grandes volumenes de datos."
+"Limitaciones","Que limitaciones tiene K-Means?","Requiere definir K, es sensible a outliers y asume clusters compactos o esfericos."
+"Uso adecuado","Cuando funciona mejor K-Means?","Con grupos bien separados, variables numericas normalizadas y numero de clusters aproximadamente conocido."
+"Uso limitado","Cuando funciona peor K-Means?","Con ruido, valores atipicos o formas de clusters irregulares."
