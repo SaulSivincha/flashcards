@@ -1,0 +1,33 @@
+curso,Redes
+unidad,Unidad 1
+tema,Enrutamiento y Direccionamiento IP
+
+categoria,pregunta,respuesta,alternativa 1,alternativa 2,alternativa 3,alternativa 4
+Enrutamiento,¿Qué función cumple principalmente un router?,Determinar la ruta para enviar paquetes,Determinar la ruta para enviar paquetes,Reenviar datos dentro de una interfaz,Compartir rutas con otros routers,Agregar una cabecera a los datos
+Enrutamiento,¿Qué describe el forwarding?,Reenviar información de una interfaz a otra,Elegir la ruta entre varias redes,Reenviar información de una interfaz a otra,Identificar la red de un host,Quitar una cabecera al llegar al destino
+Enrutamiento,¿Para qué sirven los protocolos de enrutamiento?,Compartir información sobre rutas entre routers,Agregar datos de red a un mensaje,Reenviar paquetes entre interfaces,Compartir información sobre rutas entre routers,Identificar el destino de una comunicación
+Procesos,¿Qué proceso identifica el origen y el destino?,Direccionamiento,Encapsulación,Enrutamiento,Desencapsulación,Direccionamiento
+Procesos,¿Qué ocurre durante la encapsulación?,Se agrega la cabecera de red a los datos,Se agrega la cabecera de red a los datos,Se elige la ruta del paquete,Se identifica la dirección de red,Se quita información en el destino
+Procesos,¿Qué proceso decide por dónde viajará un paquete?,Enrutamiento,Direccionamiento,Enrutamiento,Forwarding,Desencapsulación
+Procesos,¿Qué ocurre durante la desencapsulación?,Se quita la información de red al llegar,Se agrega una cabecera a los datos,Se comparte una ruta con routers,Se quita la información de red al llegar,Se determina la dirección de broadcast
+División de redes,¿Qué beneficio aporta dividir una red en rendimiento?,Reduce los dominios de broadcast,Aumenta el alcance geográfico,Reserva rutas entre hosts,Elimina la necesidad de gateways,Reduce los dominios de broadcast
+División de redes,¿Qué beneficio de seguridad aporta dividir una red?,Controlar el acceso a recursos,Controlar el acceso a recursos,Intercalar mensajes en un medio,Reservar un circuito de red,Definir el ancho de banda
+División de redes,¿Qué usan los hosts para salir de su red?,Un gateway,Una dirección de broadcast,Un gateway,Una máscara de subred,Un protocolo de enrutamiento
+Dirección IP,¿Qué identifica una dirección IP?,Un dispositivo dentro de una red,El medio de transmisión,La cabecera de red,Un dispositivo dentro de una red,La ruta óptima de un paquete
+Dirección IP,¿Qué caracteriza una dirección de red?,Todos sus bits de host están en 0,Es la dirección más alta del rango,Identifica un host individual,Permite acceso a recursos externos,Todos sus bits de host están en 0
+Dirección IP,¿Qué función tiene la dirección de broadcast?,Enviar información a todos los hosts,Enviar información a todos los hosts,Identificar una sola interfaz,Determinar la parte de red,Indicar una ruta entre routers
+Dirección IP,¿Dónde se ubica una dirección de host?,Entre la dirección de red y broadcast,Por debajo de la dirección de red,Entre la dirección de red y broadcast,Por encima de la dirección de broadcast,Fuera del rango de la red
+Clases IP,¿Qué intervalo corresponde al primer octeto de Clase A?,1 a 126,128 a 191,192 a 223,1 a 126,224 a 255
+Clases IP,¿Qué estructura corresponde a una dirección Clase B?,red.red.host.host,red.host.host.host,red.red.red.host,host.red.red.red,red.red.host.host
+Clases IP,¿Qué intervalo corresponde al primer octeto de Clase C?,192 a 223,192 a 223,1 a 126,128 a 191,224 a 255
+Clases IP,¿Qué uso se asocia con una dirección Clase D?,Multicast,Loopback,Multicast,Dirección de host,Dirección de red
+Restricciones,¿Qué uso tiene reservado el valor 127?,Loopback,Dirección de broadcast,Dirección de red,Loopback,Multicast
+Restricciones,¿Qué representa una IP con todos los bits de host en 0?,La dirección de red,Un host del rango,Un destino multicast,La dirección más alta del rango,La dirección de red
+Restricciones,¿Qué representa una IP con todos los bits de host en 1?,La dirección de broadcast,La dirección de broadcast,La dirección de red,Una dirección de host,Una dirección loopback
+Máscara de subred,¿Para qué sirve una máscara de subred?,Indicar qué parte es red y qué parte es host,Elegir la ruta de un paquete,Indicar qué parte es red y qué parte es host,Compartir rutas entre routers,Representar el alcance de una red
+Máscara de subred,¿Qué representa un bit 1 en la máscara?,La parte de red,La dirección de host,La dirección de broadcast,La parte de red,Un gateway de salida
+Máscara de subred,¿Qué representa un bit 0 en la máscara?,La parte de host,La dirección de red,Una ruta entre routers,Un mensaje encapsulado,La parte de host
+Máscara de subred,¿Qué máscara se expresa como 11111111.11111111.11111111.00000000?,255.255.255.0,255.255.255.0,255.255.0.0,255.0.0.0,0.0.0.255
+Operación AND,¿Qué fórmula obtiene la dirección de red?,IP AND MÁSCARA = RED,IP OR MÁSCARA = RED,IP AND MÁSCARA = RED,IP XOR MÁSCARA = RED,IP NOT MÁSCARA = RED
+Operación AND,¿Qué permite verificar la operación AND además de obtener la red?,Si dos hosts están en la misma red,El alcance de una WAN,La clase de una dirección,Si dos hosts están en la misma red,El modo de transmisión de un enlace
+Operación AND,¿Cuál es el resultado de 1 AND 1?,1,0,Depende de la máscara,Se conserva el bit del host,1
