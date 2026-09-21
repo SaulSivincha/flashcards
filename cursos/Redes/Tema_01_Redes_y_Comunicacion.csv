@@ -1,0 +1,40 @@
+curso,Redes
+unidad,Unidad 1
+tema,Redes y Comunicación
+
+categoria,pregunta,respuesta,alternativa 1,alternativa 2,alternativa 3,alternativa 4
+La red,¿Cuál definición describe mejor una red?,Dispositivos conectados para intercambiar información,Dispositivos conectados para intercambiar información,Dispositivos aislados que procesan información,Un medio reservado para una comunicación,Reglas que organizan los mensajes
+La red,¿Qué propósito reúne las funciones de una red?,Compartir información recursos y servicios,Compartir solo mensajes entre equipos,Compartir información recursos y servicios,Reservar enlaces para un único usuario,Convertir señales digitales en analógicas
+ARPANET,¿Qué papel tuvo ARPANET en la evolución de las redes?,Fue un antecedente de Internet,Fue una red privada de una organización,Fue un medio para conexiones WAN,Fue un antecedente de Internet,Fue un protocolo de seguridad
+ARPANET,¿Qué institución albergó uno de los primeros nodos de ARPANET?,UCLA,Una red metropolitana,Una empresa proveedora,Una universidad de Los Ángeles,UCLA
+Conmutación,¿Qué ocurre en la conmutación de paquetes?,La información se divide en paquetes,La información se divide en paquetes,La comunicación reserva un camino,El medio lleva una sola señal,Los mensajes se envían sin reglas
+Conmutación,¿Qué condición distingue a la conmutación de circuitos?,Se reserva un camino entre emisor y receptor,Los paquetes comparten el medio,Se reserva un camino entre emisor y receptor,Los mensajes se intercalan por turnos,Las señales usan canales separados
+Conmutación,¿Cómo usan los recursos las comunicaciones por paquetes?,Los recursos se comparten entre comunicaciones,Los recursos quedan reservados por sesión,Cada mensaje usa un camino exclusivo,Los recursos se comparten entre comunicaciones,El medio transporta una sola señal
+Conmutación,¿Qué afirmación contrasta correctamente ambos tipos de conmutación?,Los circuitos reservan recursos y los paquetes los comparten,Los paquetes reservan recursos y los circuitos comparten medios,Los circuitos intercalan mensajes y los paquetes no,Circuitos y paquetes requieren un camino exclusivo,Los circuitos reservan recursos y los paquetes los comparten
+Elementos,¿Qué elemento representa el contenido que viaja por la red?,El mensaje,El mensaje,El medio,El dispositivo,Las reglas
+Elementos,¿Qué elemento describe el canal de conexión entre dispositivos?,El medio,El mensaje,El medio,Las reglas,El enlace lógico
+Elementos,¿Qué elemento establece cómo deben circular los mensajes?,Las reglas,El dispositivo,El medio,Las reglas,El mensaje
+Dispositivos,¿Cuál combinación asocia correctamente cada función?,Switch conecta una LAN y router comunica redes,Switch dirige redes y router protege la red,Firewall conecta equipos y switch dirige redes,Router representa una red y nube protege paquetes,Switch conecta una LAN y router comunica redes
+Dispositivos,¿Qué función se atribuye a un firewall?,Proporcionar seguridad a la red,Proporcionar seguridad a la red,Interconectar equipos de una LAN,Representar una conexión WAN,Dividir mensajes en segmentos
+Dispositivos,En un diagrama de red ¿qué suele simplificar una nube?,Un conjunto de dispositivos o redes,Un dispositivo que filtra paquetes,Un conjunto de dispositivos o redes,Un canal exclusivo para mensajes,Una red local de equipos
+Dispositivos,¿Qué puede representar un enlace entre redes?,Una conexión entre redes como una WAN,Un equipo que dirige paquetes,Un conjunto de redes simplificado,Una conexión entre redes como una WAN,Un mecanismo para proteger una LAN
+Comunicación,¿Qué describe la segmentación de un mensaje?,Dividir un mensaje grande en partes menores,Reservar un medio durante la transmisión,Intercalar mensajes de varios emisores,Enviar una señal por un solo canal,Dividir un mensaje grande en partes menores
+Comunicación,¿Qué situación ilustra la multiplexación?,Varios mensajes comparten el mismo medio,Varios mensajes comparten el mismo medio,Un mensaje se divide en varios segmentos,Un circuito queda dedicado a un emisor,Un router separa redes diferentes
+Comunicación,¿Cuál diferencia separa segmentación y multiplexación?,La segmentación divide mensajes y la multiplexación comparte el medio,La segmentación comparte medios y la multiplexación divide mensajes,La segmentación divide mensajes y la multiplexación comparte el medio,Ambas reservan recursos de transmisión,Ambas usan una sola señal en el canal
+Ancho de banda,¿Qué mide el ancho de banda de una red?,La cantidad de información que puede fluir por tiempo,La distancia máxima entre dispositivos,El número de redes conectadas al router,La cantidad de información que puede fluir por tiempo,La cantidad de reglas de transmisión
+Ancho de banda,¿Qué consecuencia tiene disponer de mayor ancho de banda?,Existe mayor capacidad para transportar información,La comunicación se limita a una LAN,La red usa necesariamente más circuitos,La red transmite solo señales digitales,Existe mayor capacidad para transportar información
+Transmisión,¿Qué característica define la transmisión en serie?,Los datos se transmiten secuencialmente,Los datos se transmiten secuencialmente,Varios bits se transmiten al mismo tiempo,Varias señales ocupan canales distintos,Los sentidos de transmisión se alternan
+Transmisión,¿Qué característica define la transmisión en paralelo?,Varios bits pueden transmitirse simultáneamente,Los datos viajan uno detrás de otro,Varios bits pueden transmitirse simultáneamente,Una señal usa todo el canal,Un emisor reserva el medio completo
+Transmisión,¿Qué tipo de transmisión usa datos binarios?,La transmisión digital,La transmisión analógica,La transmisión en serie,La transmisión digital,La transmisión simplex
+Transmisión,¿Qué tipo de transmisión se asocia con señales como la voz?,La transmisión analógica,La transmisión digital,La transmisión en paralelo,La transmisión full duplex,La transmisión analógica
+Transmisión,¿Qué condición corresponde a la banda base?,Una sola señal utiliza el canal,Una sola señal utiliza el canal,Varias señales se distribuyen en canales,Un circuito conecta dos redes,Un medio combina comunicaciones
+Transmisión,¿Qué capacidad caracteriza a la banda ancha?,Transportar varias señales,Reservar un camino de comunicación,Transportar varias señales,Transmitir en un único sentido,Enviar datos solo en serie
+Modos,¿En qué modo la comunicación avanza en un único sentido?,Simplex,Half duplex,Full duplex,Simplex,Banda base
+Modos,¿Qué modo permite ambos sentidos pero no al mismo tiempo?,Half duplex,Simplex,Full duplex,Banda ancha,Half duplex
+Modos,¿Qué modo permite transmitir y recibir simultáneamente?,Full duplex,Full duplex,Half duplex,Simplex,Transmisión en paralelo
+Modos,¿Qué ejemplo se ajusta al modo half duplex?,Un walkie-talkie,Una radiodifusión de televisión,Un walkie-talkie,Una llamada telefónica,Una transmisión en paralelo
+Tipos de redes,¿Qué tipo de red corresponde a una casa oficina o campus?,LAN,MAN,WAN,LAN,Extranet
+Tipos de redes,¿Qué tipo de red puede conectar varias LAN en una ciudad?,MAN,LAN,WAN,Intranet,MAN
+Tipos de redes,¿Qué tipo de red cubre ciudades o países distantes?,WAN,WAN,MAN,LAN,Extranet
+Acceso,¿Qué opción distingue correctamente Internet Intranet y Extranet?,Internet es global Intranet es interna y Extranet habilita externos autorizados,Internet es interna e Intranet es global,Internet es global Intranet es interna y Extranet habilita externos autorizados,Extranet es global e Internet es privada,Intranet permite proveedores e Internet es restringida
+Acceso,¿Qué acceso caracteriza a una intranet?,Acceso limitado a personas de una organización,Acceso global a cualquier persona,Acceso de redes en varias ciudades,Acceso limitado a personas de una organización,Acceso exclusivo mediante circuitos

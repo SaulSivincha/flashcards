@@ -1,4 +1,4 @@
-import financialEducationCsv from "../../TEMA2_EF_sociedades_2026-06-06.csv?raw";
+import financialEducationCsv from "../../cursos/Educacion Financiera/TEMA2_EF_sociedades_2026-06-06.csv?raw";
 import type { FlashStudyDatabase } from "./db";
 import { CsvImportRepository } from "./repositories/csvImportRepository";
 import { parseFlashcardCsv } from "../services/csv/csvParser";

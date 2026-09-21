@@ -26,7 +26,9 @@ export type CsvImportOptions = {
 
 export type CsvImportResult = {
   courseId: string;
+  courseName: string;
   topicId: string;
+  topicFileName: string;
   mode: CsvImportMode;
   createdCards: number;
   updatedCards: number;

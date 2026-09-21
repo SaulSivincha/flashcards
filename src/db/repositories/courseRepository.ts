@@ -8,6 +8,7 @@ import type {
 import { createId } from "../../utils/ids";
 import { nowIso } from "../../utils/dates";
 import { calculateProgress } from "./repositoryUtils";
+import { ensureCourseDirectory } from "../../services/csv/csvArchiveService";
 
 export class CourseRepository {
   constructor(private readonly database: FlashStudyDatabase = db) {}
@@ -76,6 +77,7 @@ export class CourseRepository {
     };
 
     await this.database.courses.add(course);
+    void ensureCourseDirectory(course.name).catch(() => undefined);
     return course;
   }
 

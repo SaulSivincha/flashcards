@@ -14,6 +14,7 @@ import type {
 } from "../../services/csv/csvImportTypes";
 import type { ParsedFlashcardCsv } from "../../services/csv/csvTypes";
 import { normalizeCsvKey } from "../../services/csv/csvValidator";
+import { saveTopicCsvFile } from "../../services/csv/csvArchiveService";
 
 function sameText(left: string, right: string): boolean {
   return normalizeCsvKey(left) === normalizeCsvKey(right);
@@ -83,7 +84,7 @@ export class CsvImportRepository {
     parsed: ParsedFlashcardCsv,
     options: CsvImportOptions,
   ): Promise<CsvImportResult> {
-    return this.database.transaction(
+    const result = await this.database.transaction(
       "rw",
       [
         this.database.courses,
@@ -222,7 +223,9 @@ export class CsvImportRepository {
 
         return {
           courseId: course.id,
+          courseName: course.name,
           topicId: topic.id,
+          topicFileName,
           mode: options.mode,
           createdCards,
           updatedCards,
@@ -230,6 +233,13 @@ export class CsvImportRepository {
         };
       },
     );
+
+    // The database remains the source of truth; a file-system error must not
+    // prevent studying or importing on browsers that lack a native Documents folder.
+    void saveTopicCsvFile(result.courseName, result.topicFileName, parsed.sourceText).catch(
+      () => undefined,
+    );
+    return result;
   }
 
   private async resolveCourse(
