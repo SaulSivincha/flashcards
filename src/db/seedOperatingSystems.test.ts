@@ -1,5 +1,6 @@
 import operatingSystemsCsv from "../../cursos/Sistemas Operativos/Tema_01_Fundamentos_de_Sistemas_Operativos.csv?raw";
 import operatingSystemsStructureCsv from "../../cursos/Sistemas Operativos/Tema_02_Estructura_de_Sistemas_Operativos.csv?raw";
+import operatingSystemsProcessesCsv from "../../cursos/Sistemas Operativos/Tema_03_Procesos_Pesados_y_Livianos.csv?raw";
 import { parseFlashcardCsv } from "../services/csv/csvParser";
 
 describe("Tema 1 de Sistemas Operativos", () => {
@@ -22,6 +23,44 @@ describe("Tema 1 de Sistemas Operativos", () => {
     );
     parsed.cards.forEach((card) => {
       expect(card.alternatives).toHaveLength(4);
+      expect(
+        card.alternatives?.filter(
+          (alternative) => alternative === card.answer,
+        ),
+      ).toHaveLength(1);
+    });
+  });
+});
+
+describe("Tema 3 de Sistemas Operativos", () => {
+  it("incluye alternativas únicas y respuestas asociadas al material", () => {
+    const parsed = parseFlashcardCsv(
+      operatingSystemsProcessesCsv,
+      "Tema_03_Procesos_Pesados_y_Livianos.csv",
+    );
+
+    expect(parsed.cards).toHaveLength(33);
+    expect(
+      parsed.cards.find(
+        (card) =>
+          card.question ===
+          "¿Qué diferencia esencial hay entre listo y bloqueado?",
+      ),
+    ).toMatchObject({
+      answer: "Listo espera CPU y bloqueado espera un evento o recurso",
+    });
+    expect(
+      parsed.cards.find(
+        (card) =>
+          card.question ===
+          "¿Qué relación define al modelo uno a uno?",
+      ),
+    ).toMatchObject({
+      answer: "Cada hilo de usuario corresponde a un hilo de kernel",
+    });
+    parsed.cards.forEach((card) => {
+      expect(card.alternatives).toHaveLength(4);
+      expect(new Set(card.alternatives).size).toBe(4);
       expect(
         card.alternatives?.filter(
           (alternative) => alternative === card.answer,
