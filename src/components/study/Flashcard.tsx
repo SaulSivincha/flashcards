@@ -22,7 +22,12 @@ export function Flashcard({
   const answerInitiallyVisible = initialSide === "answer";
 
   return (
-    <div className="my-6 [perspective:2000px]">
+    <motion.div
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      className="my-6 [perspective:2000px]"
+      initial={{ opacity: 0, scale: 0.985, y: 14 }}
+      transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+    >
       <motion.button
         animate={{ rotateY: answerVisible ? 180 : 0 }}
         className={`group relative min-h-[400px] w-full [aspect-ratio:4/5] [transform-style:preserve-3d] ${onFlip ? "cursor-pointer" : "cursor-default"}`}
@@ -64,6 +69,6 @@ export function Flashcard({
           </div>
         </div>
       </motion.button>
-    </div>
+    </motion.div>
   );
 }
