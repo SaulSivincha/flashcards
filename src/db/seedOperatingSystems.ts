@@ -5,7 +5,7 @@ import { parseFlashcardCsv } from "../services/csv/csvParser";
 
 const fileName = "Tema_01_Fundamentos_de_Sistemas_Operativos.csv";
 
-/** Adds the bundled operating-systems deck once, without overwriting user imports. */
+/** Creates the bundled operating-systems deck and refreshes it on source changes. */
 export async function seedOperatingSystems(
   database: FlashStudyDatabase,
 ): Promise<void> {
@@ -14,6 +14,16 @@ export async function seedOperatingSystems(
   const analysis = await repository.analyze(parsed);
 
   if (analysis.conflict) {
+    const existingTopic = await database.topics.get(analysis.conflict.topicId);
+    if (existingTopic?.sourceHash === parsed.sourceHash) {
+      return;
+    }
+
+    await repository.import(parsed, {
+      mode: "update",
+      existingTopicId: analysis.conflict.topicId,
+      preferredCourseId: analysis.targetCourseId,
+    });
     return;
   }
 
