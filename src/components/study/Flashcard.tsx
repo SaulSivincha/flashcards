@@ -7,6 +7,7 @@ type FlashcardProps = {
   question: string;
   answer: string;
   onFlip?: () => void;
+  questionOnly?: boolean;
 };
 
 export function Flashcard({
@@ -15,6 +16,7 @@ export function Flashcard({
   question,
   answer,
   onFlip,
+  questionOnly = false,
 }: FlashcardProps) {
   const answerVisible = side === "answer";
   const answerInitiallyVisible = initialSide === "answer";
@@ -23,7 +25,7 @@ export function Flashcard({
     <div className="my-6 [perspective:2000px]">
       <motion.button
         animate={{ rotateY: answerVisible ? 180 : 0 }}
-        className="group relative min-h-[400px] w-full cursor-pointer [aspect-ratio:4/5] [transform-style:preserve-3d]"
+        className={`group relative min-h-[400px] w-full [aspect-ratio:4/5] [transform-style:preserve-3d] ${onFlip ? "cursor-pointer" : "cursor-default"}`}
         initial={{ rotateY: answerInitiallyVisible ? 180 : 0 }}
         onClick={onFlip}
         transition={{ duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
@@ -42,8 +44,8 @@ export function Flashcard({
           </h2>
           </div>
           <div className="mt-8 flex items-center justify-center gap-2 border-t border-black/5 pt-6 text-sm font-semibold text-slate/45">
-            <AppIcon className="animate-pulse text-xl" name="eye" />
-            Toca para revelar
+            <AppIcon className={questionOnly ? "text-xl" : "animate-pulse text-xl"} name={questionOnly ? "check" : "eye"} />
+            {questionOnly ? "Elige una alternativa" : "Toca para revelar"}
           </div>
         </div>
         <div className="absolute inset-0 flex flex-col rounded-[24px] border border-black/[0.03] bg-white p-8 text-left text-ink shadow-[0_20px_40px_-12px_rgba(10,18,42,0.10)] [backface-visibility:hidden] [transform:rotateY(180deg)]">

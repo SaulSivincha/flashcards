@@ -9,6 +9,7 @@ import {
 } from "./csvTypes";
 import {
   isFlashcardHeader,
+  alternativeColumnIndexes,
   normalizeCsvCell,
   normalizeCsvKey,
   validateCards,
@@ -51,6 +52,8 @@ export function parseFlashcardCsv(
   );
   const headerIndex = rows.findIndex(isFlashcardHeader);
   const metadata: Partial<CsvMetadata> = {};
+  const alternativeIndexes =
+    headerIndex >= 0 ? alternativeColumnIndexes(rows[headerIndex]) : undefined;
 
   const metadataRows = headerIndex >= 0 ? rows.slice(0, headerIndex) : rows;
   metadataRows.forEach((row) => {
@@ -78,7 +81,12 @@ export function parseFlashcardCsv(
           .map((row, index) => ({
             category: normalizeCsvCell(row[0]),
             question: normalizeCsvCell(row[1]),
-            answer: normalizeCsvCell(row.slice(2).join(",")),
+            answer: normalizeCsvCell(row[2]),
+            alternatives: alternativeIndexes
+              ? alternativeIndexes.map((alternativeIndex) =>
+                  normalizeCsvCell(row[alternativeIndex]),
+                )
+              : undefined,
             sourceRow: headerIndex + index + 2,
           }))
           .filter(
@@ -106,10 +114,11 @@ export function parseFlashcardCsv(
   );
   const normalizedSource = JSON.stringify({
     metadata: completeMetadata,
-    cards: cards.map(({ category, question, answer }) => ({
+    cards: cards.map(({ category, question, answer, alternatives }) => ({
       category,
       question,
       answer,
+      alternatives,
     })),
   });
 

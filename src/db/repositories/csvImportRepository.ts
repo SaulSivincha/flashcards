@@ -171,6 +171,7 @@ export class CsvImportRepository {
             category,
             question: parsedCard.question,
             answer: parsedCard.answer,
+            alternatives: parsedCard.alternatives,
             order,
             isActive: true,
             createdAt: previous?.createdAt ?? timestamp,

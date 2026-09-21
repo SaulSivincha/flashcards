@@ -575,7 +575,9 @@ function CsvExampleSheet({ open, onClose }: CsvExampleSheetProps) {
       <div className="mt-7">
         <p className="text-sm leading-6 muted-text">
           Usa metadatos arriba y luego el encabezado obligatorio de tarjetas.
-          Las respuestas con comas deben ir entre comillas.
+          Las respuestas con comas deben ir entre comillas. Para selección
+          múltiple agrega las columnas alternativa 1 a alternativa 4; una debe
+          coincidir con la respuesta.
         </p>
 
         <div className="mt-5 overflow-hidden rounded-xl border subtle-divider bg-[var(--fs-surface-muted)]">

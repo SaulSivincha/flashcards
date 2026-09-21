@@ -50,6 +50,18 @@ describe("parseFlashcardCsv", () => {
     });
   });
 
+  it("parsea tarjetas de cuatro alternativas sin afectar el formato anterior", () => {
+    const result = parseFlashcardCsv(`curso,Curso
+tema,Tema
+categoria,pregunta,respuesta,alternativa 1,alternativa 2,alternativa 3,alternativa 4
+General,¿Cuál es correcta?,Correcta,Incorrecta,Correcta,Otra,También incorrecta`);
+
+    expect(result.cards[0]).toMatchObject({
+      answer: "Correcta",
+      alternatives: ["Incorrecta", "Correcta", "Otra", "También incorrecta"],
+    });
+  });
+
   it("detecta falta de curso", () => {
     expectIssue(
       `tema,Tema

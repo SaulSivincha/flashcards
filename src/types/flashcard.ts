@@ -4,6 +4,8 @@ export type Flashcard = {
   category: string;
   question: string;
   answer: string;
+  /** Present only for cards imported as multiple-choice questions. */
+  alternatives?: string[];
   order: number;
   isActive: boolean;
   createdAt: string;

@@ -138,6 +138,16 @@ Los metadatos deben aparecer antes del encabezado
 `categoria,pregunta,respuesta`. Las respuestas con comas deben ir entre
 comillas.
 
+También se admiten preguntas de selección múltiple: agrega `alternativa 1`,
+`alternativa 2`, `alternativa 3` y `alternativa 4` después de `respuesta`.
+La respuesta correcta debe aparecer en una de esas cuatro columnas; el formato
+anterior continúa funcionando sin cambios.
+
+```csv
+categoria,pregunta,respuesta,alternativa 1,alternativa 2,alternativa 3,alternativa 4
+General,¿Cuál es la correcta?,B,A,B,C,D
+```
+
 ## Respaldo local
 
 Desde Configuración se puede:

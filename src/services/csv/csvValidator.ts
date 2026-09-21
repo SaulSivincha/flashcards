@@ -23,6 +23,17 @@ export function isFlashcardHeader(row: unknown[]): boolean {
   );
 }
 
+export function alternativeColumnIndexes(row: unknown[]): number[] | undefined {
+  const indexes = [1, 2, 3, 4].map((number) =>
+    row.findIndex((cell) => {
+      const key = normalizeCsvKey(cell).replace(/\s+/g, "");
+      return key === `alternativa${number}` || key === `opcion${number}` || key === `opción${number}`;
+    }),
+  );
+
+  return indexes.every((index) => index >= 0) ? indexes : undefined;
+}
+
 export function validateMetadata(
   metadata: Partial<CsvMetadata>,
 ): CsvValidationIssue[] {
@@ -64,6 +75,23 @@ export function validateCards(cards: ParsedCsvCard[]): CsvValidationIssue[] {
         message: `La fila ${card.sourceRow} tiene una respuesta vacía.`,
         row: card.sourceRow,
       });
+    }
+
+    if (card.alternatives) {
+      const hasFourAlternatives =
+        card.alternatives.length === 4 && card.alternatives.every(Boolean);
+      const hasUniqueAlternatives =
+        new Set(card.alternatives.map(normalizeCsvKey)).size === 4;
+      const includesAnswer = card.alternatives.some(
+        (alternative) => normalizeCsvKey(alternative) === normalizeCsvKey(card.answer),
+      );
+      if (!hasFourAlternatives || !hasUniqueAlternatives || !includesAnswer) {
+        issues.push({
+          code: "INVALID_ALTERNATIVES",
+          message: `La fila ${card.sourceRow} debe tener cuatro alternativas distintas y una debe coincidir con la respuesta correcta.`,
+          row: card.sourceRow,
+        });
+      }
     }
 
     if (card.question) {

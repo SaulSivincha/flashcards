@@ -8,6 +8,7 @@ export type ParsedCsvCard = {
   category: string;
   question: string;
   answer: string;
+  alternatives?: string[];
   sourceRow: number;
 };
 
@@ -28,6 +29,7 @@ export type CsvValidationErrorCode =
   | "MISSING_HEADER"
   | "EMPTY_QUESTION"
   | "EMPTY_ANSWER"
+  | "INVALID_ALTERNATIVES"
   | "DUPLICATE_CARD"
   | "NO_CARDS";
 

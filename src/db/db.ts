@@ -64,6 +64,27 @@ export class FlashStudyDatabase extends Dexie {
         "id, studySessionId, passId, cardId, presentedAt, answeredAt, [studySessionId+cardId]",
       cardLearningStates: "cardId, lastStudiedAt, nextReviewAt, updatedAt",
     });
+
+    this.version(3).stores({
+      courses: "id, &name, order, createdAt, updatedAt",
+      topics:
+        "id, courseId, fileName, [courseId+order], [courseId+unit+title], createdAt, updatedAt",
+      flashcards:
+        "id, topicId, [topicId+order], category, createdAt, updatedAt",
+      studySessions:
+        "id, topicId, mode, startedAt, finishedAt, [topicId+startedAt]",
+      studyPasses: "id, sessionId, [sessionId+passNumber]",
+      cardAttempts:
+        "id, sessionId, passId, cardId, answeredAt, [sessionId+answeredAt]",
+      cardStats: "cardId, lastStudiedAt",
+      settings: "key",
+      appUsageSessions: "id, openedAt, lastActiveAt, closedAt",
+      activityEvents:
+        "id, appSessionId, type, occurredAt, route, topicId, studySessionId, cardId, [type+occurredAt]",
+      cardInteractions:
+        "id, studySessionId, passId, cardId, presentedAt, answeredAt, [studySessionId+cardId]",
+      cardLearningStates: "cardId, lastStudiedAt, nextReviewAt, updatedAt",
+    });
   }
 }
 

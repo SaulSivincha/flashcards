@@ -62,7 +62,9 @@ function isFlashcard(value: unknown): boolean {
     hasNumber(value, "order") &&
     hasBoolean(value, "isActive") &&
     hasString(value, "createdAt") &&
-    hasString(value, "updatedAt")
+    hasString(value, "updatedAt") &&
+    (value.alternatives === undefined ||
+      isArrayOf(value.alternatives, (item) => typeof item === "string"))
   );
 }
 
