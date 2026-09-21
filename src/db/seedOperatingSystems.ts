@@ -1,6 +1,7 @@
 import operatingSystemsCsv from "../../cursos/Sistemas Operativos/Tema_01_Fundamentos_de_Sistemas_Operativos.csv?raw";
 import operatingSystemsStructureCsv from "../../cursos/Sistemas Operativos/Tema_02_Estructura_de_Sistemas_Operativos.csv?raw";
 import operatingSystemsProcessesCsv from "../../cursos/Sistemas Operativos/Tema_03_Procesos_Pesados_y_Livianos.csv?raw";
+import operatingSystemsSchedulingCsv from "../../cursos/Sistemas Operativos/Tema_04_Planificacion_y_Comunicacion_de_Procesos.csv?raw";
 import type { FlashStudyDatabase } from "./db";
 import { CsvImportRepository } from "./repositories/csvImportRepository";
 import { parseFlashcardCsv } from "../services/csv/csvParser";
@@ -14,6 +15,10 @@ const seedDecks = [
   [
     "Tema_03_Procesos_Pesados_y_Livianos.csv",
     operatingSystemsProcessesCsv,
+  ],
+  [
+    "Tema_04_Planificacion_y_Comunicacion_de_Procesos.csv",
+    operatingSystemsSchedulingCsv,
   ],
 ] as const;
 

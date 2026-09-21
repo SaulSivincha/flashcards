@@ -1,0 +1,41 @@
+curso,Sistemas Operativos
+unidad,Unidad 1
+tema,Planificación y Comunicación de Procesos
+
+categoria,pregunta,respuesta,alternativa 1,alternativa 2,alternativa 3,alternativa 4
+Fundamentos,¿Qué asigna la planificación de procesos?,Tiempo de CPU a los procesos,Tiempo de CPU a los procesos,Canales de datos entre procesos,Regiones de memoria compartida,Formatos de mensajes
+Fundamentos,¿Qué coordina principalmente el IPC?,El intercambio de información entre procesos,El uso del temporizador,El intercambio de información entre procesos,El orden físico de las páginas,La creación de núcleos virtuales
+Carga,¿Qué carga se caracteriza por largas ráfagas de CPU?,CPU-bound,Interactiva,E/S-bound,CPU-bound,Tiempo real duro
+Carga,¿Qué requisito domina típicamente en una carga interactiva?,Respuesta rápida al usuario,Uso constante de la caché,Estimación exacta de ráfagas,Alto throughput de lotes,Respuesta rápida al usuario
+Preempción,¿Qué condición caracteriza a un algoritmo no expropiativo?,El proceso cede al terminar o bloquearse,El proceso cede al terminar o bloquearse,El kernel lo interrumpe en cada llegada,La prioridad siempre cambia,El proceso migra de núcleo
+Preempción,¿Qué costo introduce normalmente la planificación expropiativa?,Más cambios de contexto y sincronización,Menos decisiones del planificador,Más cambios de contexto y sincronización,Menos espera de E/S,Menor necesidad de temporizador
+Métricas,¿Cómo se calcula el tiempo de retorno?,Finalización menos llegada,Primera ejecución menos llegada,Tiempo acumulado en la cola,Finalización menos llegada,Procesos terminados por unidad de tiempo
+Métricas,¿Qué mide el tiempo de respuesta?,La demora hasta recibir CPU por primera vez,El tiempo total hasta terminar,El tiempo bloqueado por E/S,El uso productivo de CPU,La demora hasta recibir CPU por primera vez
+Métricas,¿Qué métrica contabiliza procesos terminados por unidad de tiempo?,Throughput,Throughput,Tiempo de espera,Tiempo de retorno,Utilización
+FCFS,¿Qué criterio usa FCFS para seleccionar el siguiente proceso?,Orden de llegada,Menor ráfaga estimada,Orden de llegada,Mayor prioridad dinámica,Plazo absoluto más próximo
+FCFS,¿Qué problema puede generar FCFS ante una ráfaga larga?,Retrasa a procesos cortos que llegaron después,Reduce el tiempo de respuesta de todos,Evita la espera de procesos cortos,Retrasa a procesos cortos que llegaron después,Aumenta automáticamente las prioridades
+SJF y SRTF,¿Qué selecciona SJF?,El proceso con menor ráfaga de CPU,El proceso con menor prioridad,El proceso con mayor tiempo restante,El proceso con menor ráfaga de CPU,El proceso con la llegada más reciente
+SJF y SRTF,¿Qué diferencia a SRTF de SJF?,SRTF puede interrumpir por menor tiempo restante,SRTF usa un quantum fijo,SRTF solo sirve para E/S,SRTF no necesita estimar ráfagas,SRTF puede interrumpir por menor tiempo restante
+Estimación,¿Qué efecto tiene un valor alto de alfa en la estimación de ráfagas?,Da más peso al comportamiento reciente,Da más peso al comportamiento reciente,Elimina toda estimación previa,Evita la inanición de trabajos largos,Convierte SJF en FCFS
+Prioridad,¿Qué busca evitar el aging?,La espera indefinida de procesos,La pérdida de localidad de caché,La espera indefinida de procesos,El bloqueo de operaciones de E/S,La migración entre núcleos
+Prioridad,¿Qué ocurre en una inversión de prioridad?,Una tarea alta espera un recurso de una baja,Una tarea baja espera a una alta,Una tarea media recibe prioridad fija,Una tarea alta espera un recurso de una baja,Una tarea alta termina antes del plazo
+Round Robin,¿Qué recibe cada proceso en Round Robin?,Un quantum de CPU,Un quantum de CPU,Una ráfaga estimada exacta,Un núcleo con afinidad fuerte,Un buzón privado
+Round Robin,¿Qué efecto tiene reducir demasiado el quantum?,Más sobrecarga por cambios de contexto,Menos cambios de contexto,Más sobrecarga por cambios de contexto,Comportamiento más cercano a FCFS,Menor respuesta para tareas interactivas
+Round Robin,¿Qué sucede con un proceso activo al finalizar su quantum?,Vuelve al final de la cola si sigue activo,Pasa siempre a terminado,Pasa siempre a bloqueado,Vuelve al final de la cola si sigue activo,Cede permanentemente su prioridad
+Colas multinivel,¿Qué permite una cola multinivel?,Políticas y quantums distintos según el tipo de proceso,Una política única para toda carga,Un único quantum para todos,Una cola compartida por cada núcleo,Políticas y quantums distintos según el tipo de proceso
+Realimentación,¿Qué permite una cola multinivel con realimentación?,Mover procesos según su comportamiento,Mover procesos según su comportamiento,Eliminar las colas de espera,Fijar toda prioridad al crear el proceso,Evitar toda estimación de ráfagas
+Multinúcleo,¿Qué describe la afinidad suave?,Una preferencia por mantener el mismo núcleo,Una restricción a un único núcleo,Una preferencia por mantener el mismo núcleo,Un reparto obligatorio entre todos los núcleos,Una migración en cada cambio de contexto
+Multinúcleo,¿Qué costo puede tener migrar una tarea?,Pérdida de localidad de caché,Mayor cantidad de memoria física,Menor utilización de núcleos,Pérdida de localidad de caché,Eliminación de cambios de contexto
+Tiempo real,¿Qué implica incumplir un plazo en tiempo real duro?,Constituye un fallo del sistema,Solo reduce la calidad visual,Permite reintentar sin consecuencias,Retrasa la siguiente tarea periódica,Constituye un fallo del sistema
+Tiempo real,¿Qué criterio usa Rate Monotonic?,Mayor prioridad para periodos más cortos,Mayor prioridad para periodos más cortos,Menor prioridad para plazos cercanos,Prioridad según orden de llegada,Prioridad según uso de E/S
+Tiempo real,¿Qué tarea favorece Earliest Deadline First?,La de plazo absoluto más próximo,La de mayor criticidad fija,La de menor tiempo de cómputo,La de mayor antigüedad en cola,La de plazo absoluto más próximo
+IPC,¿Qué debe aportar además del transporte de bytes un mecanismo IPC?,Un protocolo con significado y coordinación,Una política de reemplazo de páginas,Un protocolo con significado y coordinación,Un cambio automático de contexto,Una estimación de ráfagas
+Memoria compartida,¿Qué ventaja distingue a la memoria compartida?,Reduce copias para grandes volúmenes,Evita toda sincronización,Impone mensajes ordenados,Permite solo procesos emparentados,Reduce copias para grandes volúmenes
+Memoria compartida,¿Qué responsabilidad asumen los procesos al usar memoria compartida?,Administrar la sincronización del acceso,Elegir el controlador de disco,Administrar la sincronización del acceso,Asignar el quantum de CPU,Definir el núcleo de afinidad
+Paso de mensajes,¿Qué usa la comunicación indirecta?,Un buzón cola o puerto,Un contador de programa común,Un espacio de direcciones común,Un hilo de kernel compartido,Un buzón cola o puerto
+Paso de mensajes,¿Qué distingue una operación asíncrona?,Continúa después de enviar o solicitar,Espera hasta recibir respuesta,Continúa después de enviar o solicitar,Cierra el canal antes de enviar,Usa exclusivamente TCP
+Pipes,¿Qué relación es típica de un pipe anónimo?,Procesos padre e hijo,Procesos padre e hijo,Procesos remotos por red,Procesos con afinidad fuerte,Procesos de distintas colas
+Pipes,¿Qué permite un named pipe o FIFO?,Comunicar procesos no necesariamente emparentados,Comunicar hilos de un único proceso,Comunicar solo padre e hijo,Comunicar procesos no necesariamente emparentados,Compartir directamente una región de memoria
+Sockets,¿Qué propiedad corresponde a TCP?,Entrega confiable y ordenada,Entrega no ordenada de datagramas,Entrega confiable y ordenada,Entrega sin garantía de llegada,Entrega solo dentro del mismo proceso
+Sockets,¿Qué no garantiza UDP?,La llegada ni el orden de datagramas,La existencia de puertos,La identificación de la familia,La comunicación local,La llegada ni el orden de datagramas
+Laboratorio,¿Qué permite distinguir el registro de envío recepción inicio y fin?,Si la espera proviene del planificador canal o consumidor,Si la espera proviene del planificador canal o consumidor,Si FCFS siempre supera a SJF,Si TCP elimina toda espera,Si el quantum debe ser fijo

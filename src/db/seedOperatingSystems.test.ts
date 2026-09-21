@@ -1,6 +1,7 @@
 import operatingSystemsCsv from "../../cursos/Sistemas Operativos/Tema_01_Fundamentos_de_Sistemas_Operativos.csv?raw";
 import operatingSystemsStructureCsv from "../../cursos/Sistemas Operativos/Tema_02_Estructura_de_Sistemas_Operativos.csv?raw";
 import operatingSystemsProcessesCsv from "../../cursos/Sistemas Operativos/Tema_03_Procesos_Pesados_y_Livianos.csv?raw";
+import operatingSystemsSchedulingCsv from "../../cursos/Sistemas Operativos/Tema_04_Planificacion_y_Comunicacion_de_Procesos.csv?raw";
 import { parseFlashcardCsv } from "../services/csv/csvParser";
 
 describe("Tema 1 de Sistemas Operativos", () => {
@@ -23,6 +24,37 @@ describe("Tema 1 de Sistemas Operativos", () => {
     );
     parsed.cards.forEach((card) => {
       expect(card.alternatives).toHaveLength(4);
+      expect(
+        card.alternatives?.filter(
+          (alternative) => alternative === card.answer,
+        ),
+      ).toHaveLength(1);
+    });
+  });
+});
+
+describe("Tema 4 de Sistemas Operativos", () => {
+  it("mantiene las respuestas correctas y cuatro alternativas por pregunta", () => {
+    const parsed = parseFlashcardCsv(
+      operatingSystemsSchedulingCsv,
+      "Tema_04_Planificacion_y_Comunicacion_de_Procesos.csv",
+    );
+
+    expect(parsed.cards).toHaveLength(36);
+    expect(
+      parsed.cards.find(
+        (card) =>
+          card.question === "¿Qué distingue una operación asíncrona?",
+      ),
+    ).toMatchObject({ answer: "Continúa después de enviar o solicitar" });
+    expect(
+      parsed.cards.find(
+        (card) => "¿Qué no garantiza UDP?" === card.question,
+      ),
+    ).toMatchObject({ answer: "La llegada ni el orden de datagramas" });
+    parsed.cards.forEach((card) => {
+      expect(card.alternatives).toHaveLength(4);
+      expect(new Set(card.alternatives).size).toBe(4);
       expect(
         card.alternatives?.filter(
           (alternative) => alternative === card.answer,
