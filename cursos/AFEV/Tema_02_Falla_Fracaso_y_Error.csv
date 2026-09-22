@@ -1,0 +1,29 @@
+curso,AFEV
+unidad,Unidad 1
+tema,Tema 02 — Falla fracaso y error
+
+categoria,pregunta,respuesta,alternativa 1,alternativa 2,alternativa 3,alternativa 4
+Conceptos,¿Qué secuencia expresa la relación causal presentada?,Error → Falla → Fracaso,Error → Falla → Fracaso,Fracaso → Error → Falla,Falla → Fracaso → Error,Error → Fracaso → Falla
+Conceptos,¿Qué representa un error en esta relación?,Una equivocación que origina la incorrección,Un comportamiento observable,Una equivocación que origina la incorrección,Un defecto activado durante ejecución,Un resultado validado formalmente
+Conceptos,¿Con qué se relaciona principalmente una falla?,Con un defecto presente en el código,Con la persona que escribió requisitos,Con la salida visible por el usuario,Con un defecto presente en el código,Con la disponibilidad de pruebas
+Conceptos,¿Qué define un fracaso?,Un comportamiento incorrecto observable,Una decisión incorrecta antes de programar,Una fórmula incorrecta almacenada,Un defecto que nunca se ejecuta,Un comportamiento incorrecto observable
+Falla y fracaso,¿Por qué una falla no implica un fracaso inmediato?,Puede requerir condiciones para manifestarse,Puede requerir condiciones para manifestarse,Siempre se corrige antes de ejecutarse,Elimina automáticamente el código incorrecto,Convierte el error en una prueba
+Falla y fracaso,¿Qué condición cumple una falla respecto de un fracaso?,Es necesaria pero no suficiente,Es suficiente por sí sola,Es necesaria pero no suficiente,Es externa al programa,Es equivalente a una prueba fallida
+Error,¿Cuál situación ejemplifica un error?,El programador escribe 0.01 en lugar de 0.10,Un usuario observa un descuento incorrecto,Una fórmula incorrecta queda en el código,El programador escribe 0.01 en lugar de 0.10,Un proceso no recibe CPU a tiempo
+Ejemplo de descuento,¿Qué corresponde a la falla en el ejemplo del descuento?,La fórmula incorrecta queda almacenada en el código,La compra muestra solo 1 por ciento,El programador confunde dos valores,El usuario reclama el resultado,La fórmula incorrecta queda almacenada en el código
+Ejemplo de descuento,¿Qué corresponde al fracaso en el ejemplo del descuento?,La aplicación muestra 1 por ciento cuando debía mostrar 10 por ciento,La aplicación muestra 1 por ciento cuando debía mostrar 10 por ciento,El programador elige 0.01 en vez de 0.10,La fórmula queda escrita dentro del programa,El descuento se evalúa en una prueba
+Observabilidad,¿Qué característica permite identificar un fracaso?,Puede observarse externamente durante ejecución,Es una condición interna del código,Puede observarse externamente durante ejecución,Es una intención del programador,Es una regla de VDM++
+Observabilidad,¿Qué puede ocurrir con código incorrecto que aún no se ejecuta?,Puede permanecer sin manifestarse,Siempre produce un fracaso,Se elimina al compilar,Puede permanecer sin manifestarse,Se transforma en especificación formal
+Distinción,¿Dónde se observa principalmente la falla?,En la incorrección presente en el código,En la conducta visible al usuario,En la decisión humana inicial,En el protocolo de verificación,En la incorrección presente en el código
+Proyectos,¿Qué tecnología corresponde al Proyecto 1?,VDM++ y VDMToolBox,VDM++ y VDMToolBox,NuSMV y UPPAAL,Redes de Petri y pipes,FCFS y Round Robin
+Proyecto 1,¿Qué se construye en la segunda fase del Proyecto 1?,Un modelo VDM++,Un modelo de transición de estados,Un modelo VDM++,Un modelo de pruebas de interfaz,Un planificador con IPC
+Proyecto 1,¿Qué actividad completa la fase posterior del Proyecto 1?,Realizar validación VDM++,Definir prioridades del sistema,Obtener un modelo de hilos,Realizar validación VDM++,Ejecutar un pipe anónimo
+Proyectos,¿Qué enfoque utiliza el Proyecto 2?,Model Checking con sistemas de transición de estados,Prueba de teoremas con VDMToolBox,Especificación funcional con Z,Testing exploratorio con APIs,Model Checking con sistemas de transición de estados
+Proyecto 2,¿Qué herramientas propone el Proyecto 2?,NuSMV y UPPAAL,NuSMV y UPPAAL,VDM++ y VDMToolBox,TCP y UDP,Z y VDM
+Proyecto 2,¿Qué resultado busca la última fase del Proyecto 2?,Un modelo validado,Una especificación de requisitos,Un modelo validado,Un programa compilado,Una tabla de procesos
+Verificación,¿Qué objetivo tiene especificar y verificar frente a error falla y fracaso?,Detectar incorrecciones antes de que generen comportamientos observables,Detectar incorrecciones antes de que generen comportamientos observables,Esperar a que el usuario reporte el fracaso,Eliminar toda necesidad de requisitos,Convertir fallas en funcionalidades
+Verificación,¿Qué ayuda a identificar la distinción entre los tres conceptos?,El origen defecto y manifestación del problema,El tipo de compilador utilizado,La fase de despliegue del sistema,El origen defecto y manifestación del problema,La cantidad de pruebas ejecutadas
+Actividad,¿Cuál es el tema central de Foro 01?,La diferencia entre fracaso error y falla,La diferencia entre fracaso error y falla,El diseño de un planificador,La instalación de VDMToolBox,El uso de sockets locales
+Relación causal,¿Qué debe suceder para que una falla produzca fracaso?,Que la falla se manifieste durante ejecución,Que el usuario conozca el código,Que la falla se manifieste durante ejecución,Que la especificación sea ejecutable,Que el proyecto use Model Checking
+Conceptos,¿Qué afirmación evita tratar los términos como sinónimos?,Error es origen falla es defecto y fracaso es manifestación,Error y falla son siempre visibles,Fracaso es la causa de una falla,Error es origen falla es defecto y fracaso es manifestación,Una falla siempre equivale a fracaso
+Sistemas,¿Qué demuestra el ejemplo del descuento?,Que una falla se vuelve fracaso al afectar el resultado observable,Que toda equivocación detiene el programa,Que los errores se eliminan con documentación,Que los fracasos solo ocurren en sistemas críticos,Que una falla se vuelve fracaso al afectar el resultado observable
