@@ -1,5 +1,6 @@
 import afevCsv from "../../cursos/AFEV/Tema_01_Metodos_Formales_Introduccion.csv?raw";
 import afevFailuresCsv from "../../cursos/AFEV/Tema_02_Falla_Fracaso_y_Error.csv?raw";
+import afevVerificationCsv from "../../cursos/AFEV/Tema_03_Verificacion_y_Validacion.csv?raw";
 import type { FlashStudyDatabase } from "./db";
 import { CsvImportRepository } from "./repositories/csvImportRepository";
 import { parseFlashcardCsv } from "../services/csv/csvParser";
@@ -7,6 +8,7 @@ import { parseFlashcardCsv } from "../services/csv/csvParser";
 const seedDecks = [
   ["Tema_01_Metodos_Formales_Introduccion.csv", afevCsv],
   ["Tema_02_Falla_Fracaso_y_Error.csv", afevFailuresCsv],
+  ["Tema_03_Verificacion_y_Validacion.csv", afevVerificationCsv],
 ] as const;
 
 /** Creates bundled AFEV decks and refreshes them when their source changes. */
